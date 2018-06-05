@@ -10,9 +10,10 @@ import { withStyles } from '@material-ui/core/styles';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import ReactChartkick, { LineChart, PieChart } from 'react-chartkick'
 import Chart from 'chart.js'
+import AuthService from '../components/AuthService'
 
 // ReactChartkick.addAdapter(Chart)
-
+const Auth = new AuthService()
 const BASE = 'http://localhost:3000'
 
 
@@ -34,6 +35,7 @@ class UserHistory extends Component {
   constructor(props) {
     super(props)
     this.state={
+      userHistory: [],
       chartdata: {},
       reps: [],
       xvals: [],
@@ -161,17 +163,19 @@ class UserHistory extends Component {
   componentWillMount() {
     this.getMoves()
     this.filterMoves()
+    let userID = Auth.getUserId()
 
-    // return fetch(BASE + '/user_histories' +'?id=1')
-    //   .then((resp) => {
-    //     return resp.json()
-    //   })
-    //   .then(APIinfo => {
-    //     this.setState({
-    //       history: APIinfo
-    //       })
-    //     console.log(this.state.history);
-    //   })
+    return fetch(BASE + '/user_histories' +'?id=' + userID)
+      .then((resp) => {
+        return resp.json()
+      })
+      .then(APIinfo => {
+        this.setState({
+          userHistory: APIinfo
+          })
+          console.log("this.state.userHistory:")
+        console.log(this.state.userHistory)
+      })
   }
 
 
@@ -308,7 +312,7 @@ this.setState({ xvals: xvals, yvals: yvals, chartdata: chartdata})
 {console.log("myRows:")}
 {console.log(this.state.myRows)}
 
-          <Table className="log-table">
+          <Table sortable className="log-table">
 
             <TableHead>
               <TableRow>
@@ -332,7 +336,6 @@ this.setState({ xvals: xvals, yvals: yvals, chartdata: chartdata})
                       {n.movement}
                     </TableCell>
                     <TableCell numeric style={{width: '50px',  padding: '8px', textAlign: 'center'}}>{n.weight}</TableCell>
-
                     <TableCell numeric style={{width: '60px',  padding: '8px', textAlign: 'center'}}></TableCell>
                     <TableCell numeric style={{width: '60px',  padding: '8px', textAlign: 'center'}}></TableCell>
 
@@ -365,7 +368,7 @@ this.setState({ xvals: xvals, yvals: yvals, chartdata: chartdata})
 
 
 
-          <Table
+          {/* <Table
             sortable
             shadow={5}
             rows={  this.state.myRows }
@@ -394,7 +397,7 @@ this.setState({ xvals: xvals, yvals: yvals, chartdata: chartdata})
               tooltip="Sets"
             >Set Number</TableHead>
 
-          </Table>
+          </Table> */}
 
 
 
