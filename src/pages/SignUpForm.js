@@ -1,6 +1,10 @@
 import React, {Component} from 'react'
+import {withRouter} from 'react-router-dom'
 import {TextField, Button, Card, CardContent} from '@material-ui/core'
 import {registerUser} from "../api"
+import AuthService from '../components/AuthService'
+
+const Auth = new AuthService()
 
 class SignUpForm extends Component{
   constructor(props){
@@ -13,7 +17,8 @@ class SignUpForm extends Component{
         password: "",
         password_confirmation: ""
       },
-      registerSuccess: false
+      registerSuccess: false,
+      loginSuccess:false
     }
   }
   handleChange(event){
@@ -22,10 +27,13 @@ class SignUpForm extends Component{
     this.setState({user: user})
   }
   handleSubmit(event){
+    event.preventDefault()
     registerUser(this.state.user).then( successUser => {
-            console.log("Create Success!", successUser ); this.setState({registerSuccess: true})
-        })
-    console.log(this.state.user);
+            console.log("Create Success!", successUser );
+            this.setState({registerSuccess: true})
+          })
+          .then(Auth.login(this.state.user.email, this.state.user.password))
+          .then( successLogin => {this.props.history.push("/dashboard")})
   }
   render(){
     let form = this.state.user
@@ -83,7 +91,7 @@ class SignUpForm extends Component{
           </span>
         </CardContent>
         <span className="action-button">
-          <Button variant="raised" color="primary" onClick={this.handleSubmit.bind(this)}>Sign Up</Button>
+          <Button type="submit" variant="raised" color="primary" onClick={this.handleSubmit.bind(this)}>Sign Up</Button>
         </span>
         </Card>
 
@@ -93,4 +101,4 @@ class SignUpForm extends Component{
     )
   }
 }
-export default SignUpForm
+export default withRouter(SignUpForm)
