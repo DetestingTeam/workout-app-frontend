@@ -161,8 +161,8 @@ class UserHistory extends Component {
         }
       }
   componentWillMount() {
-    this.getMoves()
-    this.filterMoves()
+    // this.getMoves()
+
     let userID = Auth.getUserId()
 
     return fetch(BASE + '/user_histories' +'?id=' + userID)
@@ -175,28 +175,29 @@ class UserHistory extends Component {
           })
           console.log("this.state.userHistory:")
         console.log(this.state.userHistory)
+          this.filterMoves()
       })
   }
 
 
 
-  getMoves(){
-    let newRows = this.state.myRows
-    this.state.history.forEach((element, index) =>{
-               element.workout.forEach((e,i)=> {
-                 e.movement.forEach((ele,ind)=> {
-                        newRows.push(
-                         {movement: ele.name, weight: ele.weight, date: ele.date, reps: ele.reps, sets: ele.sets}
-                        )
-                    })
-             })
-      })
-      this.setState({myRows: newRows})
-  }
+  // getMoves(){
+  //   let newRows = this.state.myRows
+  //   this.state.history.forEach((element, index) =>{
+  //              element.workout.forEach((e,i)=> {
+  //                e.movement.forEach((ele,ind)=> {
+  //                       newRows.push(
+  //                        {movement: ele.name, weight: ele.weight, date: ele.date, reps: ele.reps, sets: ele.sets}
+  //                       )
+  //                   })
+  //            })
+  //     })
+  //     this.setState({myRows: newRows})
+  // }
 
 
   filterMoves(){
-    const unique = [...new Set(this.state.myRows.map(element=> element.movement))];
+    const unique = [...new Set(this.state.userHistory.map(element=> element.movement_name))];
     this.setState({uniquemoves: unique});
   }
 
@@ -216,31 +217,59 @@ generateChartData(){
   let xvals = []
   let yvals = []
   let chartdata = {}
-  this.state.myRows.forEach((element, index)=>
+
+//TESTING:
+let dt = new Date();
+let utcDate = dt.toUTCString();
+
+
+
+  console.log("this.state.userHistory in gen chart");
+  console.log(this.state.userHistory);
+  this.state.userHistory.forEach((element, index)=>
 {
 
   let selectedProp = this.state.selectedProperty
-  console.log("selected Prop:")
-  console.log(selectedProp)
-  if(element.movement === this.state.selectedMove && selectedProp === "reps"){
+    let num = index
+  if(element.movement_name === this.state.selectedMove && selectedProp === "reps"){
     xvals.push(element.date)
-    yvals.push(element.reps)
-    index = element.date
-    chartdata[index] = (element.reps)
+    yvals.push(element.rep)
+    console.log("THIS RUNNING");
+    //make some fake ranged dates:
+    //make some fake ranged dates:
+    if(num<30){
+    num = element.workout_date.slice(0,8) + num
+  } else{ num = index - 30
+    num = element.workout_date.slice(0,8) + num}
+    //   // USE THIS FOR REAL:
+    // index = element.workout_date
+    // TODO: fix: this only allows for one data point per date:
+    chartdata[num] = (element.rep)
 }
-if(element.movement === this.state.selectedMove && selectedProp === "weight"){
+if(element.movement_name === this.state.selectedMove && selectedProp === "weight"){
   xvals.push(element.date)
   yvals.push(element.weight)
-  index = element.date
-  chartdata[index] = (element.weight)
+
+//make some fake ranged dates:
+if(num<30){
+num = element.workout_date.slice(0,8) + num
+} else{ num = 1
+num = element.workout_date.slice(0,8) + num}
+  // USE THIS FOR REAL:
+  // index = element.workout_date
+      // TODO: fix: this only allows for one data point per date:
+  chartdata[num] = (element.weight)
 }
 }
 )
+console.log("chartdata:");
+console.log(chartdata);
 this.setState({ xvals: xvals, yvals: yvals, chartdata: chartdata})
 }
 
 
   render(){
+
   return(
     <div>
       <h2>Your Stats</h2>
@@ -250,9 +279,9 @@ this.setState({ xvals: xvals, yvals: yvals, chartdata: chartdata})
       <form className="root">
        <FormControl className="dropdown">
          <Select
-           value={this.state.movement}
+           value={this.state.movement_name}
            onChange={this.selectMove}
-           input={<Input name="movement" id="movement_id" />}
+           input={<Input name="movement_name" id="movement_id" />}
          >
            <MenuItem value="">
              <em>Select Movement:</em>
@@ -309,8 +338,11 @@ this.setState({ xvals: xvals, yvals: yvals, chartdata: chartdata})
 <br/>
         <div className="table">
 
-{console.log("myRows:")}
-{console.log(this.state.myRows)}
+
+{console.log("userHistory:")}
+{console.log(this.state.userHistory)}
+{console.log("chartData:")}
+{console.log(this.state.chartdata)}
 
           <Table sortable className="log-table">
 
@@ -325,19 +357,19 @@ this.setState({ xvals: xvals, yvals: yvals, chartdata: chartdata})
               </TableRow>
             </TableHead>
             <TableBody>
-              {this.state.myRows.map((n, index) => {
+              {this.state.userHistory.map((n, index) => {
                 return (
 
                   <TableRow key={n.id}>
                     <TableCell component="th" scope="row" style={{padding: '8px', width: '5px', textAlign: 'center'}}>
-                      {n.date}
+                      {n.workout_date.slice(0,8) + index}
                     </TableCell>
                     <TableCell component="th" scope="row" style={{padding: '8px', width: '50px', textAlign: 'center'}}>
-                      {n.movement}
+                      {n.movement_name}
                     </TableCell>
                     <TableCell numeric style={{width: '50px',  padding: '8px', textAlign: 'center'}}>{n.weight}</TableCell>
-                    <TableCell numeric style={{width: '60px',  padding: '8px', textAlign: 'center'}}></TableCell>
-                    <TableCell numeric style={{width: '60px',  padding: '8px', textAlign: 'center'}}></TableCell>
+                    <TableCell numeric style={{width: '60px',  padding: '8px', textAlign: 'center'}}>{n.rep}</TableCell>
+                    <TableCell numeric style={{width: '60px',  padding: '8px', textAlign: 'center'}}>{n.set}</TableCell>
 
                   </TableRow>
                 );

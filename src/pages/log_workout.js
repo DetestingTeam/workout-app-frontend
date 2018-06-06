@@ -10,6 +10,9 @@ class LogWorkout extends Component{
   constructor(props){
     super(props)
     this.state = {
+      totalWorkouts: 2,
+      fullSet: [],
+      workout_id: 2,
       userhistory: {},
       userID: '',
       userhistoryAdded: false,
@@ -57,8 +60,9 @@ class LogWorkout extends Component{
 
 
   componentWillMount() {
+        this.generateHistory()
     let userID = Auth.getUserId()
-    return fetch(BASE + '/workoutdetails' +'?id=' + userID)
+    return fetch(BASE + '/workoutdetails' +'?workout_id=' + this.state.workout_id)
       .then((resp) => {
         return resp.json()
       })
@@ -73,10 +77,13 @@ class LogWorkout extends Component{
 
 
 
-    this.loaduserhistory()
-  console.log(this.state.userhistory);
+    this.generateHistory()
+    console.log("this.state.fullSet:")
+    console.log(this.state.fullSet)
+
+    this.state.fullSet.map((element)=>{
     return fetch(BASE+'/user_histories', {
-        body: JSON.stringify(this.state.userhistory),
+        body: JSON.stringify(element),
         headers: {
             'Content-Type': 'application/json'
         },
@@ -88,6 +95,7 @@ class LogWorkout extends Component{
         }).then( userhistoryAdded => {
             console.log("Create Success!", userhistoryAdded ); this.setState({userhistoryAdded: true})
         })
+    })
     console.log(this.state.userhistory);
   }
 
@@ -110,6 +118,7 @@ class LogWorkout extends Component{
 
 
 handleReps(event){
+  this.generateHistory()
   let { reps } = this.state
   reps[event.target.id] = event.target.value
   this.setState({reps: reps})
@@ -134,10 +143,40 @@ nextSet(){
 
 saveAndQuit(){
 }
-loaduserhistory(){
-  let userhistory = {userhistory: {user_id: 1, movement_id: 2, workout_id: 2, weight: 99, set: 99, rep: 99}}
-  this.setState({userhistory: userhistory})
+generateHistory(){
+  let {userID, reps, weight, setNum, workout, workout_id} = this.state
+  let fullSet = []
+  //generate movements with reps and weight:
+  let completedMoves = { }
+//(:userhistory).permit(:user_id, :set, :movement_name, :workout_name, :weight, :set, :rep)
+
+//  :workout_name[ :set setNum (:movement_name movement_name (:rep reps. :weight weight), movement(reps, set), move(reps, set)..), set: setNum()]
+
+// WHAT API WANTS TO SEE:
+// let userhistory = {userhistory:{user_id: userID, workout_id: workout_id, set: setNum, movement_id: 1, rep: 10, weight: 15}}
+// // WE CAN MAKE AN ARRAY OF WHAT API WANTS TO SEE AND THEN MAP IT IN THE FETCH / POST (SEND A FULL SET)
+// let fullSet = [{userhistory:{user_id: userID, workout_id: workout_id, set: setNum, movement_id: 1, rep: 10, weight: 15}},{userhistory:{user_id: userID, workout_id: workout_id, set: setNum, movement_id: 2, rep: 99, weight: 105}},{userhistory:{user_id: userID, workout_id: workout_id, set: setNum, movement_id: 3, rep: 98, weight: 95}}]
+// WE CAN GENERATE THIS ARRAY VIA OUR SPECIFIC DATA COLLECTED HERE
+workout.forEach((element, index) => {
+  fullSet.push({userhistory:{user_id: userID, workout_id: workout_id, set: setNum, movement_id: element.movement_id, rep: reps[index], weight: weight[index]}})
+})
+
+this.setState({fullSet: fullSet})
+
 }
+
+randomWorkout(){
+  let {totalWorkouts} = this.state
+  let workout_id = Math.ceil(Math.random()*totalWorkouts)
+  this.setState({workout_id: workout_id})
+  this.componentWillMount()
+}
+
+  // let userhistory = {set: {set: setNum, user_id: userID, movement_id:, workout_id: 2, weight: 99, set: 99, rep: 99}
+
+  // let userhistory = {set: {set: setNum, user_id: userID, movement_id: 2, workout_id: 2, weight: 99, set: 99, rep: 99}
+  // this.setState({userhistory: userhistory})
+// }
 
 //  handleReps(n, index){
 //    console.log(index);
@@ -154,8 +193,9 @@ loaduserhistory(){
   render(){
     // let {workout} = this.state
     // {console.log("THis.state,workout:")}
-    //   {console.log(workout[0])}
-{console.log(this.state.userhistory)}
+    //   {console.log(workout[0
+    {console.log("this.state.workout")}
+{console.log(this.state.workout)}
     return(
 
         <div>
@@ -206,6 +246,11 @@ loaduserhistory(){
              <TableRow >
                <TableCell colspan='6'>
                  <div  style={{textAlign: 'right'}}>
+
+
+<Button variant="contained" type='submit' color="primary" onClick={this.randomWorkout.bind(this)}>
+   Random Workout
+</Button>
                   <Button variant="contained" type='submit' color="primary" onClick={this.nextSet.bind(this)}>
                      Next Set
                   </Button> <nbsp/>
@@ -214,6 +259,7 @@ loaduserhistory(){
                   </Button>
                 </div>
               </TableCell>
+
 
              </TableRow>
            </TableBody>
