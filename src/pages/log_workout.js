@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {Paper, Button, Checkbox, Table, TableHead, TableCell, TableBody, TableRow, Input} from '@material-ui/core'
 import LogHeader from '../components/log_header'
 import AuthService from '../components/AuthService'  // <- We use the AuthService to logout
+import withAuth from '../components/withAuth'
 
 const Auth = new AuthService()
 const BASE = 'http://localhost:3000'
@@ -25,42 +26,12 @@ class LogWorkout extends Component{
       savedSet: [],
       setNum: 1,
       ttoF: false,
-      movement:[
-        {
-          id: 1,
-          "name": "Push-Up",
-          bodypart: "chest",
-          url: "http://www.ebay.com",
-          description: "push yourself up",
-          //JOIN:
-          duration: "30 seconds"
-        },
-        {
-          id: 2,
-          "name": "Pull-Up",
-          bodypart: "back",
-          url: "http://www.google.com",
-          description: "pull yourself up",
-          //JOIN:
-          duration: "1 minute"
-        },
-        {
-            id: 3,
-            "name": "Kettle Bell Swings",
-            bodypart: "Full Body",
-            url: "http://www.google.com",
-            description: "Swing that shit",
-            //JOIN:
-            duration: "45 seconds"
-          }]
-
     }
 
   }
 
 
   componentWillMount() {
-        this.generateHistory()
     let userID = Auth.getUserId()
     return fetch(BASE + '/workoutdetails' +'?workout_id=' + this.state.workout_id)
       .then((resp) => {
@@ -75,12 +46,8 @@ class LogWorkout extends Component{
 
   handleSubmit(event){
 
-
-
-    this.generateHistory()
-    console.log("this.state.fullSet:")
-    console.log(this.state.fullSet)
-
+    console.log("this.state.fullSet");
+    console.log(this.state.fullSet);
     this.state.fullSet.map((element)=>{
     return fetch(BASE+'/user_histories', {
         body: JSON.stringify(element),
@@ -105,6 +72,7 @@ class LogWorkout extends Component{
   }
 
   handleCheck(n, index){
+
     let {checked, ttoF} = this.state
     if (checked[index] === true){
       checked[index] = false
@@ -118,7 +86,7 @@ class LogWorkout extends Component{
 
 
 handleReps(event){
-  this.generateHistory()
+  // this.generateHistory()
   let { reps } = this.state
   reps[event.target.id] = event.target.value
   this.setState({reps: reps})
@@ -138,8 +106,12 @@ nextSet(){
   let blankArr = new Array(workout.length).fill('')
   let falseArr = new Array(workout.length).fill(false)
   this.setState({setNum: setNum, reps: blankArr, weight: blankArr, checked: falseArr})
-  console.log(checked);
+
 }
+
+
+
+
 
 saveAndQuit(){
 }
@@ -147,7 +119,6 @@ generateHistory(){
   let {userID, reps, weight, setNum, workout, workout_id} = this.state
   let fullSet = []
   //generate movements with reps and weight:
-  let completedMoves = { }
 //(:userhistory).permit(:user_id, :set, :movement_name, :workout_name, :weight, :set, :rep)
 
 //  :workout_name[ :set setNum (:movement_name movement_name (:rep reps. :weight weight), movement(reps, set), move(reps, set)..), set: setNum()]
@@ -161,7 +132,9 @@ workout.forEach((element, index) => {
   fullSet.push({userhistory:{user_id: userID, workout_id: workout_id, set: setNum, movement_id: element.movement_id, rep: reps[index], weight: weight[index]}})
 })
 
-this.setState({fullSet: fullSet})
+this.setState({fullSet: fullSet},
+this.handleSubmit
+)
 
 }
 
@@ -191,13 +164,13 @@ randomWorkout(){
  // };
 
   render(){
-    // let {workout} = this.state
-    // {console.log("THis.state,workout:")}
-    //   {console.log(workout[0
-    {console.log("this.state.workout")}
-{console.log(this.state.workout)}
+//     // let {workout} = this.state
+//     // {console.log("THis.state,workout:")}
+//     //   {console.log(workout[0
+//     {console.log("this.state.workout")}
+// {console.log(this.state.workout)}
 
-  
+
     return(
 
         <div>
@@ -256,7 +229,7 @@ randomWorkout(){
                   <Button variant="contained" type='submit' color="primary" onClick={this.nextSet.bind(this)}>
                      Next Set
                   </Button> <nbsp/>
-                  <Button variant="contained" color="primary" onClick={this.handleSubmit.bind(this)}>
+                  <Button variant="contained" color="primary" onClick={this.generateHistory.bind(this)}>
                          Save and Quit
                   </Button>
                 </div>
@@ -276,4 +249,4 @@ randomWorkout(){
 
 }
 
-export default LogWorkout
+export default withAuth(LogWorkout)
