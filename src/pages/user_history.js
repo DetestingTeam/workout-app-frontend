@@ -12,6 +12,7 @@ import ReactChartkick, { LineChart, PieChart } from 'react-chartkick'
 import Chart from 'chart.js'
 import AuthService from '../components/AuthService'
 import withAuth from '../components/withAuth'
+import { withRouter } from 'react-router-dom'
 
 
 // ReactChartkick.addAdapter(Chart)
@@ -300,4 +301,4 @@ this.setState({chartdata: chartdata})
 }
 
 
-export default withAuth(UserHistory);
+export default withRouter(withAuth(UserHistory))

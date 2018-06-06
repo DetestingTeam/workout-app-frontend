@@ -3,6 +3,7 @@ import {Paper, Button, Checkbox, Table, TableHead, TableCell, TableBody, TableRo
 import LogHeader from '../components/log_header'
 import AuthService from '../components/AuthService'  // <- We use the AuthService to logout
 import withAuth from '../components/withAuth'
+import { withRouter } from 'react-router-dom'
 
 const Auth = new AuthService()
 const BASE = 'http://localhost:3000'
@@ -249,4 +250,4 @@ randomWorkout(){
 
 }
 
-export default withAuth(LogWorkout)
+export default withRouter(withAuth(LogWorkout))
