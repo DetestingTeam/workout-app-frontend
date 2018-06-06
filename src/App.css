@@ -6,6 +6,14 @@
   background: linear-gradient(to left, #fcb045, #fd1d1d, #833ab4); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
+.back{
+  background: #0f0c29;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #24243e, #302b63, #0f0c29);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background-attachment: fixed;
+  height: 100vh
+}
+
 
 .avatar-img {
   display: flex;
@@ -60,24 +68,9 @@
   border: 20px;
 }
 
-.card_color .btn {
-  background: #b92b27;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to left, #1565C0, #b92b27);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to left, #1565C0, #b92b27); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  position: absolute;
-  top: 45%;
-  left: 24.5%;
-  transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  background-color: #555;
-  color: white;
-  font-size: 20px;
-  padding: 12px 24px;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
-  height: 100px;
-  width: 200px;
+.topnav{
+  display: flex;
+  float: right;
 }
 
 .card_color .btn2 {
@@ -175,3 +168,29 @@
 		line-height: 1.8;
 	}
 }
+
+.text-field{
+  width: 200px;
+}
+
+.action-button{
+  margin-top: 5%;
+}
+
+.sign-up-page{
+}
+
+.form-card{
+  line-height: 300%;
+  margin-top: 5%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 5%;
+  max-width: 400px;
+  min-width: 200px;
+  text-align: center
+}
+/*
+.text-field + .text-field{
+  margin-left: 10px;
+} */

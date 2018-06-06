@@ -1,46 +1,55 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import {AppBar, Toolbar, Typography, Button, IconButton } from '@material-ui/core/';
 import MenuIcon from '@material-ui/icons/Menu';
+import AuthService from './AuthService'
+import LoggedInNav from './LoggedInNav'
+import GuestNav from './GuestNav'
 
-const styles = {
-  root: {
-    flexGrow: 1,
-  },
-  flex: {
-    flex: 1,
-  },
-  menuButton: {
-    marginLeft: -12,
-    marginRight: 20,
-  },
-};
+const Auth = new AuthService()
 
-function ButtonAppBar(props) {
-  const { classes } = props;
-  return (
-    <div className={classes.root}>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
-            <MenuIcon/>
-          </IconButton>
-          <Typography variant="title" color="inherit" className={classes.flex}>
-          <Button color="inherit" href="/">Fitology</Button>
-          </Typography>
-          <Button color="inherit" href="/login">Login</Button>
-          <Button color="inherit" href="/register">Register</Button>
-          <Button color="inherit" href="/groupworkouts">Group Workout</Button>
-          <Button color="inherit" href="/aboutus">About Us</Button>
-        </Toolbar>
-      </AppBar>
-    </div>
-  );
+class Navbar extends Component{
+  constructor(props){
+    super(props)
+    this.state = {
+      loggedIn: false,
+      userId: null
+    }
+  }
+
+  componentWillMount(){
+    let {loggedIn} = this.state
+    loggedIn = Auth.loggedIn()
+    if (loggedIn === true){
+      let { userId } = this.state
+      userId = Auth.getUserId()
+      this.setState({loggedIn, userId})
+    }
+  }
+
+  handleLogout(){
+    let { loggedIn } = this.state
+    Auth.logout()
+    this.setState({loggedIn: false})
+    this.props.history.push("/")
+  }
+  render(){
+    if(this.state.loggedIn){
+
+      return(
+        <span>
+          <LoggedInNav id={this.state.userId} logout={this.handleLogout.bind(this)}  />
+        </span>
+      )
+    } else {
+      return(
+        <span>
+          <GuestNav />
+        </span>
+      )
+    }
+  }
 }
 
-ButtonAppBar.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
-
-export default withStyles(styles)(ButtonAppBar);
+export default Navbar

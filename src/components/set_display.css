@@ -1,0 +1,8 @@
+.pic{
+display: flex;
+align-self: left;
+align-content: left;
+position: left;
+justify-content: left;
+border-bottom: 0px;
+}
