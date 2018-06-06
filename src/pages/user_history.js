@@ -9,10 +9,12 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import ReactChartkick, { LineChart, PieChart } from 'react-chartkick'
+import Chart from 'chart.js'
+import AuthService from '../components/AuthService'
 
 
 // ReactChartkick.addAdapter(Chart)
-
+const Auth = new AuthService()
 const BASE = 'http://localhost:3000'
 
 
@@ -34,13 +36,14 @@ class UserHistory extends Component {
   constructor(props) {
     super(props)
     this.state={
+      userHistory: [],
       chartdata: {},
       reps: [],
       xvals: [],
       yvals: [],
       movement: '',
       uniquemoves: [],
-      myRows: [],
+      filteredData: [],
       selectedMove: '',
       selectedProperty: '',
       history: [
@@ -159,45 +162,51 @@ class UserHistory extends Component {
         }
       }
   componentWillMount() {
-    this.getMoves()
-    this.filterMoves()
+    // this.getMoves()
 
-    // return fetch(BASE + '/user_histories' +'?id=1')
-    //   .then((resp) => {
-    //     return resp.json()
-    //   })
-    //   .then(APIinfo => {
-    //     this.setState({
-    //       history: APIinfo
-    //       })
-    //     console.log(this.state.history);
-    //   })
-  }
+    let userID = Auth.getUserId()
 
-
-
-  getMoves(){
-    let newRows = this.state.myRows
-    this.state.history.forEach((element, index) =>{
-               element.workout.forEach((e,i)=> {
-                 e.movement.forEach((ele,ind)=> {
-                        newRows.push(
-                         {movement: ele.name, weight: ele.weight, date: ele.date, reps: ele.reps, sets: ele.sets}
-                        )
-                    })
-             })
+    return fetch(BASE + '/user_histories' +'?id=' + userID)
+      .then((resp) => {
+        return resp.json()
       })
-      this.setState({myRows: newRows})
+      .then(APIinfo => {
+        this.setState({
+          userHistory: APIinfo
+          })
+          console.log("this.state.userHistory:")
+        console.log(this.state.userHistory)
+          this.filterMoves()
+      })
   }
+
+
+
+  // getMoves(){
+  //   let newRows = this.state.myRows
+  //   this.state.history.forEach((element, index) =>{
+  //              element.workout.forEach((e,i)=> {
+  //                e.movement.forEach((ele,ind)=> {
+  //                       newRows.push(
+  //                        {movement: ele.name, weight: ele.weight, date: ele.date, reps: ele.reps, sets: ele.sets}
+  //                       )
+  //                   })
+  //            })
+  //     })
+  //     this.setState({myRows: newRows})
+  // }
 
 
   filterMoves(){
-    const unique = [...new Set(this.state.myRows.map(element=> element.movement))];
+    const unique = [...new Set(this.state.userHistory.map(element=> element.movement_name))];
     this.setState({uniquemoves: unique});
   }
 
   selectMove = event => {
-    this.setState({ [event.target.name]: event.target.value, selectedMove: event.target.value})
+  // Filter out selected movements data:
+    let arrByID = this.state.userHistory.filter(item => { return item.movement_name === event.target.value ? true : false })
+          console.log(arrByID);
+      this.setState({ [event.target.name]: event.target.value, selectedMove: event.target.value, filteredData: arrByID})
    };
 
 selectProperty = event => {
@@ -208,35 +217,91 @@ selectProperty = event => {
   //    console.log(this.state.selectedProperty);
   //   };
 
+
+
+isNumber(obj) {
+    return obj !== undefined && typeof(obj) === 'number' && !isNaN(obj);
+  }
+
+// filterByID(item) {
+//     if (item.movement_name == event.target.value) {
+//       return true;
+//     }
+//     return false;
+//   }
+
+filterData(){
+let arrByID = this.state.userHistory.filter(this.filterByID)
+console.log("TEST!");
+console.log(arrByID);
+}
+
+
+
+
+
 generateChartData(){
   let xvals = []
   let yvals = []
   let chartdata = {}
-  this.state.myRows.forEach((element, index)=>
+
+//TESTING:
+let dt = new Date();
+let utcDate = dt.toUTCString();
+//
+
+
+
+  console.log("this.state.userHistory in gen chart");
+  console.log(this.state.userHistory);
+  this.state.userHistory.forEach((element, index)=>
 {
 
   let selectedProp = this.state.selectedProperty
-  console.log("selected Prop:")
-  console.log(selectedProp)
-  if(element.movement === this.state.selectedMove && selectedProp === "reps"){
-    xvals.push(element.date)
-    yvals.push(element.reps)
-    index = element.date
-    chartdata[index] = (element.reps)
+    let num = index
+  if(element.movement_name === this.state.selectedMove && selectedProp === "reps"){
+    xvals.push(element.workout_date)
+    yvals.push(element.rep)
+    console.log("THIS RUNNING");
+    //make some fake ranged dates:
+    //make some fake ranged dates:
+    if(num<30){
+    num = element.workout_date.slice(0,8) + num
+  } else{ num = index - 30
+    num = element.workout_date.slice(0,8) + num}
+    //   // USE THIS FOR REAL:
+    // index = element.workout_date
+    // TODO: fix: this only allows for one data point per date:
+    chartdata[num] = (element.rep)
 }
-if(element.movement === this.state.selectedMove && selectedProp === "weight"){
-  xvals.push(element.date)
+if(element.movement_name === this.state.selectedMove && selectedProp === "weight"){
+  xvals.push(element.workout_date)
   yvals.push(element.weight)
-  index = element.date
-  chartdata[index] = (element.weight)
+
+//make some fake ranged dates:
+if(num<30){
+num = element.workout_date.slice(0,8) + num
+} else{ num = 1
+num = element.workout_date.slice(0,8) + num}
+  // USE THIS FOR REAL:
+  // index = element.workout_date
+      // TODO: fix: this only allows for one data point per date:
+  chartdata[num] = (element.weight)
 }
 }
 )
+console.log("chartdata:");
+console.log(chartdata);
+console.log("potential graph data:");
+console.log(xvals);
+console.log(yvals);
+
 this.setState({ xvals: xvals, yvals: yvals, chartdata: chartdata})
 }
 
 
   render(){
+
   return(
     <div>
       <h2>Your Stats</h2>
@@ -246,9 +311,9 @@ this.setState({ xvals: xvals, yvals: yvals, chartdata: chartdata})
       <form className="root">
        <FormControl className="dropdown">
          <Select
-           value={this.state.movement}
+           value={this.state.movement_name}
            onChange={this.selectMove}
-           input={<Input name="movement" id="movement_id" />}
+           input={<Input name="movement_name" id="movement_id" />}
          >
            <MenuItem value="">
              <em>Select Movement:</em>
@@ -299,16 +364,60 @@ this.setState({ xvals: xvals, yvals: yvals, chartdata: chartdata})
 {/* {let dataArr = this.state.xvals.map((element)=>{
   rr
 } )  } */}
+<div>
 <div id="chartbox">
   <LineChart id="chart" width="400px" height="200px" data={ this.state.chartdata }   />
+</div>
+<div className='sidegraph'><Paper className = 'datapaper'>
+<h1>{this.state.selectedMove} Table </h1>
+<Table sortable className="log-table">
+
+  <TableHead>
+    <TableRow>
+      <TableCell style={{padding: '8px',width: '5px', textAlign: 'center'}}>Date</TableCell>
+      <TableCell style={{padding: '8px',width: '50px', textAlign: 'center'}}>Movement</TableCell>
+      <TableCell numeric style={{width: '50px',  padding: '8px', textAlign: 'center'}} >Weight</TableCell>
+      <TableCell numeric style={{width: '60px',  padding: '8px', textAlign: 'center'}}>Max Reps</TableCell>
+      <TableCell numeric style={{width: '60px',  padding: '8px', textAlign: 'center'}}>On Set</TableCell>
+
+    </TableRow>
+  </TableHead>
+  <TableBody>
+    {this.state.filteredData.map((n, index) => {
+      return (
+
+        <TableRow key={n.id}>
+          <TableCell component="th" scope="row" style={{padding: '8px', width: '5px', textAlign: 'center'}}>
+            {n.workout_date.slice(0,8) + index}
+          </TableCell>
+          <TableCell component="th" scope="row" style={{padding: '8px', width: '50px', textAlign: 'center'}}>
+            {n.movement_name}
+          </TableCell>
+          <TableCell numeric style={{width: '50px',  padding: '8px', textAlign: 'center'}}>{n.weight}</TableCell>
+          <TableCell numeric style={{width: '60px',  padding: '8px', textAlign: 'center'}}>{n.rep}</TableCell>
+          <TableCell numeric style={{width: '60px',  padding: '8px', textAlign: 'center'}}>{n.set}</TableCell>
+
+        </TableRow>
+      );
+    })}
+
+
+</TableBody>
+</Table>
+</Paper>
+</div>
 </div>
 <br/>
         <div className="table">
 
-{console.log("myRows:")}
-{console.log(this.state.myRows)}
 
-          <Table className="log-table">
+{console.log("userHistory:")}
+{console.log(this.state.userHistory)}
+{console.log("chartData:")}
+{console.log(this.state.chartdata)}
+
+
+          <Table sortable className="log-table">
 
             <TableHead>
               <TableRow>
@@ -321,20 +430,19 @@ this.setState({ xvals: xvals, yvals: yvals, chartdata: chartdata})
               </TableRow>
             </TableHead>
             <TableBody>
-              {this.state.myRows.map((n, index) => {
+              {this.state.userHistory.map((n, index) => {
                 return (
 
                   <TableRow key={n.id}>
                     <TableCell component="th" scope="row" style={{padding: '8px', width: '5px', textAlign: 'center'}}>
-                      {n.date}
+                      {n.workout_date.slice(0,8) + index}
                     </TableCell>
                     <TableCell component="th" scope="row" style={{padding: '8px', width: '50px', textAlign: 'center'}}>
-                      {n.movement}
+                      {n.movement_name}
                     </TableCell>
                     <TableCell numeric style={{width: '50px',  padding: '8px', textAlign: 'center'}}>{n.weight}</TableCell>
-
-                    <TableCell numeric style={{width: '60px',  padding: '8px', textAlign: 'center'}}></TableCell>
-                    <TableCell numeric style={{width: '60px',  padding: '8px', textAlign: 'center'}}></TableCell>
+                    <TableCell numeric style={{width: '60px',  padding: '8px', textAlign: 'center'}}>{n.rep}</TableCell>
+                    <TableCell numeric style={{width: '60px',  padding: '8px', textAlign: 'center'}}>{n.set}</TableCell>
 
                   </TableRow>
                 );
@@ -365,7 +473,7 @@ this.setState({ xvals: xvals, yvals: yvals, chartdata: chartdata})
 
 
 
-          <Table
+          {/* <Table
             sortable
             shadow={5}
             rows={  this.state.myRows }
@@ -394,7 +502,7 @@ this.setState({ xvals: xvals, yvals: yvals, chartdata: chartdata})
               tooltip="Sets"
             >Set Number</TableHead>
 
-          </Table>
+          </Table> */}
 
 
 
@@ -405,4 +513,4 @@ this.setState({ xvals: xvals, yvals: yvals, chartdata: chartdata})
 }
 
 
-export default withStyles(styles)(UserHistory);
+export default UserHistory;
