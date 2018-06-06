@@ -48,7 +48,7 @@ class UserHistory extends Component {
       })
       .then(APIinfo => {
         this.setState({
-          userHistory: APIinfo, firstname: APIinfo[0].first_name, lastname: APIinfo[0].last_name
+          userHistory: APIinfo, firstname: APIinfo[0].first_name, lastname: APIinfo[0].last_name[0]
           })
           this.filterMoves()
       })
@@ -264,10 +264,13 @@ this.setState({fullHistoryGraph: fullHistoryGraph, show: show})
 
 <br/>
 <div className="showbutton">
-  <div className="topgraphbar">
-<Button  size="small" variant="contained" color="primary" onClick={this.showFullHistory.bind(this)}>
-    {this.state.show} all
-</Button></div></div>
+  <div className="topgraphbar" onClick={this.showFullHistory.bind(this)}>
+{/* <Button  size="small" variant="contained" color="primary" onClick={this.showFullHistory.bind(this)}>
+
+</Button> */}
+{this.state.show} all <br/>
+=
+</div></div>
 
 {this.state.fullHistoryGraph}
 

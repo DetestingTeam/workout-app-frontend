@@ -27,6 +27,7 @@ class LogWorkout extends Component{
       savedSet: [],
       setNum: 1,
       ttoF: false,
+      workout_date: 'date'
     }
 
   }
@@ -39,7 +40,7 @@ class LogWorkout extends Component{
         return resp.json()
       })
       .then(APIinfo => {
-        this.setState({ workout: APIinfo, userID: userID, workout_name: APIinfo[0].workout_name})
+        this.setState({ workout: APIinfo, userID: userID, workout_name: APIinfo[0].workout_name, workout_date: APIinfo[0].workout_date})
       })
   }
 
@@ -176,7 +177,7 @@ randomWorkout(){
 
         <div>
        <div style={{display: 'flex', justifyContent: 'center'}}>  <Paper className="paper" style={{marginTop: '10px', width: '800px', maxWidth: '1000px'}}>
-        <h3 style={{textAlign: 'left', marginLeft: '10vw',  marginBottom: '10px', marginTop: '10px', marginRight: '0px'}} ><h1 style={{marginBottom: '10px'}}> {this.state.workout_name} :   Set {this.state.setNum}</h1></h3>
+        <h3 style={{textAlign: 'left', marginLeft: '10vw',  marginBottom: '10px', marginTop: '10px', marginRight: '0px'}} ><h1 style={{marginBottom: '10px'}}> {this.state.workout_name}, {this.state.workout_date}:   Set {this.state.setNum}</h1></h3>
       </Paper></div><br/>
 
         <div style={{display: 'flex', justifyContent: 'center'}}>  <Paper className="paper" style={{marginTop: '0px', width: '800px', maxWidth: '1000px'}}>
