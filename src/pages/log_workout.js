@@ -196,6 +196,8 @@ randomWorkout(){
     //   {console.log(workout[0
     {console.log("this.state.workout")}
 {console.log(this.state.workout)}
+
+  
     return(
 
         <div>

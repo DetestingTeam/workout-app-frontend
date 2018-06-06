@@ -17,14 +17,18 @@ div{
 
 }
 
-
+.sidegraph{
+  display: flex;
+  font-size: small;
+  justify-content: center;
+}
 #blankspace{
   width: 40px;
 }
 
 #chartbox{
 display: flex;
-  justify-content: center;
+justify-content: center;
 }
 
 #chart{
@@ -34,7 +38,9 @@ display: flex;
 display: flex;
 justify-content: center;
   }
-
+.datapaper{
+  width: 600px;
+}
 .dropdown{
   padding: 500px;
   margin-right: 100px;

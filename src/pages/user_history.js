@@ -42,7 +42,7 @@ class UserHistory extends Component {
       yvals: [],
       movement: '',
       uniquemoves: [],
-      myRows: [],
+      filteredData: [],
       selectedMove: '',
       selectedProperty: '',
       history: [
@@ -202,7 +202,10 @@ class UserHistory extends Component {
   }
 
   selectMove = event => {
-    this.setState({ [event.target.name]: event.target.value, selectedMove: event.target.value})
+  // Filter out selected movements data:
+    let arrByID = this.state.userHistory.filter(item => { return item.movement_name === event.target.value ? true : false })
+          console.log(arrByID);
+      this.setState({ [event.target.name]: event.target.value, selectedMove: event.target.value, filteredData: arrByID})
    };
 
 selectProperty = event => {
@@ -213,6 +216,29 @@ selectProperty = event => {
   //    console.log(this.state.selectedProperty);
   //   };
 
+
+
+isNumber(obj) {
+    return obj !== undefined && typeof(obj) === 'number' && !isNaN(obj);
+  }
+
+// filterByID(item) {
+//     if (item.movement_name == event.target.value) {
+//       return true;
+//     }
+//     return false;
+//   }
+
+filterData(){
+let arrByID = this.state.userHistory.filter(this.filterByID)
+console.log("TEST!");
+console.log(arrByID);
+}
+
+
+
+
+
 generateChartData(){
   let xvals = []
   let yvals = []
@@ -221,6 +247,7 @@ generateChartData(){
 //TESTING:
 let dt = new Date();
 let utcDate = dt.toUTCString();
+//
 
 
 
@@ -232,7 +259,7 @@ let utcDate = dt.toUTCString();
   let selectedProp = this.state.selectedProperty
     let num = index
   if(element.movement_name === this.state.selectedMove && selectedProp === "reps"){
-    xvals.push(element.date)
+    xvals.push(element.workout_date)
     yvals.push(element.rep)
     console.log("THIS RUNNING");
     //make some fake ranged dates:
@@ -247,7 +274,7 @@ let utcDate = dt.toUTCString();
     chartdata[num] = (element.rep)
 }
 if(element.movement_name === this.state.selectedMove && selectedProp === "weight"){
-  xvals.push(element.date)
+  xvals.push(element.workout_date)
   yvals.push(element.weight)
 
 //make some fake ranged dates:
@@ -264,6 +291,10 @@ num = element.workout_date.slice(0,8) + num}
 )
 console.log("chartdata:");
 console.log(chartdata);
+console.log("potential graph data:");
+console.log(xvals);
+console.log(yvals);
+
 this.setState({ xvals: xvals, yvals: yvals, chartdata: chartdata})
 }
 
@@ -332,8 +363,48 @@ this.setState({ xvals: xvals, yvals: yvals, chartdata: chartdata})
 {/* {let dataArr = this.state.xvals.map((element)=>{
   rr
 } )  } */}
+<div>
 <div id="chartbox">
   <LineChart id="chart" width="400px" height="200px" data={ this.state.chartdata }   />
+</div>
+<div className='sidegraph'><Paper className = 'datapaper'>
+<h1>{this.state.selectedMove} Table </h1>
+<Table sortable className="log-table">
+
+  <TableHead>
+    <TableRow>
+      <TableCell style={{padding: '8px',width: '5px', textAlign: 'center'}}>Date</TableCell>
+      <TableCell style={{padding: '8px',width: '50px', textAlign: 'center'}}>Movement</TableCell>
+      <TableCell numeric style={{width: '50px',  padding: '8px', textAlign: 'center'}} >Weight</TableCell>
+      <TableCell numeric style={{width: '60px',  padding: '8px', textAlign: 'center'}}>Max Reps</TableCell>
+      <TableCell numeric style={{width: '60px',  padding: '8px', textAlign: 'center'}}>On Set</TableCell>
+
+    </TableRow>
+  </TableHead>
+  <TableBody>
+    {this.state.filteredData.map((n, index) => {
+      return (
+
+        <TableRow key={n.id}>
+          <TableCell component="th" scope="row" style={{padding: '8px', width: '5px', textAlign: 'center'}}>
+            {n.workout_date.slice(0,8) + index}
+          </TableCell>
+          <TableCell component="th" scope="row" style={{padding: '8px', width: '50px', textAlign: 'center'}}>
+            {n.movement_name}
+          </TableCell>
+          <TableCell numeric style={{width: '50px',  padding: '8px', textAlign: 'center'}}>{n.weight}</TableCell>
+          <TableCell numeric style={{width: '60px',  padding: '8px', textAlign: 'center'}}>{n.rep}</TableCell>
+          <TableCell numeric style={{width: '60px',  padding: '8px', textAlign: 'center'}}>{n.set}</TableCell>
+
+        </TableRow>
+      );
+    })}
+
+
+</TableBody>
+</Table>
+</Paper>
+</div>
 </div>
 <br/>
         <div className="table">
@@ -343,6 +414,7 @@ this.setState({ xvals: xvals, yvals: yvals, chartdata: chartdata})
 {console.log(this.state.userHistory)}
 {console.log("chartData:")}
 {console.log(this.state.chartdata)}
+
 
           <Table sortable className="log-table">
 
@@ -440,4 +512,4 @@ this.setState({ xvals: xvals, yvals: yvals, chartdata: chartdata})
 }
 
 
-export default withStyles(styles)(UserHistory);
+export default UserHistory;
