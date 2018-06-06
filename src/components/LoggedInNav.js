@@ -27,9 +27,9 @@ class LoggedInNav extends Component{
               <Button color="inherit" href="/">Fitology</Button>
             </Typography>
             <span className="topnav">
-            <Button color="inherit" href="/login">Login</Button>
-            <Button color="inherit" href="/register">Register</Button>
-            <Button color="inherit" href="/groupworkouts">Group Workout</Button>
+            <Button color="inherit" href="/dashboard">Dashboard</Button>
+            <Button color="inherit" href="/log">Log Workout</Button>
+            <Button color="inherit" href="/stats">Stats</Button>
             <Button color="inherit" onClick={this.props.logout.bind(this)}>Logout</Button>
           </span>
           </Toolbar>
