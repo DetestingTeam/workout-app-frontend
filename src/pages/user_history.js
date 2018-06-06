@@ -11,26 +11,12 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import ReactChartkick, { LineChart, PieChart } from 'react-chartkick'
 import Chart from 'chart.js'
 import AuthService from '../components/AuthService'
+import withAuth from '../components/withAuth'
 
 
 // ReactChartkick.addAdapter(Chart)
 const Auth = new AuthService()
 const BASE = 'http://localhost:3000'
-
-
-const styles = theme => ({
-  root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-  },
-  formControl: {
-    margin: theme.spacing.unit,
-    minWidth: 120,
-  },
-  selectEmpty: {
-    marginTop: theme.spacing.unit * 2,
-  },
-});
 
 class UserHistory extends Component {
   constructor(props) {
@@ -46,126 +32,11 @@ class UserHistory extends Component {
       filteredData: [],
       selectedMove: '',
       selectedProperty: '',
-      history: [
-        {
-          "id": 1,
-          "user_id": 1,
-          "created_at": "2018-04-20T20:53:38.103Z",
-          "workout": [
-            {
-              id: 1,
-              name: "Booty Blaster",
-              difficulty: "moderate",
-              duration: "1 hour",
-              "movement":[
-                {
-                  id: 1,
-                  "name": "Pull-Up",
-                  bodypart: "back",
-                  url: "http://www.google.com",
-                  description: "pull yourself up",
-                  //JOIN:
-                  "reps": 8,
-                  "weight": "N/A",
-                  "sets": 2,
-                  "date": "4/01/2018"
-                },  {
-                    id: 2,
-                    "name": "Kettle Bell Swings",
-                    bodypart: "Full Body",
-                    url: "http://www.google.com",
-                    description: "Swing that shit",
-                    //JOIN:
-                    "reps": 10,
-                    "weight": 25,
-                    "sets": 1,
-                    "date": "4/02/2018"
-                  },
-                  {
-                      id: 2,
-                      "name": "Kettle Bell Swings",
-                      bodypart: "Full Body",
-                      url: "http://www.google.com",
-                      description: "Swing that shit",
-                      //JOIN:
-                      "reps": 10,
-                      "weight": 30,
-                      "sets": 2,
-                      "date": "4/06/2018"
-                    },{
-                        id: 2,
-                        "name": "Kettle Bell Swings",
-                        bodypart: "Full Body",
-                        url: "http://www.google.com",
-                        description: "Swing that shit",
-                        //JOIN:
-                        "reps": 10,
-                        "weight": 35,
-                        "sets": 3,
-                        "date": "4/08/2018"
-                      }],
 
-              }]
-        } ,
-            {
-              "id": 2,
-              "user_id": 1,
-              created_at: "2018-04-22T20:53:38.103Z",
-              "workout": [
-                {
-                  id: 2,
-                  name: "Booty Blaster",
-                  difficulty: "moderate",
-                  duration: "1 hour",
-                  "movement":[
-                    {
-                      id: 2,
-                      "name": "Push-Up",
-                      bodypart: "chest",
-                      url: "http://www.ebay.com",
-                      description: "push yourself up",
-                      //JOIN:
-                      "reps": 30,
-                      "weight": "N/A",
-                      "sets": 5,
-                      "date": "4/20/2018"
-                    },
-                    {
-                      id: 1,
-                      "name": "Pull-Up",
-                      bodypart: "back",
-                      url: "http://www.google.com",
-                      description: "pull yourself up",
-                      //JOIN:
-                      "reps": 15,
-                      "weight": "N/A",
-                      "sets": 2,
-                      "date": "4/22/2018"
-                    },
-                    {
-                        id: 2,
-                        "name": "Kettle Bell Swings",
-                        bodypart: "Full Body",
-                        url: "http://www.google.com",
-                        description: "Swing that shit",
-                        //JOIN:
-                        "reps": 10,
-                        "weight": 35,
-                        "sets": 3,
-                        "date": "4/12/2018"
-                      }]
-
-                }
-              ]
-            }
-          ]
         }
       }
   componentWillMount() {
-    // this.getMoves()
-
     let userID = Auth.getUserId()
-
     return fetch(BASE + '/user_histories' +'?id=' + userID)
       .then((resp) => {
         return resp.json()
@@ -174,28 +45,9 @@ class UserHistory extends Component {
         this.setState({
           userHistory: APIinfo
           })
-          console.log("this.state.userHistory:")
-        console.log(this.state.userHistory)
           this.filterMoves()
       })
   }
-
-
-
-  // getMoves(){
-  //   let newRows = this.state.myRows
-  //   this.state.history.forEach((element, index) =>{
-  //              element.workout.forEach((e,i)=> {
-  //                e.movement.forEach((ele,ind)=> {
-  //                       newRows.push(
-  //                        {movement: ele.name, weight: ele.weight, date: ele.date, reps: ele.reps, sets: ele.sets}
-  //                       )
-  //                   })
-  //            })
-  //     })
-  //     this.setState({myRows: newRows})
-  // }
-
 
   filterMoves(){
     const unique = [...new Set(this.state.userHistory.map(element=> element.movement_name))];
@@ -212,56 +64,17 @@ class UserHistory extends Component {
 selectProperty = event => {
   this.setState({ [event.target.name]: event.target.value, selectedProperty: event.target.value })
 }
-  // selectProperty(event){
-  //     this.setState({ [event.target.name]: event.target.value, selectedProperty: event.target.value })
-  //    console.log(this.state.selectedProperty);
-  //   };
-
-
-
-isNumber(obj) {
-    return obj !== undefined && typeof(obj) === 'number' && !isNaN(obj);
-  }
-
-// filterByID(item) {
-//     if (item.movement_name == event.target.value) {
-//       return true;
-//     }
-//     return false;
-//   }
-
-filterData(){
-let arrByID = this.state.userHistory.filter(this.filterByID)
-console.log("TEST!");
-console.log(arrByID);
-}
-
-
-
 
 
 generateChartData(){
-  let xvals = []
-  let yvals = []
   let chartdata = {}
 
-//TESTING:
-let dt = new Date();
-let utcDate = dt.toUTCString();
-//
-
-
-
-  console.log("this.state.userHistory in gen chart");
-  console.log(this.state.userHistory);
   this.state.userHistory.forEach((element, index)=>
 {
 
   let selectedProp = this.state.selectedProperty
     let num = index
   if(element.movement_name === this.state.selectedMove && selectedProp === "reps"){
-    xvals.push(element.workout_date)
-    yvals.push(element.rep)
     console.log("THIS RUNNING");
     //make some fake ranged dates:
     //make some fake ranged dates:
@@ -275,9 +88,6 @@ let utcDate = dt.toUTCString();
     chartdata[num] = (element.rep)
 }
 if(element.movement_name === this.state.selectedMove && selectedProp === "weight"){
-  xvals.push(element.workout_date)
-  yvals.push(element.weight)
-
 //make some fake ranged dates:
 if(num<30){
 num = element.workout_date.slice(0,8) + num
@@ -290,86 +100,69 @@ num = element.workout_date.slice(0,8) + num}
 }
 }
 )
-console.log("chartdata:");
-console.log(chartdata);
-console.log("potential graph data:");
-console.log(xvals);
-console.log(yvals);
-
-this.setState({ xvals: xvals, yvals: yvals, chartdata: chartdata})
+this.setState({chartdata: chartdata})
 }
-
-
   render(){
 
   return(
     <div>
-      <h2>Your Stats</h2>
-    <h4> {this.state.selectedMove}</h4>
-{console.log(this.state.chartData)}
-{/* {console.log(this.state.uniquemoves)} */}
-      <form className="root">
-       <FormControl className="dropdown">
-         <Select
-           value={this.state.movement_name}
-           onChange={this.selectMove}
-           input={<Input name="movement_name" id="movement_id" />}
-         >
-           <MenuItem value="">
-             <em>Select Movement:</em>
-           </MenuItem>
-           {this.state.uniquemoves.map((element)=>{
-             return(
-              <MenuItem value={element}> {element}</MenuItem>
-             )
-           })}
-         </Select>
-         <FormHelperText>Movement</FormHelperText>
-         </FormControl>
-         <FormControl> <div id="blankspace"></div>   </FormControl>
+      <br/>
+      <div className='sidegraph'>
+          <Paper className = 'datapaper'>
+            <h2>Your Stats</h2>
+            <h4> {this.state.selectedMove}</h4>
+              {console.log(this.state.chartData)}
+              {/* {console.log(this.state.uniquemoves)} */}
+            <form className="root">
+                <FormControl className="dropdown">
+                    <Select
+                       value={this.state.movement_name}
+                       onChange={this.selectMove}
+                       input={<Input name="movement_name" id="movement_id" />}
+                     >
+                       <MenuItem value="">
+                         <em>Select Movement:</em>
+                       </MenuItem>
+                       {this.state.uniquemoves.map((element)=>{
+                         return(
+                        <MenuItem value={element}> {element}</MenuItem>
+                       )
+                     })}
+                   </Select>
+                   <FormHelperText>Movement</FormHelperText>
+              </FormControl>
+              <FormControl> <div id="blankspace"></div>   </FormControl>
 
- <FormControl className="dropdown">
-  <Select
-    value={this.state.age}
-    onChange={this.selectProperty}
-    displayEmpty
-    name="age"
-    className=""
-  >
-    <MenuItem value="">
-      <em>All</em>
-    </MenuItem>
-    <MenuItem value={"reps"}>Reps</MenuItem>
-    <MenuItem value={"weight"}>Weight</MenuItem>
-  </Select>
-  <FormHelperText>Property</FormHelperText>
-</FormControl>
-     <FormControl><div id="blankspace"></div> </FormControl>
-<Button variant="contained" color="primary" onClick={this.generateChartData.bind(this)}>
-       Go!
-     </Button>
+              <FormControl className="dropdown">
+              <Select
+                value={this.state.age}
+                onChange={this.selectProperty}
+                displayEmpty
+                name="age"
+                className=""
+              >
+                <MenuItem value="">
+                  <em>All</em>
+                </MenuItem>
+                <MenuItem value={"reps"}>Reps</MenuItem>
+                <MenuItem value={"weight"}>Weight</MenuItem>
+              </Select>
+              <FormHelperText>Property</FormHelperText>
+              </FormControl>
+              <FormControl><div id="blankspace"></div> </FormControl>
+              <Button className="mybutton" size="small" variant="contained" color="primary" onClick={this.generateChartData.bind(this)}>
+                  Plot!
+              </Button>
+            </form>
 
-  {/* this.generateChartData() */}
-
-
-
-
-
-
-
-
-</form>
-
-
-{/* {let dataArr = this.state.xvals.map((element)=>{
-  rr
-} )  } */}
-<div>
-<div id="chartbox">
-  <LineChart id="chart" width="400px" height="200px" data={ this.state.chartdata }   />
-</div>
-<div className='sidegraph'><Paper className = 'datapaper'>
-<h1>{this.state.selectedMove} Table </h1>
+            <div id="chartbox">
+              <LineChart id="chart" width="400px" height="200px" data={ this.state.chartdata }   />
+            </div>
+          </Paper>
+      </div>
+    <br/>
+          <div className='sidegraph'><Paper className = 'datapaper'>
+<h2>{this.state.selectedMove} Table </h2>
 <Table sortable className="log-table">
 
   <TableHead>
@@ -405,16 +198,10 @@ this.setState({ xvals: xvals, yvals: yvals, chartdata: chartdata})
 </TableBody>
 </Table>
 </Paper>
-</div>
+
 </div>
 <br/>
         <div className="table">
-
-
-{console.log("userHistory:")}
-{console.log(this.state.userHistory)}
-{console.log("chartData:")}
-{console.log(this.state.chartdata)}
 
 
           <Table sortable className="log-table">
@@ -513,4 +300,4 @@ this.setState({ xvals: xvals, yvals: yvals, chartdata: chartdata})
 }
 
 
-export default UserHistory;
+export default withAuth(UserHistory);

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, withRouter } from 'react-router-dom';
 import LandingPage from './landingpage';
 import Workouts from './groupworkouts';
 import About from './aboutus';
@@ -32,4 +32,4 @@ class Main extends Component{
   }
 }
 
-export default Main;
+export default withRouter(Main);

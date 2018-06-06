@@ -4,6 +4,10 @@ body{
   position: center;
 }
 
+.mybutton{
+  background-color: green;
+  color: green;
+}
 h2{
   text-align: center;
 }
