@@ -4,7 +4,7 @@ import './user_history.css';
 
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
-import {Paper, FormControl, Button, Checkbox, Table, TableHead, TableCell, TableBody, TableRow, Input} from '@material-ui/core'
+import {Paper, FormControl, Button, Checkbox, Table, TableHead, EnhancedTableHead, EnhancedTableToolbar, TableCell, TableBody, TableRow, Input} from '@material-ui/core'
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import FormHelperText from '@material-ui/core/FormHelperText';
@@ -34,6 +34,7 @@ class UserHistory extends Component {
   constructor(props) {
     super(props)
     this.state={
+      order: 'asc',
       chartdata: {},
       reps: [],
       xvals: [],
@@ -335,7 +336,7 @@ this.setState({ xvals: xvals, yvals: yvals, chartdata: chartdata})
 
                     <TableCell numeric style={{width: '60px',  padding: '8px', textAlign: 'center'}}></TableCell>
                     <TableCell numeric style={{width: '60px',  padding: '8px', textAlign: 'center'}}></TableCell>
-              
+
                   </TableRow>
                 );
               })}
@@ -343,6 +344,79 @@ this.setState({ xvals: xvals, yvals: yvals, chartdata: chartdata})
 
           </TableBody>
           </Table>
+
+
+
+
+
+
+
+
+
+
+          <Paper className="">
+                  <EnhancedTableToolbar numSelected={this.state.myRows.length} />
+                  <div className="">
+                    <Table className='log-table' aria-labelledby="tableTitle">
+                      <EnhancedTableHead
+                        numSelected={this.state.myRows.length}
+                        order={this.state.order}
+                        orderBy={this.state.myRows}
+                        onSelectAllClick={this.handleSelectAllClick}
+                        onRequestSort={this.handleRequestSort}
+                        rowCount={this.state.myRows.length}
+                      />
+                      <TableBody>
+                        {data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(n => {
+                          const isSelected = this.isSelected(n.id);
+                          return (
+                            <TableRow
+                              hover
+                              onClick={event => this.handleClick(event, n.id)}
+                              role="checkbox"
+                              aria-checked={isSelected}
+                              tabIndex={-1}
+                              key={n.id}
+                              selected={isSelected}
+                            >
+                              <TableCell padding="checkbox">
+                                <Checkbox checked={isSelected} />
+                              </TableCell>
+                              <TableCell component="th" scope="row" padding="none">
+                                {n.name}
+                              </TableCell>
+                              <TableCell numeric>{n.calories}</TableCell>
+                              <TableCell numeric>{n.fat}</TableCell>
+                              <TableCell numeric>{n.carbs}</TableCell>
+                              <TableCell numeric>{n.protein}</TableCell>
+                            </TableRow>
+                          );
+                        })}
+                        {emptyRows > 0 && (
+                          <TableRow style={{ height: 49 * emptyRows }}>
+                            <TableCell colSpan={6} />
+                          </TableRow>
+                        )}
+                      </TableBody>
+                    </Table>
+                  </div>
+                  <TablePagination
+                    component="div"
+                    count={data.length}
+                    rowsPerPage={rowsPerPage}
+                    page={page}
+                    backIconButtonProps={{
+                      'aria-label': 'Previous Page',
+                    }}
+                    nextIconButtonProps={{
+                      'aria-label': 'Next Page',
+                    }}
+                    onChangePage={this.handleChangePage}
+                    onChangeRowsPerPage={this.handleChangeRowsPerPage}
+                  />
+                </Paper>
+
+
 
 
 
