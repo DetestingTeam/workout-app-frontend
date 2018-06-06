@@ -58,3 +58,14 @@ justify-content: center;
   justify-content: center;
   color: black;
 }
+.showbutton{
+  display: flex;
+
+  justify-content: center;
+}
+.topgraphbar{
+    background-color: #3f51b5;
+    width: 600px;
+    display: flex;
+    justify-content: center;
+}

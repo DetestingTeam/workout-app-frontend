@@ -23,6 +23,8 @@ class UserHistory extends Component {
     super(props)
     this.state={
       userHistory: [],
+      firstname: 'Default',
+      lastname: 'User',
       chartdata: {},
       reps: [],
       xvals: [],
@@ -32,6 +34,8 @@ class UserHistory extends Component {
       filteredData: [],
       selectedMove: '',
       selectedProperty: '',
+      show: "show",
+      fullHistoryGraph: '',
 
         }
       }
@@ -43,7 +47,7 @@ class UserHistory extends Component {
       })
       .then(APIinfo => {
         this.setState({
-          userHistory: APIinfo
+          userHistory: APIinfo, firstname: APIinfo[0].first_name, lastname: APIinfo[0].last_name
           })
           this.filterMoves()
       })
@@ -65,6 +69,44 @@ selectProperty = event => {
   this.setState({ [event.target.name]: event.target.value, selectedProperty: event.target.value })
 }
 
+popSelectChart(){
+  if(this.state.selectedMove != ''){
+    return(
+      <div className='sidegraph'>
+        <Paper className = 'datapaper'>
+          <h2>{this.state.selectedMove} Table </h2>
+          <Table sortable className="log-table">
+            <TableHead>
+              <TableRow>
+                <TableCell style={{padding: '8px',width: '5px', textAlign: 'center'}}>Date</TableCell>
+                <TableCell style={{padding: '8px',width: '50px', textAlign: 'center'}}>Movement</TableCell>
+                <TableCell numeric style={{width: '50px',  padding: '8px', textAlign: 'center'}} >Weight</TableCell>
+                <TableCell numeric style={{width: '60px',  padding: '8px', textAlign: 'center'}}>Max Reps</TableCell>
+                <TableCell numeric style={{width: '60px',  padding: '8px', textAlign: 'center'}}>On Set</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {this.state.filteredData.map((n, index) => {
+                return (
+                  <TableRow key={n.id}>
+                    <TableCell component="th" scope="row" style={{padding: '8px', width: '5px', textAlign: 'center'}}>
+                      {n.workout_date.slice(0,8) + index}
+                    </TableCell>
+                    <TableCell component="th" scope="row" style={{padding: '8px', width: '50px', textAlign: 'center'}}>
+                      {n.movement_name}
+                    </TableCell>
+                    <TableCell numeric style={{width: '50px',  padding: '8px', textAlign: 'center'}}>{n.weight}</TableCell>
+                    <TableCell numeric style={{width: '60px',  padding: '8px', textAlign: 'center'}}>{n.rep}</TableCell>
+                    <TableCell numeric style={{width: '60px',  padding: '8px', textAlign: 'center'}}>{n.set}</TableCell>
+                  </TableRow>
+                );
+              })}
+            </TableBody>
+          </Table>
+        </Paper>
+      </div>
+    )}
+}
 
 generateChartData(){
   let chartdata = {}
@@ -102,14 +144,67 @@ num = element.workout_date.slice(0,8) + num}
 )
 this.setState({chartdata: chartdata})
 }
+
+
+
+showFullHistory(){
+  let fullHistoryGraph
+  let {show} = this.state
+if(this.state.show == "show"){
+  show = "hide"
+fullHistoryGraph = <div className="table">
+  <Paper className = 'datapaper'>
+    <h2>Full History</h2>
+  <Table sortable className="log-table">
+    <TableHead>
+      <TableRow>
+        <TableCell style={{padding: '8px',width: '5px', textAlign: 'center'}}>Date</TableCell>
+        <TableCell style={{padding: '8px',width: '50px', textAlign: 'center'}}>Movement</TableCell>
+        <TableCell numeric style={{width: '50px',  padding: '8px', textAlign: 'center'}} >Weight</TableCell>
+        <TableCell numeric style={{width: '60px',  padding: '8px', textAlign: 'center'}}>Max Reps</TableCell>
+        <TableCell numeric style={{width: '60px',  padding: '8px', textAlign: 'center'}}>On Set</TableCell>
+
+      </TableRow>
+    </TableHead>
+
+    <TableBody>
+      {this.state.userHistory.map((n, index) => {
+        return (
+
+          <TableRow key={n.id}>
+            <TableCell component="th" scope="row" style={{padding: '8px', width: '5px', textAlign: 'center'}}>
+              {n.workout_date.slice(0,8) + index}
+            </TableCell>
+            <TableCell component="th" scope="row" style={{padding: '8px', width: '50px', textAlign: 'center'}}>
+              {n.movement_name}
+            </TableCell>
+            <TableCell numeric style={{width: '50px',  padding: '8px', textAlign: 'center'}}>{n.weight}</TableCell>
+            <TableCell numeric style={{width: '60px',  padding: '8px', textAlign: 'center'}}>{n.rep}</TableCell>
+            <TableCell numeric style={{width: '60px',  padding: '8px', textAlign: 'center'}}>{n.set}</TableCell>
+
+          </TableRow>
+        );
+      })}
+  </TableBody>
+  </Table>
+</Paper>
+</div>
+} else show = "show"
+
+this.setState({fullHistoryGraph: fullHistoryGraph, show: show})
+
+}
+
+
   render(){
 
   return(
     <div>
+
       <br/>
       <div className='sidegraph'>
           <Paper className = 'datapaper'>
-            <h2>Your Stats</h2>
+            <h2>Progress for {this.state.firstname} {this.state.lastname} </h2>
             <h4> {this.state.selectedMove}</h4>
               {console.log(this.state.chartData)}
               {/* {console.log(this.state.uniquemoves)} */}
@@ -161,139 +256,23 @@ this.setState({chartdata: chartdata})
           </Paper>
       </div>
     <br/>
-          <div className='sidegraph'><Paper className = 'datapaper'>
-<h2>{this.state.selectedMove} Table </h2>
-<Table sortable className="log-table">
 
-  <TableHead>
-    <TableRow>
-      <TableCell style={{padding: '8px',width: '5px', textAlign: 'center'}}>Date</TableCell>
-      <TableCell style={{padding: '8px',width: '50px', textAlign: 'center'}}>Movement</TableCell>
-      <TableCell numeric style={{width: '50px',  padding: '8px', textAlign: 'center'}} >Weight</TableCell>
-      <TableCell numeric style={{width: '60px',  padding: '8px', textAlign: 'center'}}>Max Reps</TableCell>
-      <TableCell numeric style={{width: '60px',  padding: '8px', textAlign: 'center'}}>On Set</TableCell>
-
-    </TableRow>
-  </TableHead>
-  <TableBody>
-    {this.state.filteredData.map((n, index) => {
-      return (
-
-        <TableRow key={n.id}>
-          <TableCell component="th" scope="row" style={{padding: '8px', width: '5px', textAlign: 'center'}}>
-            {n.workout_date.slice(0,8) + index}
-          </TableCell>
-          <TableCell component="th" scope="row" style={{padding: '8px', width: '50px', textAlign: 'center'}}>
-            {n.movement_name}
-          </TableCell>
-          <TableCell numeric style={{width: '50px',  padding: '8px', textAlign: 'center'}}>{n.weight}</TableCell>
-          <TableCell numeric style={{width: '60px',  padding: '8px', textAlign: 'center'}}>{n.rep}</TableCell>
-          <TableCell numeric style={{width: '60px',  padding: '8px', textAlign: 'center'}}>{n.set}</TableCell>
-
-        </TableRow>
-      );
-    })}
+{this.popSelectChart()}
 
 
-</TableBody>
-</Table>
-</Paper>
 
-</div>
 <br/>
-        <div className="table">
+<div className="showbutton">
+  <div className="topgraphbar">
+<Button  size="small" variant="contained" color="primary" onClick={this.showFullHistory.bind(this)}>
+    {this.state.show} all
+</Button></div></div>
 
-
-          <Table sortable className="log-table">
-
-            <TableHead>
-              <TableRow>
-                <TableCell style={{padding: '8px',width: '5px', textAlign: 'center'}}>Date</TableCell>
-                <TableCell style={{padding: '8px',width: '50px', textAlign: 'center'}}>Movement</TableCell>
-                <TableCell numeric style={{width: '50px',  padding: '8px', textAlign: 'center'}} >Weight</TableCell>
-                <TableCell numeric style={{width: '60px',  padding: '8px', textAlign: 'center'}}>Max Reps</TableCell>
-                <TableCell numeric style={{width: '60px',  padding: '8px', textAlign: 'center'}}>On Set</TableCell>
-
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {this.state.userHistory.map((n, index) => {
-                return (
-
-                  <TableRow key={n.id}>
-                    <TableCell component="th" scope="row" style={{padding: '8px', width: '5px', textAlign: 'center'}}>
-                      {n.workout_date.slice(0,8) + index}
-                    </TableCell>
-                    <TableCell component="th" scope="row" style={{padding: '8px', width: '50px', textAlign: 'center'}}>
-                      {n.movement_name}
-                    </TableCell>
-                    <TableCell numeric style={{width: '50px',  padding: '8px', textAlign: 'center'}}>{n.weight}</TableCell>
-                    <TableCell numeric style={{width: '60px',  padding: '8px', textAlign: 'center'}}>{n.rep}</TableCell>
-                    <TableCell numeric style={{width: '60px',  padding: '8px', textAlign: 'center'}}>{n.set}</TableCell>
-
-                  </TableRow>
-                );
-              })}
-
-
-          </TableBody>
-          </Table>
+{this.state.fullHistoryGraph}
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-          {/* <Table
-            sortable
-            shadow={5}
-            rows={  this.state.myRows }
-          >
-            <TableHead  numeric  name="date"  tooltip="Sort by Date"> Date </TableHead>
-            <TableHead
-              name="movement"
-              numeric
-              tooltip="Start a Movement"
-            >
-             Movement Name
-           </TableHead>
-            <TableHead
-              sortFn={ (a, b, isAsc) => (isAsc ? (b-a):(a-b)) }
-              name="weight"
-              tooltip="Get Beefy"
-            >Weight</TableHead>
-            <TableHead
-              sortFn={ (a, b, isAsc) => (isAsc ? (b-a):(a-b)) }
-              name="reps"
-              tooltip="Steady Reppin'"
-            >Max Reps</TableHead>
-            <TableHead
-              sortFn={ (a, b, isAsc) => (isAsc ? (b-a):(a-b)) }
-              name="sets"
-              tooltip="Sets"
-            >Set Number</TableHead>
-
-          </Table> */}
-
-
-
-    </div>
   </div>
     )
   }
