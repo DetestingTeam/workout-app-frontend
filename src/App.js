@@ -27,7 +27,8 @@ class App extends Component {
     return (
       <div className="back">
         <CssBaseline />
-        {Auth.loggedIn ? <LoggedInNav logout={this.handleLogout.bind(this)}/> : <GuestNav />}
+        {Auth.loggedIn() && <LoggedInNav logout={this.handleLogout.bind(this)}/>}
+        {!Auth.loggedIn() && <GuestNav />}
         <Main/>
         <Footer />
       </div>

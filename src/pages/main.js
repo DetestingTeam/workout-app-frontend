@@ -22,11 +22,11 @@ class Main extends Component{
         <Route exact path="/dashboard" component={Dashboard} />
         <Route path="/groupworkouts" component={Workouts} />
         <Route path="/aboutus" component={About} />
-        <Route exact path ="/moves" render={(props) => <CreateMovement history={this.state.history}/>} />
-        <Route exact path ="/newworkout" render={(props) => <CreateWorkout history={this.state.history}/>} />
-        <Route exact path ="/stats" render={(props) => <UserHistory history={this.state.history}/>} />
-        <Route exact path ="/log" render={(props) => <LogWorkout history={this.state.history}/>} />
-        <Route exact path ="/new" render={(props) => <WorkoutPage history={this.state.history}/>} />
+        <Route exact path ="/moves" render={(props) => <CreateMovement />} />
+        <Route exact path ="/newworkout" render={(props) => <CreateWorkout />} />
+        <Route exact path ="/stats" render={(props) => <UserHistory />} />
+        <Route exact path ="/log" render={(props) => <LogWorkout />} />
+        <Route exact path ="/new" render={(props) => <WorkoutPage />} />
       </Switch>
     )
   }
