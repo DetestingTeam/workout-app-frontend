@@ -1,0 +1,46 @@
+.full-container{
+    height: 80vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    background-color: black;
+}
+.picone{
+  width: 50vw;
+  height: 80vh;
+  background-color: pink;
+  /* background-image: url("./assets/images/findaworkout.jpeg"); */
+  /* background-image: "./assets/images/findaworkout.jpeg"; */
+  background-image: url("http://localhost:3001/assets/images/findaworkout.jpeg");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pictwo{
+  width: 50vw;
+  height: 80vh;
+  background-color: pink;
+  /* background-image: url("./assets/images/findaworkout.jpeg"); */
+  /* background-image: "./assets/images/findaworkout.jpeg"; */
+  background-image: url("http://localhost:3001/assets/images/logaworkout.jpeg");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn{
+  height: 90px;
+}
+.btn:hover {opacity: 0.7;}
+.btn2:hover {opacity: 0.7;}
+
+.landing-grid {
+  display: flex;
+  flex-direction: row;
+  min-height: 76.6vh;
+}
