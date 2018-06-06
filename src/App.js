@@ -1,21 +1,38 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Main from './pages/main';
+import Navbar from './components/navbar';
+import Footer from './components/Footer'
 
+import { withRouter } from 'react-router-dom';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import AuthService from './components/AuthService'
+import LoggedInNav from  './components/LoggedInNav'
+import GuestNav from './components/GuestNav'
+
+const BASE = 'http://localhost:3000'
+
+const Auth = new AuthService()
 class App extends Component {
+  constructor(props) {
+    super(props)
+    this.state={
+    }
+  }
+  handleLogout(){
+    Auth.logout()
+    this.props.history.push("/")
+  }
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div className="back">
+        <CssBaseline />
+        {Auth.loggedIn ? <LoggedInNav logout={this.handleLogout.bind(this)}/> : <GuestNav />}
+        <Main/>
+        <Footer />
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export default withRouter(App);
