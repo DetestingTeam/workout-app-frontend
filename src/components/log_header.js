@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Paper, Button, Checkbox, Table, TableHead, TableCell, TableBody, TableRow, Input} from '@material-ui/core'
+import {Paper} from '@material-ui/core'
 
 class LogHeader extends Component{
   constructor(props){

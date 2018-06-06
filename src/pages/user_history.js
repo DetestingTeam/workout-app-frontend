@@ -12,6 +12,7 @@ import ReactChartkick, { LineChart, PieChart } from 'react-chartkick'
 import Chart from 'chart.js'
 import AuthService from '../components/AuthService'
 
+
 // ReactChartkick.addAdapter(Chart)
 const Auth = new AuthService()
 const BASE = 'http://localhost:3000'
