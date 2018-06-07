@@ -11,6 +11,7 @@ class Landing extends Component {
         <div className ="picone"><Button className="btn" size="large" variant="contained" color="primary" href="/groupworkouts">Find a Workout</Button></div>
         <div className ="pictwo"><Button className="btn" size="large" variant="contained" color="primary" href="/log">Log a Workout</Button></div>
 
+
   {/* <div className="landing-grid back">
         <div className="card_color">
             <img className="lp-image" src="./assets/images/findaworkout.jpeg" alt="Women Working Out"/>
