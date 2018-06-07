@@ -7,21 +7,19 @@ class GuestNav extends Component{
   render(){
     return(
 
-      <div className="navbarcolor">
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton  color="inherit" aria-label="Menu">
+      <div className="nav-container">
+          {/* <IconButton  color="inherit" aria-label="Menu">
             <MenuIcon/>
-          </IconButton>
+          </IconButton> */}
           <Typography variant="title" color="inherit" >
           <Button href="/"><img className="navlogo" src="./assets/images/fitology.png"/></Button>
           </Typography>
-          <Button color="inherit" href="/login">Login</Button>
-          <Button color="inherit" href="/register">Register</Button>
-          <Button color="inherit" href="/groupworkouts">Group Workout</Button>
-          <Button color="inherit" href="/aboutus">About Us</Button>
-        </Toolbar>
-      </AppBar>
+          <span className="topnav">
+            <Button className="navbutton" style={{color:'white'}} color="inherit" href="/login">Login</Button>
+            <Button className="navbutton" style={{color:'white'}} color="inherit" href="/register">Register</Button>
+            <Button className="navbutton" style={{color:'white'}} color="inherit" href="/groupworkouts">Group Workout</Button>
+            <Button className="navbutton" style={{color:'white'}} color="inherit" href="/aboutus">About Us</Button>
+          </span>
     </div>
     )
   }
