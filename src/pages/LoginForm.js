@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import {Redirect, withRouter} from 'react-router-dom'
 import {TextField, Button, Card, CardContent} from '@material-ui/core'
 import AuthService from "../components/AuthService"
 
@@ -21,12 +22,19 @@ class LoginForm extends Component{
   handleSubmit(event){
     this.Auth.login(this.state.email,this.state.password)
     .then(res =>{
-      this.props.history.push("/dashboard")
+      this.setState({loginSuccess: true})
     })
     .catch(err =>{ alert(err) })
   }
 
   render(){
+    const { from } = this.props.location.state || { from: { pathname: '/dashboard' } }
+    const { loginSuccess } = this.state
+
+    if (loginSuccess === true) {
+      return <Redirect to={from} />
+    }
+
     let form = this.state
     return(
       <div className="sign-up-page">
@@ -64,4 +72,4 @@ class LoginForm extends Component{
     )
   }
 }
-export default LoginForm
+export default withRouter(LoginForm)
