@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
 import Main from './pages/main';
-import Navbar from './components/navbar';
 import Footer from './components/Footer'
 
 import { withRouter } from 'react-router-dom';
@@ -9,6 +8,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import AuthService from './components/AuthService'
 import LoggedInNav from  './components/LoggedInNav'
 import GuestNav from './components/GuestNav'
+
 
 const BASE = 'http://localhost:3000'
 
@@ -27,8 +27,10 @@ class App extends Component {
     return (
       <div className="back">
         <CssBaseline />
-        {Auth.loggedIn() && <LoggedInNav logout={this.handleLogout.bind(this)}/>}
-        {!Auth.loggedIn() && <GuestNav />}
+        <span>
+          {Auth.loggedIn() && <LoggedInNav logout={this.handleLogout.bind(this)}/>}
+          {!Auth.loggedIn() && <GuestNav />}
+        </span>
         <Main/>
         <Footer />
       </div>

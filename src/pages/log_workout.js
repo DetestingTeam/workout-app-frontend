@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import {Paper, Button, Checkbox, Table, TableHead, TableCell, TableBody, TableRow, Input} from '@material-ui/core'
+import {Paper, Snackbar, Button, Checkbox, Table, TableHead, TableCell, TableBody, TableRow, Input} from '@material-ui/core'
 import LogHeader from '../components/log_header'
 import AuthService from '../components/AuthService'  // <- We use the AuthService to logout
 import withAuth from '../components/withAuth'
 import { withRouter } from 'react-router-dom'
 
 const Auth = new AuthService()
-const BASE = 'http://localhost:3000'
+const BASE = 'https://workout-app-backend.herokuapp.com'
 
 class LogWorkout extends Component{
   constructor(props){
@@ -27,26 +27,44 @@ class LogWorkout extends Component{
       savedSet: [],
       setNum: 1,
       ttoF: false,
+      workout_date: 'date',
+      nodata: '',
+      fancypopshit: '',
+      open: false,
     }
 
   }
 
 
   componentWillMount() {
+    console.log(this.props.history.location.state);
+
+    this.noStatsUser()
     let userID = Auth.getUserId()
     return fetch(BASE + '/workoutdetails' +'?workout_id=' + this.state.workout_id)
       .then((resp) => {
         return resp.json()
       })
       .then(APIinfo => {
-        this.setState({ workout: APIinfo, userID: userID, workout_name: APIinfo[0].workout_name})
+        this.setState({ workout: APIinfo, userID: userID, workout_name: APIinfo[0].workout_name, workout_date: APIinfo[0].workout_date})
       })
   }
 
+  handleClose = () => {
+    console.log("test");
+     this.setState({ open: false });
+   };
 
+  noStatsUser(){
+    let open = false
+    if( this.props.history.location.state){
+    if(this.props.history.location.state.nodata == true){
+      open = true
+  }}
+this.setState({open: open})
+}
 
   handleSubmit(event){
-
     console.log("this.state.fullSet");
     console.log(this.state.fullSet);
     this.state.fullSet.map((element)=>{
@@ -65,6 +83,7 @@ class LogWorkout extends Component{
         })
     })
     console.log(this.state.userhistory);
+
   }
 
 
@@ -73,7 +92,7 @@ class LogWorkout extends Component{
   }
 
   handleCheck(n, index){
-
+console.log(this.props.location.query.__firebase_request_key);
     let {checked, ttoF} = this.state
     if (checked[index] === true){
       checked[index] = false
@@ -165,18 +184,30 @@ randomWorkout(){
  // };
 
   render(){
+
 //     // let {workout} = this.state
 //     // {console.log("THis.state,workout:")}
 //     //   {console.log(workout[0
 //     {console.log("this.state.workout")}
 // {console.log(this.state.workout)}
-
+// console.log(this.props.history.location.state.nodata);
+console.log(this.state.open)
 
     return(
 
         <div>
+          <Snackbar
+              anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+              open={this.state.open}
+              onClose={this.handleClose.bind(this)}
+              ContentProps={{
+                'aria-describedby': 'message-id',
+              }}
+              message={<span id="message-id">Do a workout first!</span>}
+            />
+
        <div style={{display: 'flex', justifyContent: 'center'}}>  <Paper className="paper" style={{marginTop: '10px', width: '800px', maxWidth: '1000px'}}>
-        <h3 style={{textAlign: 'left', marginLeft: '10vw',  marginBottom: '10px', marginTop: '10px', marginRight: '0px'}} ><h1 style={{marginBottom: '10px'}}> {this.state.workout_name} :   Set {this.state.setNum}</h1></h3>
+        <h3 style={{textAlign: 'left', marginLeft: '10vw',  marginBottom: '10px', marginTop: '10px', marginRight: '0px'}} ><h1 style={{marginBottom: '10px'}}> {this.state.workout_name}, {this.state.workout_date}:   Set {this.state.setNum}</h1></h3>
       </Paper></div><br/>
 
         <div style={{display: 'flex', justifyContent: 'center'}}>  <Paper className="paper" style={{marginTop: '0px', width: '800px', maxWidth: '1000px'}}>

@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { withRouter } from 'react-router-dom'
 import AuthService from './AuthService'
 
 export default function withAuth(WrappedComponent) {
@@ -14,7 +13,7 @@ export default function withAuth(WrappedComponent) {
 
     componentWillMount() {
       if (!Auth.loggedIn()) {
-        this.props.history.replace('/login')
+        this.props.history.push('/login', this.props.path)
       }
       else {
         try {

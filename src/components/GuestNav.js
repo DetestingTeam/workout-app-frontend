@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
-import {AppBar, Toolbar, Typography, Button, IconButton } from '@material-ui/core/';
+import { AppBar, Toolbar, Typography, Button, IconButton } from '@material-ui/core/';
 import MenuIcon from '@material-ui/icons/Menu';
 
 
 class GuestNav extends Component{
   render(){
     return(
+
       <div className="navbarcolor">
       <AppBar position="static">
         <Toolbar>

@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import {Redirect, withRouter} from 'react-router-dom'
 import {TextField, Button, Card, CardContent} from '@material-ui/core'
 import AuthService from "../components/AuthService"
 
@@ -21,12 +22,13 @@ class LoginForm extends Component{
   handleSubmit(event){
     this.Auth.login(this.state.email,this.state.password)
     .then(res =>{
-      this.props.history.replace('/dashboard')
+      this.props.history.push(this.props.location.state)
     })
     .catch(err =>{ alert(err) })
   }
 
   render(){
+    console.log(this.props.location)
     let form = this.state
     return(
       <div className="sign-up-page">
@@ -54,7 +56,7 @@ class LoginForm extends Component{
           </span><br />
           </CardContent>
           <span className="action-button">
-            <Button variant="raised" color="primary" onClick={this.handleSubmit.bind(this)}>Log in</Button>
+            <Button type="submit" variant="raised" color="primary" onClick={this.handleSubmit.bind(this)}>Log in</Button>
           </span>
         </Card>
 
@@ -64,4 +66,4 @@ class LoginForm extends Component{
     )
   }
 }
-export default LoginForm
+export default withRouter(LoginForm)
