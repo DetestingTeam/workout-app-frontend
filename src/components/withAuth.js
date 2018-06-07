@@ -13,7 +13,7 @@ export default function withAuth(WrappedComponent) {
 
     componentWillMount() {
       if (!Auth.loggedIn()) {
-        this.props.history.replace('/login')
+        this.props.history.push('/login', this.props.path)
       }
       else {
         try {

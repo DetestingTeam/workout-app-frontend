@@ -18,22 +18,21 @@ const styles = {
 class LoggedInNav extends Component{
   render(){
     return (
-        <AppBar position="static">
-          <Toolbar>
-            <IconButton color="inherit" aria-label="Menu">
-              <MenuIcon/>
-            </IconButton>
-            <Typography variant="title" color="inherit">
-              <Button color="inherit" href="/">Fitology</Button>
-            </Typography>
-            <span className="topnav">
-            <Button color="inherit" href="/dashboard">Dashboard</Button>
-            <Button color="inherit" href="/log">Log Workout</Button>
-            <Button color="inherit" href="/stats">Stats</Button>
-            <Button color="inherit" onClick={this.props.logout.bind(this)}>Logout</Button>
-          </span>
-          </Toolbar>
-        </AppBar>
+      <div className="nav-container">
+        {/* <IconButton  color="inherit" aria-label="Menu">
+          <MenuIcon/>
+        </IconButton> */}
+        <Typography variant="title" color="inherit">
+          <Button href="/"><img className="navlogo" src="./assets/images/fitology.png"/></Button>
+        </Typography>
+        <span className="topnav">
+          <Button color="inherit" style={{color:'white'}} href="/dashboard">Dashboard</Button>
+          <Button color="inherit" style={{color:'white'}} href="/log">Log Workout</Button>
+          <Button color="inherit" style={{color:'white'}} href="/stats">Stats</Button>
+          <Button color="inherit" style={{color:'white'}} href="/groupworkouts">Group Workouts</Button>
+          <Button color="inherit" style={{color:'white'}} onClick={this.props.logout.bind(this)}>Logout</Button>
+        </span>
+      </div>
     )
   }
 }

@@ -8,8 +8,9 @@ class Landing extends Component {
   render() {
     return(
       <div className ="full-container">
-<div className ="picone"><Button className="btn" size="large" variant="contained" color="primary" href="/groupworkouts">Find a Workout</Button></div>
-<div className ="pictwo"><Button className="btn" size="large" variant="contained" color="primary" href="/log">Log a Workout</Button></div>
+        <div className ="picone"><Button className="btn" size="large" variant="contained" color="primary" href="/groupworkouts">Find a Workout</Button></div>
+        <div className ="pictwo"><Button className="btn" size="large" variant="contained" color="primary" href="/log">Log a Workout</Button></div>
+
 
   {/* <div className="landing-grid back">
         <div className="card_color">

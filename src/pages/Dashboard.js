@@ -5,7 +5,7 @@ import MotivationMessage from '../components/motivation_message'
 import {Grid, Paper, Typography} from '@material-ui/core'
 import '../styles/dashboard.css'
 import FullWidthGrid from '../components/full_width_grid'
-
+import { withRouter } from 'react-router-dom'
 
 const Auth = new AuthService()
 const styles = theme => ({
@@ -45,4 +45,4 @@ class Dashboard extends Component{
     }
   }
 
-export default withAuth(Dashboard)
+export default withRouter(withAuth(Dashboard))
