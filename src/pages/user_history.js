@@ -17,7 +17,7 @@ import { withRouter } from 'react-router-dom'
 
 // ReactChartkick.addAdapter(Chart)
 const Auth = new AuthService()
-const BASE = 'http://localhost:3000'
+const BASE = 'https://workout-app-backend.herokuapp.com'
 
 class UserHistory extends Component {
   constructor(props) {

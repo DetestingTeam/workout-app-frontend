@@ -6,7 +6,7 @@ import withAuth from '../components/withAuth'
 import { withRouter } from 'react-router-dom'
 
 const Auth = new AuthService()
-const BASE = 'http://localhost:3000'
+const BASE = 'https://workout-app-backend.herokuapp.com'
 
 class LogWorkout extends Component{
   constructor(props){
