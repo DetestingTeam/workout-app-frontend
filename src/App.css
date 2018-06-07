@@ -63,10 +63,14 @@
 .footer {
   border: 20px;
 }
+.nav-container{
+  display: flex;
+  width:100%;
+  margin-right: 100px;
+}
 
 .topnav{
-  display: flex;
-  float: right;
+  margin-right: 0px;
 }
 
 .card_color .btn {
