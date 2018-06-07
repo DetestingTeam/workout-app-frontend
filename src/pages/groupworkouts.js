@@ -51,7 +51,7 @@ class Workouts extends Component {
                     width="400"
                     height="350"
                     frameborder="0"
-                    src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDGC6QAps8ZE8-q3f_quRFafP_n13n3P0Y&q=Learn+Academy,San+Diego,CA" allowfullscreen>
+                    src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDGC6QAps8ZE8-q3f_quRFafP_n13n3P0Y&q=Park,San+Diego,CA" allowfullscreen>
                 </iframe>
 
                 <Card className='card2'>
@@ -77,7 +77,7 @@ class Workouts extends Component {
                         width="400"
                         height="350"
                         frameborder="0"
-                        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDGC6QAps8ZE8-q3f_quRFafP_n13n3P0Y&q=Le    arn+Academy,San+Diego,CA" allowfullscreen>
+                        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDGC6QAps8ZE8-q3f_quRFafP_n13n3P0Y&q=Kate-Sessions-Park,San+Diego,CA" allowfullscreen>
                     </iframe>
 
                     <Card className='card3'>

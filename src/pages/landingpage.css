@@ -41,6 +41,7 @@
 
 .landing-grid {
   display: flex;
-  flex-direction: row;
+  background: pink;
+  justify-content: center;
   min-height: 76.6vh;
 }

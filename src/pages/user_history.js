@@ -44,27 +44,28 @@ class UserHistory extends Component {
       }
   componentWillMount() {
     let userID = Auth.getUserId()
+
     return fetch(BASE + '/user_histories' +'?id=' + userID)
       .then((resp) => {
         return resp.json()
       })
       .then(APIinfo => {
+        console.log("APIinfo")
         console.log(APIinfo)
-        if(APIinfo == []){
+        if(APIinfo == [] || APIinfo == ''){
+          debugger
+          console.log("TEST PASSED");
           let nodata = true
           this.props.history.push({
                 pathname: '/log',
                 state: {nodata: nodata}
           })
           // this.props.history.push('/log', nodata.true)
-          }
-
-
-
-
+        } else{
         this.setState({
           userHistory: APIinfo, firstname: APIinfo[0].first_name, lastname: APIinfo[0].last_name
           })
+        }
           this.filterMoves()
       })
   }
