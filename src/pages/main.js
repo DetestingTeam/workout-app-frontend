@@ -26,7 +26,7 @@ class Main extends Component{
         <Route exact path ="/moves" render={(props) => <CreateMovement />} />
         <Route exact path ="/newworkout" render={(props) => <CreateWorkout />} />
         <Route exact path ="/stats" render={(props) => <UserHistory />} />
-        <Route exact path ="/log" render={(props) => <LogWorkout />} />
+        <Route exact path ="/log" render={(props) => <LogWorkout path="/log"/>} />
         <Route exact path ="/new" render={(props) => <WorkoutPage />} />
       </Switch>
     )
