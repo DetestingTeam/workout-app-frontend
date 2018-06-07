@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import {Button, Card, Typography, CardActions, CardMedia, CardContent} from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
+import { Link } from 'react-router-dom'
 
 
 // INFO NEEDED: WORKOUT_hist[workout.length]. Today's workout.
@@ -17,14 +18,28 @@ const styles = theme => ({
     textAlign: 'center',
     color: theme.palette.text.secondary,
   },
+  paper2: {
+    padding: theme.spacing.unit * 2,
+    color: theme.palette.text.secondary,
+    height: '345px',
+    display: 'flex',
+    justifyContent: 'center',
+  },
   card: {
     maxWidth: 345,
+  },
+  card1: {
+    textAlign: 'center',
+    width: '100%',
+    margin: 'auto',
+
   },
   media: {
    height: 0,
    paddingTop: '56.25%',
    backgroundImage: 'url("http://localhost:3001/assets/images/graph.png")',
    backgroundSize: 'contain',
+
  },
  media2: {
   height: 0,
@@ -68,30 +83,45 @@ function FullWidthGrid(props) {
         </Grid>
 
         <Grid item xs={12} sm={6}>
-          <Paper className={classes.paper}>
-            <Card className={classes.paper}>
-              Today's Daily Workout:
+          <Paper className={classes.paper2}>
+            <Card className={classes.card1}>
+              <Typography gutterBottom variant="headline" component="h2">
+                Today's Workout
+              </Typography>
+              Set 1:
             <br/>
             Move 1: Burpees  20 secs
             <br/>
-            Move 1: Burpees  20 secs
+            Move 2: Push Ups  20 secs
             <br/>
-            Move 1: Burpees  20 secs
+            Move 3: Pull Ups  20 secs
             <br/>
-            Move 1: Burpees  20 secs
+            Rest 30 seconds
+            <br/><br/>
+            Set 2:
             <br/>
-            Move 1: Burpees  20 secs
+            Move 4: Squats 20 secs
             <br/>
-            <Button href='/log'> Do today's Workout!</Button>
+            Move 5: Kettle Bell Swings  20 secs
+            <br/>
+            ....
+            <br/>
+              <CardActions>
+            <Button size="small" color="primary" href='/log'>
+              Do today's Workout!
+            </Button>
+              </CardActions>
           </Card>
           </Paper>
 
 
 
         </Grid>
-        <Grid item xs={12} sm={3}>
-          <Paper className={classes.paper}>
-            <Card className={classes.paper} linkto='/stats'>
+
+        <Grid item xs={12} sm={3} href='/stats'>
+          <Paper className={classes.paper} href='/stats'>
+            <Link to={`/stats`} style={{textDecoration: 'none'}}>
+            <Card className={classes.paper}>
               <Typography gutterBottom variant="headline" component="h2">
                 My Stats
               </Typography>
@@ -111,10 +141,14 @@ function FullWidthGrid(props) {
                       </Button>
                     </CardActions>
                   </Card>
+                    </Link>
           </Paper>
         </Grid>
+
+
         <Grid item xs={12} sm={3}>
           <Paper className={classes.paper}>
+            <Link to={`/log`} style={{textDecoration: 'none'}}>
             <Card className={classes.paper}>
               <Typography gutterBottom variant="headline" component="h2">
                 My Journal
@@ -135,6 +169,7 @@ function FullWidthGrid(props) {
                       </Button>
                     </CardActions>
                   </Card>
+                </Link>
           </Paper>
         </Grid>
 
@@ -166,6 +201,7 @@ function FullWidthGrid(props) {
 
         <Grid item xs={6} sm={3}>
           <Paper className={classes.paper}>
+            <Link to={`/groupworkouts`} style={{textDecoration: 'none'}}>
             <Card className={classes.paper}>
             <Typography gutterBottom variant="headline" component="h2">
               Find a Class
@@ -186,6 +222,7 @@ function FullWidthGrid(props) {
                     </Button>
                   </CardActions>
                 </Card>
+              </Link>
               </Paper>
         </Grid>
 
@@ -213,7 +250,7 @@ function FullWidthGrid(props) {
                   </CardContent>
                   <CardActions>
                     <Button size="small" color="primary" href='/log'>
-                      Search
+                      Search Workouts
                     </Button>
                   </CardActions>
                 </Card>
