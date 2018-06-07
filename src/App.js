@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
 import Main from './pages/main';
-import Navbar from './components/navbar';
 import Footer from './components/Footer'
 
 import { withRouter } from 'react-router-dom';
