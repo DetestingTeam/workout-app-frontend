@@ -24,7 +24,7 @@ class LoggedInNav extends Component{
               <MenuIcon/>
             </IconButton>
             <Typography variant="title" color="inherit">
-              <Button color="inherit" href="/">Fitology</Button>
+              <Button href="/"><img className="navlogo" src="./assets/images/fitology.png"/></Button>
             </Typography>
             <span className="topnav">
             <Button color="inherit" href="/dashboard">Dashboard</Button>
