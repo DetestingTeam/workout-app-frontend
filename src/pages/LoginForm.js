@@ -21,7 +21,7 @@ class LoginForm extends Component{
   handleSubmit(event){
     this.Auth.login(this.state.email,this.state.password)
     .then(res =>{
-      this.props.history.replace('/dashboard')
+      this.props.history
     })
     .catch(err =>{ alert(err) })
   }
@@ -54,7 +54,7 @@ class LoginForm extends Component{
           </span><br />
           </CardContent>
           <span className="action-button">
-            <Button variant="raised" color="primary" onClick={this.handleSubmit.bind(this)}>Log in</Button>
+            <Button type="submit" variant="raised" color="primary" onClick={this.handleSubmit.bind(this)}>Log in</Button>
           </span>
         </Card>
 
