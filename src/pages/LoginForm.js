@@ -22,19 +22,12 @@ class LoginForm extends Component{
   handleSubmit(event){
     this.Auth.login(this.state.email,this.state.password)
     .then(res =>{
-      this.setState({loginSuccess: true})
+      this.props.history.push("/dashboard")
     })
     .catch(err =>{ alert(err) })
   }
 
   render(){
-    const { from } = this.props.location.state || { from: { pathname: '/dashboard' } }
-    const { loginSuccess } = this.state
-
-    if (loginSuccess === true) {
-      return <Redirect to={from} />
-    }
-
     let form = this.state
     return(
       <div className="sign-up-page">

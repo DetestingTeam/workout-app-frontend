@@ -27,11 +27,11 @@ class GuestNav extends Component{
           <Typography variant="title" color="inherit" >
           <Button color="inherit" href="/">Fitology</Button>
           </Typography>
-          <Button color="inherit" href="/login">Login</Button>
-          <Button color="inherit" href="/register">Register</Button>
-          <Button color="inherit" href="/groupworkouts">Group Workout</Button>
-          <Button color="inherit" href="/aboutus">About Us</Button>
-        </Toolbar>
+            <Button color="inherit" href="/login">Login</Button>
+            <Button color="inherit" href="/register">Register</Button>
+            <Button color="inherit" href="/groupworkouts">Group Workouts</Button>
+            <Button color="inherit" href="/aboutus">About Us</Button>
+          </Toolbar>
       </AppBar>
     )
   }

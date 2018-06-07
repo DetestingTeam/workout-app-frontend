@@ -14,7 +14,6 @@ import WorkoutPage from './workout_page'
 
 class Main extends Component{
   render(){
-    console.log(this.props.location.state);
     return(
       <Switch>
         <Route exact path="/" render={(props) => <LandingPage />} />

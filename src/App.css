@@ -63,9 +63,10 @@
 .footer {
   border: 20px;
 }
-
-.topnav{
+.nav-container{
   display: flex;
+}
+.topnav{
   float: right;
 }
 
