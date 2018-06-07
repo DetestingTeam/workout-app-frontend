@@ -22,7 +22,7 @@ class LoginForm extends Component{
   handleSubmit(event){
     this.Auth.login(this.state.email,this.state.password)
     .then(res =>{
-      this.props.history.push(this.props.location.state)
+      this.props.history.push(this.props.location.state || '/dashboard')
     })
     .catch(err =>{ alert(err) })
   }
