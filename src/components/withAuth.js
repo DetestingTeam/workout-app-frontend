@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { withRouter } from 'react-router-dom'
 import AuthService from './AuthService'
 
 export default function withAuth(WrappedComponent) {

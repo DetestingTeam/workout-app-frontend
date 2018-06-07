@@ -14,10 +14,11 @@ import WorkoutPage from './workout_page'
 
 class Main extends Component{
   render(){
+    console.log(this.props.location.state);
     return(
       <Switch>
-        <Route exact path="/" component={LandingPage} />
-        <Route exact path="/login" component={LoginForm} />
+        <Route exact path="/" render={(props) => <LandingPage />} />
+        <Route exact path="/login" render={(props) => <LoginForm />} />
         <Route exact path="/register" component={SignUpForm} />
         <Route exact path="/dashboard" component={Dashboard} />
         <Route path="/groupworkouts" component={Workouts} />
