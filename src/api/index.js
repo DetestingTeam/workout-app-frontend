@@ -1,4 +1,4 @@
-const BASE = "http://localhost:3000"
+const BASE = "https://workout-app-backend.herokuapp.com"
 
 
 let registerUser = function(user){

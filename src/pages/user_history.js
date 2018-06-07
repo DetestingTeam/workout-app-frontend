@@ -4,7 +4,8 @@ import './user_history.css';
 
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
-import {Paper, FormControl, Button, Checkbox, Table, TableHead, TableCell, TableBody, TableRow, Input} from '@material-ui/core'
+import {Paper, FormControl, Button, Checkbox, Table, TableHead, TableCell, TableBody, TableRow, Input, Snackbar, IconButton} from '@material-ui/core'
+import CloseIcon from '@material-ui/icons/Close';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import FormHelperText from '@material-ui/core/FormHelperText';
@@ -17,7 +18,7 @@ import { withRouter } from 'react-router-dom'
 
 // ReactChartkick.addAdapter(Chart)
 const Auth = new AuthService()
-const BASE = 'http://localhost:3000'
+const BASE = 'https://workout-app-backend.herokuapp.com'
 
 class UserHistory extends Component {
   constructor(props) {
@@ -37,6 +38,7 @@ class UserHistory extends Component {
       selectedProperty: '',
       show: "show",
       fullHistoryGraph: '',
+      nodata: false,
 
         }
       }
@@ -47,8 +49,21 @@ class UserHistory extends Component {
         return resp.json()
       })
       .then(APIinfo => {
+        console.log(APIinfo)
+        if(APIinfo == []){
+          let nodata = true
+          this.props.history.push({
+                pathname: '/log',
+                state: {nodata: nodata}
+          })
+          // this.props.history.push('/log', nodata.true)
+          }
+
+
+
+
         this.setState({
-          userHistory: APIinfo, firstname: APIinfo[0].first_name, lastname: APIinfo[0].last_name[0]
+          userHistory: APIinfo, firstname: APIinfo[0].first_name, lastname: APIinfo[0].last_name
           })
           this.filterMoves()
       })
