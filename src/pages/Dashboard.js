@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import withAuth from '../components/withAuth'
-import AuthService from '../components/AuthService'  // <- We use the AuthService to logout
+import AuthService from '../components/AuthService'
+import { withRouter } from 'react-router-dom'
 
 const Auth = new AuthService()
 
@@ -16,4 +17,4 @@ class Dashboard extends Component{
     }
   }
 
-export default withAuth(Dashboard)
+export default withRouter(withAuth(Dashboard))
