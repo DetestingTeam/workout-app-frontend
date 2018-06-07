@@ -22,12 +22,13 @@ class LoginForm extends Component{
   handleSubmit(event){
     this.Auth.login(this.state.email,this.state.password)
     .then(res =>{
-      this.props.history.push("/dashboard")
+      this.props.history.push(this.props.location.state)
     })
     .catch(err =>{ alert(err) })
   }
 
   render(){
+    console.log(this.props.location)
     let form = this.state
     return(
       <div className="sign-up-page">
