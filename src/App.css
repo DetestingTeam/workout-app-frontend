@@ -6,30 +6,6 @@
   background: linear-gradient(to left, #fcb045, #fd1d1d, #833ab4)
 }
 
-
-
-
-
-.avatar-img {
-  display: flex;
-  margin-top: 10%;
-  justify-content: center;
-}
-
-.avatar-a {
-  display: flex;
-  margin-top: 10%;
-  justify-content: center;
-}
-
-.landing-foot {
-  width: 100%;
-  color: white;
-  display: flex;
-  justify-content: center;
-}
-
-
 .navlogo {
   max-height: 200px;
   max-width: 200px;
@@ -41,23 +17,15 @@
   background: linear-gradient(to right, #0072ff, #00c6ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
-
-.lp-image{
-  max-width:100%;
-  max-height:100%;
+.logworkout {
+  margin-bottom: 218px;
 }
 
-.card_color {
-   display: flex;
-   flex-direction: column;
-   justify-content: center;
-   align-items: center;
-   border: none;
-   margin: 0 auto;
-   background-attachment: fixed;
-   animation-name: zoom;
-   animation-duration: 0.6s;
+
+.sidegraph {
+  margin-bottom: 218px;
 }
+
 
 .btn:hover {opacity: 0.7;}
 .btn2:hover {opacity: 0.7;}
@@ -83,53 +51,6 @@
 }
 
 
-.card_color .btn {
-  background: #b92b27;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to left, #1565C0, #b92b27);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to left, #1565C0, #b92b27); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  position: absolute;
-  top: 45%;
-  left: 24.5%;
-  transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  background-color: #555;
-  color: white;
-  font-size: 20px;
-  padding: 12px 24px;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
-  height: 100px;
-  width: 200px;
-}
-
-.card_color .btn2 {
-  background: #b92b27;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to left, #1565C0, #b92b27);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to left, #1565C0, #b92b27); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  position: absolute;
-  top: 45%;
-  right: 18%;
-  transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  background-color: #555;
-  color: white;
-  font-size: 20px;
-  padding: 12px 24px;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
-  height: 100px;
-  width: 200px;
-}
-
-.landing-grid {
-  display: flex;
-  flex-direction: row;
-  min-height: 76.6vh;
-}
-
-
 .foot-landing {
   display: block;
 }
@@ -138,14 +59,13 @@
   background: #3f2b96;  /* fallback for old browsers */
   background: -webkit-linear-gradient(to left, #3f2b96, #000428);  /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to left, #3f2b96, #000428); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
 	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
 	box-sizing: border-box;
 	width: 100%;
 	text-align: center;
 	font: normal 18px sans-serif;
   padding: 45px;
-	margin-top: 80px;
+	margin-top: 40px;
 }
 
 .footer-basic-centered .footer-company-motto{
@@ -222,36 +142,27 @@
   min-width: 200px;
   text-align: center
 }
-/*
-.text-field + .text-field{
-  margin-left: 10px;
-} */
 
 .map1 {
-
-    padding: 20px;
-
-
+  padding: 20px;
 }
 
 .map2 {
-
-    padding: 20px;
+  padding: 20px;
 }
 
 .map3 {
-
-    padding: 20px;
+  padding: 20px;
 }
 
 
 .main-container{
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .upcoming{
-    justify-content: center;
+  justify-content: center;
 }
 
 

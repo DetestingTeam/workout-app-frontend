@@ -195,7 +195,7 @@ console.log(this.state.open)
 
     return(
 
-        <div>
+        <div className="logworkout">
           <Snackbar
               anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
               open={this.state.open}
