@@ -206,3 +206,30 @@
 .text-field + .text-field{
   margin-left: 10px;
 } */
+
+.map1 {
+
+    padding: 20px;
+
+
+}
+
+.map2 {
+
+    padding: 20px;
+}
+
+.map3 {
+
+    padding: 20px;
+}
+
+
+.main-container{
+    display: flex;
+    justify-content: center;
+}
+
+.upcoming{
+    justify-content: center;
+}

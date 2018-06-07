@@ -10,6 +10,7 @@ import AuthService from './components/AuthService'
 import LoggedInNav from  './components/LoggedInNav'
 import GuestNav from './components/GuestNav'
 
+
 const BASE = 'http://localhost:3000'
 
 const Auth = new AuthService()
