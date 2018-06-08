@@ -12,9 +12,44 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
-
+  const BASE = 'http://localhost:3000'
 class Workouts extends Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      workout_name: [],
+      workout_date: [],
+      time: [],
+      location: [],
+      instructor: [],
+      workouts: []
+    }
+}
+
+
+  componentWillMount() {
+    return fetch(BASE + '/groupworkout/future')
+      .then((resp) => {
+        return resp.json()
+      })
+      .then(workoutinfo => {
+        console.log(workoutinfo);
+        this.setState({ workouts: workoutinfo })
+      })
+}
+
+todaysworkouts(){
+  let {workouts} = this.state
+  workouts.map((element, index) => {
+    if(element.workout_date == '2018-08-07')
+    console.log(element.workout_name)
+  })
+
+}
+
+
     render(){
+      this.todaysworkouts()
         return(
         <div>
             <div class='main-container'>

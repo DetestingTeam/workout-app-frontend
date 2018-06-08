@@ -14,20 +14,19 @@ import WorkoutPage from './workout_page'
 
 class Main extends Component{
   render(){
-    console.log(this.props.location.state);
     return(
       <Switch>
-        <Route exact path="/" render={(props) => <LandingPage />} />
-        <Route exact path="/login" render={(props) => <LoginForm />} />
-        <Route exact path="/register" component={SignUpForm} />
-        <Route exact path="/dashboard" component={Dashboard} />
-        <Route path="/groupworkouts" component={Workouts} />
+        <Route exact path="/" render={(props) => <LandingPage path="/" />} />
+        <Route exact path="/login" render={(props) => <LoginForm path="/login"/>} />
+        <Route exact path="/register" render={(props) => <SignUpForm path="/register"/>} />
+        <Route exact path="/dashboard" render={(props) => <Dashboard path="/dashboard" />} />
+        <Route path="/groupworkouts" render={(props) => <Workouts path="/groupworkouts" />} />
         <Route path="/aboutus" component={About} />
-        <Route exact path ="/moves" render={(props) => <CreateMovement />} />
-        <Route exact path ="/newworkout" render={(props) => <CreateWorkout />} />
-        <Route exact path ="/stats" render={(props) => <UserHistory />} />
-        <Route exact path ="/log" render={(props) => <LogWorkout />} />
-        <Route exact path ="/new" render={(props) => <WorkoutPage />} />
+        <Route exact path ="/moves" render={(props) => <CreateMovement path="/moves"/>} />
+        <Route exact path ="/newworkout" render={(props) => <CreateWorkout path="/newworkout"/>} />
+        <Route exact path ="/stats" render={(props) => <UserHistory path="/stats"/>} />
+        <Route exact path ="/log" render={(props) => <LogWorkout path="/log"/>} />
+        <Route exact path ="/new" render={(props) => <WorkoutPage path="/new"/>} />
       </Switch>
     )
   }

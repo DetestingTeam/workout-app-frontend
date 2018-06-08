@@ -4,7 +4,8 @@ import './user_history.css';
 
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
-import {Paper, FormControl, Button, Checkbox, Table, TableHead, TableCell, TableBody, TableRow, Input} from '@material-ui/core'
+import {Paper, FormControl, Button, Checkbox, Table, TableHead, TableCell, TableBody, TableRow, Input, Snackbar, IconButton} from '@material-ui/core'
+import CloseIcon from '@material-ui/icons/Close';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import FormHelperText from '@material-ui/core/FormHelperText';
@@ -37,19 +38,34 @@ class UserHistory extends Component {
       selectedProperty: '',
       show: "show",
       fullHistoryGraph: '',
+      nodata: false,
 
         }
       }
   componentWillMount() {
     let userID = Auth.getUserId()
+
     return fetch(BASE + '/user_histories' +'?id=' + userID)
       .then((resp) => {
         return resp.json()
       })
       .then(APIinfo => {
-        this.setState({
-          userHistory: APIinfo, firstname: APIinfo[0].first_name, lastname: APIinfo[0].last_name[0]
+        console.log("APIinfo")
+        console.log(APIinfo)
+        if(APIinfo == [] || APIinfo == ''){
+          debugger
+          console.log("TEST PASSED");
+          let nodata = true
+          this.props.history.push({
+                pathname: '/log',
+                state: {nodata: nodata}
           })
+          // this.props.history.push('/log', nodata.true)
+        } else{
+        this.setState({
+          userHistory: APIinfo, firstname: APIinfo[0].first_name, lastname: APIinfo[0].last_name
+          })
+        }
           this.filterMoves()
       })
   }
