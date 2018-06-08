@@ -15,7 +15,7 @@ const styles = theme => ({
   image: {
     position: 'relative',
     backgroundColor: 'pink',
-    margin: '10px',
+    margin: '0.5%',
     padding: '40px',
     border: '40px',
     height: 200,
@@ -93,37 +93,37 @@ const images = [
   {
     url: '/assets/images/blankgraphpaper.jpeg',
     title: 'Stats',
-    width: '31.29%',
+    width: '32.3%',
     link: '/stats',
   },
   {
     url:  '/assets/images/padandpencil.jpeg',
     title: 'Log a Workout',
-    width: '31.29%',
+    width: '32.3%',
     link: '/log',
   },
   {
     url: '/assets/images/barbell.jpeg',
     title: "Today's Workout",
-    width: '31.29%',
+    width: '32.3%',
     link: '/log',
   },
   {
     url: '/assets/images/sdmap.png',
     title: "Find a Class",
-    width: '31.29%',
+    width: '32.3%',
     link: '/groupworkouts',
   },
   {
     url: '/assets/images/findaworkout.jpeg',
     title: "Browse Workouts",
-    width: '31.29%',
+    width: '32.3%',
     link: '/log',
   },
   {
     url: '/assets/images/logaworkout.jpeg',
     title: "Update Profile",
-    width: '31.29%',
+    width: '32.3%',
     link: '/stats',
   },
 ];
@@ -135,6 +135,7 @@ function ButtonBases(props) {
     <div className={classes.root}>
       {images.map(image => (
         <ButtonBase
+
           href={image.link}
           focusRipple
           key={image.title}
