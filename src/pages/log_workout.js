@@ -5,6 +5,7 @@ import AuthService from '../components/AuthService'  // <- We use the AuthServic
 import withAuth from '../components/withAuth'
 import { withRouter } from 'react-router-dom'
 
+
 const Auth = new AuthService()
 const BASE = 'process.env.REACT_APP_API_URL
 
@@ -170,6 +171,7 @@ randomWorkout(){
   this.componentWillMount()
 }
 
+
   // let userhistory = {set: {set: setNum, user_id: userID, movement_id:, workout_id: 2, weight: 99, set: 99, rep: 99}
 
   // let userhistory = {set: {set: setNum, user_id: userID, movement_id: 2, workout_id: 2, weight: 99, set: 99, rep: 99}
@@ -189,6 +191,8 @@ randomWorkout(){
  // };
 
   render(){
+
+
 
 //     // let {workout} = this.state
 //     // {console.log("THis.state,workout:")}
@@ -219,6 +223,7 @@ console.log(this.state.open)
         <h3 style={{textAlign: 'center', color: 'black', fontSize: '20px'}} >Set {this.state.setNum}</h3>
       </Paper></div>
       <br/>
+    
         <div style={{display: 'flex', justifyContent: 'center'}}>
         <Paper className="paper" style={{marginTop: '0px', width: '800px', maxWidth: '1000px'}}>
              <Table className="log-table">
