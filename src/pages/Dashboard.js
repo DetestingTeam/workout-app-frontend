@@ -6,6 +6,7 @@ import {Grid, Paper, Typography} from '@material-ui/core'
 import '../styles/dashboard.css'
 import FullWidthGrid from '../components/full_width_grid'
 import { withRouter } from 'react-router-dom'
+import ButtonBases from '../components/button_base'
 
 const Auth = new AuthService()
 const styles = theme => ({
@@ -29,7 +30,8 @@ class Dashboard extends Component{
     render() {
       return (
         <div className='grid-cont'>
-<FullWidthGrid/>
+{/* <FullWidthGrid/> */}
+<ButtonBases/>
 </div>
     //     <div className="landing-grid back">
     //       <div className='topmessage'>

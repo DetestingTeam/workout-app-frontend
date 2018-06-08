@@ -206,12 +206,12 @@ console.log(this.state.open)
               message={<span id="message-id">Do a workout first!</span>}
             />
 
-       <div style={{display: 'flex', justifyContent: 'center'}}>  <Paper className="paper" style={{marginTop: '10px', width: '800px', maxWidth: '1000px'}}>
-        <h3 style={{textAlign: 'left', marginLeft: '10vw',  marginBottom: '10px', marginTop: '10px', marginRight: '0px'}} ><h1 style={{marginBottom: '10px'}}> {this.state.workout_name}, {this.state.workout_date}:   Set {this.state.setNum}</h1></h3>
+       <div style={{display: 'flex', justifyContent: 'center'}}>  <Paper className="paper" style={{marginTop: '10px', borderRadius: '6px', width: '800px', maxWidth: '1000px'}}>
+        <h3 style={{textAlign: 'left', marginLeft: '10vw',  marginBottom: '10px', marginTop: '10px', marginRight: '0px'}} ><h1 style={{marginBottom: '10px'}}> {this.state.workout_name}</h1> {this.state.workout_date}</h3>
       </Paper></div><br/>
 
-        <div style={{display: 'flex', justifyContent: 'center'}}>  <Paper className="paper" style={{marginTop: '0px', width: '800px', maxWidth: '1000px'}}>
-        <h3 style={{textAlign: 'left', marginLeft: '10vw',  marginBottom: '10px', marginTop: '10px', marginRight: '0px'}} >Log your workout:</h3>
+        <div style={{display: 'flex', justifyContent: 'center'}}>  <Paper className="paper" style={{marginTop: '0px',  borderRadius: '6px',  width: '800px', maxWidth: '1000px'}}>
+        <h3 style={{textAlign: 'center', color: 'black', fontSize: '20px'}} >Set {this.state.setNum}</h3>
       </Paper></div>
       <br/>
         <div style={{display: 'flex', justifyContent: 'center'}}>
@@ -257,7 +257,7 @@ console.log(this.state.open)
 
 <Button variant="contained" type='submit' color="primary" onClick={this.randomWorkout.bind(this)}>
    Random Workout
-</Button>
+</Button> <nbws/>
                   <Button variant="contained" type='submit' color="primary" onClick={this.nextSet.bind(this)}>
                      Next Set
                   </Button> <nbsp/>
