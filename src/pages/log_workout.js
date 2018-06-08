@@ -6,7 +6,7 @@ import withAuth from '../components/withAuth'
 import { withRouter } from 'react-router-dom'
 
 const Auth = new AuthService()
-const BASE = 'https://workout-app-backend.herokuapp.com'
+const BASE = 'http://localhost:3000'
 
 class LogWorkout extends Component{
   constructor(props){
@@ -19,7 +19,7 @@ class LogWorkout extends Component{
       userID: '',
       userhistoryAdded: false,
       workout: [],
-      checked: [],
+      // checked: [],
       reps: [],
       weight: [],
       workout_name: "test",
@@ -37,8 +37,6 @@ class LogWorkout extends Component{
 
 
   componentWillMount() {
-    console.log(this.props.history.location.state);
-
     this.noStatsUser()
     let userID = Auth.getUserId()
     return fetch(BASE + '/workoutdetails' +'?workout_id=' + this.state.workout_id)
@@ -46,9 +44,15 @@ class LogWorkout extends Component{
         return resp.json()
       })
       .then(APIinfo => {
+        console.log(APIinfo);
         this.setState({ workout: APIinfo, userID: userID, workout_name: APIinfo[0].workout_name, workout_date: APIinfo[0].workout_date})
       })
   }
+
+
+
+
+
 
   handleClose = () => {
     console.log("test");
@@ -83,24 +87,25 @@ this.setState({open: open})
         })
     })
     console.log(this.state.userhistory);
+    this.props.history.push({ pathname: '/dashboard'})
 
   }
 
-
-  isChecked(index){
-  return this.state.checked[index]
-  }
-
-  handleCheck(n, index){
-console.log(this.props.location.query.__firebase_request_key);
-    let {checked, ttoF} = this.state
-    if (checked[index] === true){
-      checked[index] = false
-    } else checked[index] = true
-    console.log(checked);
-    ttoF == false ? ttoF = true : ttoF = false
-    this.setState({checked: checked, ttoF: ttoF})
- };
+//
+//   isChecked(index){
+//   return this.state.checked[index]
+//   }
+//
+//   handleCheck(n, index){
+// console.log(this.props.location.query.__firebase_request_key);
+//     let {checked, ttoF} = this.state
+//     if (checked[index] === true){
+//       checked[index] = false
+//     } else checked[index] = true
+//     console.log(checked);
+//     ttoF == false ? ttoF = true : ttoF = false
+//     this.setState({checked: checked, ttoF: ttoF})
+//  };
 
 
 
@@ -220,12 +225,12 @@ console.log(this.state.open)
 
                <TableHead>
                  <TableRow>
-                   <TableCell style={{padding: '8px',width: '5px', textAlign: 'center'}}></TableCell>
+                   <TableCell style={{padding: '8px',width: '5px', textAlign: 'center'}}>#</TableCell>
                    <TableCell style={{padding: '8px',width: '50px', textAlign: 'center'}}>Movement</TableCell>
                    <TableCell numeric style={{width: '50px',  padding: '8px', textAlign: 'center'}} >Time/Reps</TableCell>
                    <TableCell numeric style={{width: '60px',  padding: '8px', textAlign: 'center'}}>Reps</TableCell>
                    <TableCell numeric style={{width: '60px',  padding: '8px', textAlign: 'center'}}>Weight</TableCell>
-                   <TableCell numeric style={{padding: '0px',width: '20px', textAlign: 'center'}}>Complete</TableCell>
+
                  </TableRow>
                </TableHead>
                <TableBody>
@@ -244,7 +249,7 @@ console.log(this.state.open)
                        <TableCell numeric style={{width: '60px',  padding: '8px', textAlign: 'center'}}><Input id={index} value={this.state.reps[index]} onChange={this.handleReps.bind(this)} placeholder='0' type='number' style={{width: '30px'}} /></TableCell>
                        <TableCell numeric style={{width: '60px',  padding: '8px', textAlign: 'center'}}><Input id={index} value={this.state.weight[index]} placeholder='lbs' type='number' style={{width: '45px'}} onChange={this.handleWeight.bind(this)}/></TableCell>
                        <TableCell numeric style={{padding: '0px',width: '20px', textAlign: 'center'}}>
-                          <Checkbox name="checked" checked={this.state.checked[index]} onChange={this.handleCheck.bind(this,n,index)} color="primary"/>
+                          {/* <Checkbox name="checked" checked={this.state.checked[index]} onChange={this.handleCheck.bind(this,n,index)} color="primary"/> */}
                       </TableCell>
                      </TableRow>
                    );
