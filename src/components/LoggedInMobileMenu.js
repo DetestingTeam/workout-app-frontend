@@ -46,7 +46,7 @@ class LoggedInMobileMenu extends React.Component {
           </Link>
           <Link to="/log">
             <ListItem button>
-              <ListItemText primary="Workout Journal" />
+              <ListItemText primary="Log Workout" />
             </ListItem>
           </Link>
           <Link to="/stats">
