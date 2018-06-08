@@ -25,6 +25,7 @@ class App extends Component {
   }
   render() {
     return (
+      <div>
       <div className="back">
         <CssBaseline />
         <span>
@@ -32,8 +33,13 @@ class App extends Component {
           {!Auth.loggedIn() && <GuestNav />}
         </span>
         <Main/>
+
+        </div>
+        <div className = 'bottombitch'>
         <Footer />
       </div>
+
+    </div>
     )
   }
 }

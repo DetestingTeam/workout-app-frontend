@@ -3,7 +3,9 @@
   background: #833ab4;
   background: -webkit-linear-gradient(to left, #fcb045, #fd1d1d, #833ab4);  /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to left, #fcb045, #fd1d1d, #833ab4); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  background: linear-gradient(to left, #fcb045, #fd1d1d, #833ab4)
+  background: linear-gradient(to left, #fcb045, #fd1d1d, #833ab4);
+  min-height: 80vh;
+
 }
 
 /* .back{
@@ -71,7 +73,6 @@
 	text-align: center;
 	font: normal 18px sans-serif;
   padding: 45px;
-	margin-top: 40px;
 }
 
 .footer-basic-centered .footer-company-motto{
@@ -170,6 +171,7 @@
 .upcoming{
   justify-content: center;
 }
+
 
 
 @media (max-width: 60em) {
