@@ -22,124 +22,98 @@ class Workouts extends Component {
       time: [],
       location: [],
       instructor: [],
-      workouts: []
+      workouts: [],
+      today: [],
+      future: [],
+      url: [],
+
     }
 }
 
 
-  componentWillMount() {
+componentWillMount() {
     return fetch(BASE + '/groupworkout/future')
       .then((resp) => {
         return resp.json()
       })
       .then(workoutinfo => {
-        console.log(workoutinfo);
-        this.setState({ workouts: workoutinfo })
+        this.setState({ workouts: workoutinfo }, this.todaysWorkouts)
       })
 }
 
-todaysworkouts(){
+todaysWorkouts(){
+  let array = []
+  let farray = []
   let {workouts} = this.state
   workouts.map((element, index) => {
-    if(element.workout_date == '2018-08-07')
-    console.log(element.workout_name)
+    if(element.workout_date == '2018-06-08'){
+      array.push(element)
+    } else {
+      farray.push(element)
+    }
   })
+    this.setState({ today: array, future: farray }, this.generateUrl)
 
+ }
+
+generateUrl(){
+  let newURL = []
+  let {today} = this.state
+  today.map((element, index) => {
+    return(
+    newURL.push('https://www.google.com/maps/embed/v1/place?key=AIzaSyDGC6QAps8ZE8-q3f_quRFafP_n13n3P0Y&q=' + element.location.replace(/\s/g, '+'))
+  )})
+  this.setState({ url: newURL})
+  console.log(newURL);
 }
+generateMapCards(){
+  let {today, url} = this.state
+  let mapCards = today.map((element, index) => {
+    return(
+  <div class='map1'>
 
+      <iframe title='frame1'
+      width="400"
+      height="350"
+      frameborder="0"
+      src={url[index]} allowfullscreen>
+      </iframe>
 
-    render(){
-      this.todaysworkouts()
-        return(
+      <Card className='card1'>
+              <CardContent>
+                  <Typography gutterBottom variant="headline" component="h2">
+                      Workout: {element.workout_name}
+                  </Typography>
+                  <Typography component="date">
+                      Time: {element.time}
+                  </Typography>
+                  <Typography component="instructor">
+                      Instructor: {element.instructor}
+                  </Typography>
+              </CardContent>
+      </Card>
+  </div>
+)
+})
+
+return mapCards
+}
+  render(){
+    return(
         <div>
-            <div class='main-container'>
-                <div class='map1'>
-
-                    <iframe title='frame1'
-                    width="400"
-                    height="350"
-                    frameborder="0"
-                    src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDGC6QAps8ZE8-q3f_quRFafP_n13n3P0Y&q=Learn+Academy,San+Diego,CA" allowfullscreen>
-                    </iframe>
-
-                    <Card className='card1'>
-                            <CardMedia
-                                className='card1'
-                            />
-                            <CardContent>
-                                <Typography gutterBottom variant="headline" component="h2">
-                                    Maximum Thruster
-                                </Typography>
-                                <Typography component="date">
-                                    Date/Time:
-                                </Typography>
-                                <Typography component="instructor">
-                                    Instructor:
-                                </Typography>
-                            </CardContent>
-                    </Card>
+          <div className = 'daily-workouts'>
+            <h1>Today's Workouts</h1>
+          </div>
+          <div className = 'cardcontainer'>{this.generateMapCards()}
+          </div>
+              <Paper className="paper">
+                <div class = 'table-title'>
+                <h1>Upcoming Workouts</h1>
                 </div>
-
-
-            <div class='map2'>
-                <iframe title="frame2"
-                    width="400"
-                    height="350"
-                    frameborder="0"
-                    src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDGC6QAps8ZE8-q3f_quRFafP_n13n3P0Y&q=Learn+Academy,San+Diego,CA" allowfullscreen>
-                </iframe>
-
-                <Card className='card2'>
-                        <CardMedia
-                            className='card2'
-                        />
-                        <CardContent>
-                            <Typography gutterBottom variant="headline">
-                                Maximum Thruster
-                            </Typography>
-                            <Typography component="date">
-                                Date/Time:
-                            </Typography>
-                            <Typography component="instructor">
-                                Instructor:
-                            </Typography>
-                        </CardContent>
-                </Card>
-            </div>
-
-                <div class='map3'>
-                    <iframe title='frame3'
-                        width="400"
-                        height="350"
-                        frameborder="0"
-                        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDGC6QAps8ZE8-q3f_quRFafP_n13n3P0Y&q=Le    arn+Academy,San+Diego,CA" allowfullscreen>
-                    </iframe>
-
-                    <Card className='card3'>
-                            <CardMedia
-                                className='card3'
-                            />
-                            <CardContent>
-                                <Typography gutterBottom variant="headline" component="h2">
-                                    Maximum Thruster
-                                </Typography>
-                                <Typography component="date">
-                                    Date/Time:
-                                </Typography>
-                                <Typography component="instructor">
-                                    Instructor:
-                                </Typography>
-                            </CardContent>
-                    </Card>
-                </div>
-            </div>
-
-
-
-                <Paper className="paper">
-            <Table className="upcoming">
+                <Table className="upcoming">
                 <TableHead>
                     <TableRow>
+                        <TableCell>Workout</TableCell>
                         <TableCell>Date</TableCell>
                         <TableCell>Time</TableCell>
                         <TableCell>Location</TableCell>
@@ -148,36 +122,20 @@ todaysworkouts(){
                 </TableHead>
 
                 <TableBody>
-
+                  {this.state.future.map((n, index) => {
+                    return(
                     <TableRow>
-                        <TableCell>testing</TableCell>
-                        <TableCell>testing</TableCell>
-                        <TableCell>testing</TableCell>
-                        <TableCell>testing</TableCell>
+                      <TableCell>{n.workout_name}</TableCell>
+                        <TableCell>{n.workout_date}</TableCell>
+                        <TableCell>{n.time}</TableCell>
+                        <TableCell>{n.location}</TableCell>
+                        <TableCell>{n.instructor}</TableCell>
                     </TableRow>
-                    <TableRow>
-                        <TableCell>testing</TableCell>
-                        <TableCell>testing</TableCell>
-                        <TableCell>testing</TableCell>
-                        <TableCell>testing</TableCell>
-                    </TableRow>
-                    <TableRow>
-                        <TableCell>testing</TableCell>
-                        <TableCell>testing</TableCell>
-                        <TableCell>testing</TableCell>
-                        <TableCell>testing</TableCell>
-                    </TableRow>
-                    <TableRow>
-                        <TableCell>testing</TableCell>
-                        <TableCell>testing</TableCell>
-                        <TableCell>testing</TableCell>
-                        <TableCell>testing</TableCell>
-                    </TableRow>
-
+                  )
+                  })}
                 </TableBody>
             </Table>
             </Paper>
-
         </div>
         )
     }

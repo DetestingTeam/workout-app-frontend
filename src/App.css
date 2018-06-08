@@ -148,7 +148,9 @@
   min-width: 200px;
   text-align: center
 }
-
+.card1{
+  width: 400px;
+}
 .map1 {
   padding: 20px;
 }
@@ -161,6 +163,10 @@
   padding: 20px;
 }
 
+.cardcontainer{
+  display: flex;
+  justify-content: center;
+}
 
 .main-container{
   display: flex;
@@ -181,4 +187,9 @@
   .mobile {
     display: none;
   }
+}
+
+.table-title{
+
+  text-align: center;
 }
