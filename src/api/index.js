@@ -1,4 +1,4 @@
-const BASE = 'process.env.REACT_APP_API_URL
+const BASE = process.env.REACT_APP_API_URL
 
 
 let registerUser = function(user){

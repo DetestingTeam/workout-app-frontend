@@ -7,7 +7,7 @@ import { withRouter } from 'react-router-dom'
 
 
 const Auth = new AuthService()
-const BASE = 'process.env.REACT_APP_API_URL
+const BASE = process.env.REACT_APP_API_URL
 
 class LogWorkout extends Component{
   constructor(props){
@@ -223,7 +223,7 @@ console.log(this.state.open)
         <h3 style={{textAlign: 'center', color: 'black', fontSize: '20px'}} >Set {this.state.setNum}</h3>
       </Paper></div>
       <br/>
-    
+
         <div style={{display: 'flex', justifyContent: 'center'}}>
         <Paper className="paper" style={{marginTop: '0px', width: '800px', maxWidth: '1000px'}}>
              <Table className="log-table">
