@@ -10,7 +10,7 @@ import LoggedInNav from  './components/LoggedInNav'
 import GuestNav from './components/GuestNav'
 
 
-const BASE = 'https://workout-app-backend.herokuapp.com'
+const BASE = 'localhost:3000'
 
 const Auth = new AuthService()
 class App extends Component {
