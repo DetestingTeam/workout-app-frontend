@@ -85,13 +85,13 @@ const styles = theme => ({
 const images = [
   {
     url: '/assets/images/deadlift.jpeg',
-    title: 'Motivational Message',
+    title: "You've done 5 workouts this week! You're amazing!!!",
     width: '100%',
     link: '/stats',
     height: '30px',
   },
   {
-    url: '/assets/images/graph.png',
+    url: '/assets/images/blankgraphpaper.jpeg',
     title: 'Stats',
     width: '31.29%',
     link: '/stats',
@@ -103,7 +103,7 @@ const images = [
     link: '/log',
   },
   {
-    url: '/assets/images/logaworkout.jpeg',
+    url: '/assets/images/barbell.jpeg',
     title: "Today's Workout",
     width: '31.29%',
     link: '/log',
@@ -121,7 +121,7 @@ const images = [
     link: '/log',
   },
   {
-    url: '/assets/images/barbell.jpeg',
+    url: '/assets/images/logaworkout.jpeg',
     title: "Update Profile",
     width: '31.29%',
     link: '/stats',
