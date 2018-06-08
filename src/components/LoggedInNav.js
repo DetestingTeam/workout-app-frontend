@@ -13,7 +13,7 @@ class LoggedInNav extends Component{
         </Typography>
         <span className="topnav desktop">
           <Button color="inherit" style={{color:'white'}} href="/dashboard">Dashboard</Button>
-          <Button color="inherit" style={{color:'white'}} href="/log">Workout Journal</Button>
+          <Button color="inherit" style={{color:'white'}} href="/log">Log Workout</Button>
           <Button color="inherit" style={{color:'white'}} href="/stats">Stats</Button>
           <Button color="inherit" style={{color:'white'}} href="/groupworkouts">Group Workouts</Button>
           <Button color="inherit" style={{color:'white'}} onClick={this.props.logout.bind(this)}>Logout</Button>
