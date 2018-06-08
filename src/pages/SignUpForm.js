@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {withRouter} from 'react-router-dom'
+import {withRouter, Redirect} from 'react-router-dom'
 import {TextField, Button, Card, CardContent} from '@material-ui/core'
 import {registerUser} from "../api"
 import AuthService from '../components/AuthService'
@@ -35,7 +35,7 @@ class SignUpForm extends Component{
           })
   }
   render(){
-    if(loginSuccess){
+    if(this.state.loginSuccess){
       <Redirect to="/dashboard" />
     }
     let form = this.state.user
