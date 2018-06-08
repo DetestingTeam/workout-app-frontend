@@ -19,6 +19,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  box-shadow: 0px -5px 50px black;
 }
 
 .pictwo{
@@ -33,6 +34,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  box-shadow: 0px -5px 50px black;
 }
 
 .btn{
