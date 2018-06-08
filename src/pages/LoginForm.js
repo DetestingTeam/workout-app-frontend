@@ -14,11 +14,7 @@ class LoginForm extends Component{
       loginSuccess: false
     }
   }
-  componentWillMount(){
-    if(this.Auth.loggedIn()){
-      this.props.history.push('/dashboard')
-    }
-  }
+
   handleChange(event){
     this.setState({[event.target.id]: event.target.value})
   }
@@ -32,7 +28,9 @@ class LoginForm extends Component{
   }
 
   render(){
-    console.log(this.props.location)
+    if(this.Auth.loggedIn()){
+      <Redirect to="/dashboard" />
+    }
     let form = this.state
     return(
       <div className="sign-up-page">

@@ -28,14 +28,16 @@ class SignUpForm extends Component{
   }
   handleSubmit(event){
     event.preventDefault()
-    registerUser(this.state.user).then( successUser => {
-            console.log("Create Success!", successUser );
-            this.setState({registerSuccess: true})
-          })
+    registerUser(this.state.user)
           .then(Auth.login(this.state.user.email, this.state.user.password))
-          .then( successLogin => {this.props.history.push("/dashboard")})
+          .then( successLogin => {
+            this.setState({registerSuccess: true, loginSuccess: true})
+          })
   }
   render(){
+    if(loginSuccess){
+      <Redirect to="/dashboard" />
+    }
     let form = this.state.user
     return(
       <div id="sign-up-page">
