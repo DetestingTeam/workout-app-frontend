@@ -33,7 +33,9 @@ componentWillMount(){
   }
 
   render(){
-    console.log(this.props.location)
+    if(this.Auth.loggedIn()){
+      <Redirect to="/dashboard" />
+    }
     let form = this.state
     return(
       <div className="sign-up-page">

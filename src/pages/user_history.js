@@ -18,7 +18,7 @@ import { withRouter } from 'react-router-dom'
 
 // ReactChartkick.addAdapter(Chart)
 const Auth = new AuthService()
-const BASE = 'http://localhost:3000'
+const BASE = process.env.REACT_APP_API_URL
 
 class UserHistory extends Component {
   constructor(props) {

@@ -83,12 +83,13 @@ const styles = theme => ({
   },
 });
 
+
+
 const images = [
   {
     url: '/assets/images/deadlift.jpeg',
     title: "You've done 5 workouts this week! You're amazing!!!",
     width: '100%',
-    link: '/stats',
     height: '30px',
   },
   {
@@ -129,14 +130,24 @@ const images = [
   },
 ];
 
+
 function ButtonBases(props) {
   const { classes } = props;
 
   return (
     <div className={classes.root}>
+
       {images.map(image => (
         <ButtonBase
           
+
+      {images.map((image,index) => (
+
+        <ButtonBase
+          onClick={() => {console.log(props); if(index===0){
+            props.animate()
+          }  }}
+
           href={image.link}
           focusRipple
           key={image.title}
@@ -161,11 +172,12 @@ function ButtonBases(props) {
               color="inherit"
               className={classes.imageTitle}
             >
-              {image.title}
+              {index==0?props.motivations[Math.floor(Math.random(2))]:image.title  }
               <span className={classes.imageMarked} />
             </Typography>
           </span>
         </ButtonBase>
+
       ))}
     </div>
   );
