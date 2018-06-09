@@ -1,19 +1,21 @@
-const BASE = process.env.REACT_APP_API_URL
+import AuthService from '../components/AuthService'
 
+const BASE = process.env.REACT_APP_API_URL
+const Auth = new AuthService()
 
 let registerUser = function(user){
+
   let newUser = {user: user}
-  return fetch(BASE+'/users', {
+  return Auth.fetch(BASE+'/users', {
       body: JSON.stringify(newUser),
       headers: {
           'Content-Type': 'application/json'
       },
       method: "POST"
+  }).then(res => {
+    Auth.setToken(res.jwt)
+    return Promise.resolve(res)
   })
-      .then((rawResponse) => {
-          let parsedResponse = rawResponse.json()
-          return parsedResponse
-      })
 }
 
  export {registerUser}
