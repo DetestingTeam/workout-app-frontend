@@ -15,6 +15,11 @@ class LoginForm extends Component{
     }
   }
 
+componentWillMount(){
+  if(this.Auth.loggedIn()){
+    this.props.history.push('/dashboard')
+  }
+}
   handleChange(event){
     this.setState({[event.target.id]: event.target.value})
   }

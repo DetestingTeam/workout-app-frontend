@@ -1,8 +1,36 @@
+
+.flextits{
+  display: flex;
+justify-content: center;
+}
+
+.setlist{
+  background-color: pink;
+  width: 300px;
+  margin-top: -30px;
+  z-index: 1;
+}
+
 .pic{
-display: flex;
-align-self: left;
-align-content: left;
-position: left;
-justify-content: left;
-border-bottom: 0px;
+margin-right: 100px;
+margin-left: 110px;
+width: 70px;
+
+z-index: 6;
+
+}
+
+.pad{
+  background-color: white;
+  height: 800px;
+  width: 400px;
+  margin-top: 25px;
+  margin-left: .6vw;
+  margin-bottom: 25px;
+}
+
+.contain-box{
+align-self: stretch;
+  width: 300px;
+  position:relative;
 }
