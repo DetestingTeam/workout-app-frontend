@@ -15,6 +15,7 @@ class LoginForm extends Component{
     }
   }
 
+
   componentWillMount(){
     let {loginSuccess} = this.state
     loginSuccess = this.Auth.loggedIn()

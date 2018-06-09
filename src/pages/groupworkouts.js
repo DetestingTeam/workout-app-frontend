@@ -12,7 +12,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
-  const BASE = 'http://localhost:3000'
+  const BASE = process.env.REACT_APP_API_URL
 class Workouts extends Component {
   constructor(props){
     super(props)

@@ -45,6 +45,7 @@ const styles = theme => ({
     bottom: 0,
     display: 'flex',
     alignItems: 'center',
+    textAlign: 'center',
     justifyContent: 'center',
     color: theme.palette.common.white,
   },
@@ -135,12 +136,18 @@ function ButtonBases(props) {
 
   return (
     <div className={classes.root}>
+
+      {images.map(image => (
+        <ButtonBase
+          
+
       {images.map((image,index) => (
 
         <ButtonBase
           onClick={() => {console.log(props); if(index===0){
             props.animate()
           }  }}
+
           href={image.link}
           focusRipple
           key={image.title}

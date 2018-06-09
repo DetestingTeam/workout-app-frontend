@@ -10,7 +10,7 @@ import LoggedInNav from  './components/LoggedInNav'
 import GuestNav from './components/GuestNav'
 
 
-const BASE = 'https://workout-app-backend.herokuapp.com'
+const BASE = 'localhost:3000'
 
 const Auth = new AuthService()
 class App extends Component {
@@ -25,6 +25,7 @@ class App extends Component {
   }
   render() {
     return (
+      <div>
       <div className="back">
         <CssBaseline />
         <span>
@@ -32,8 +33,13 @@ class App extends Component {
           {!Auth.loggedIn() && <GuestNav />}
         </span>
         <Main/>
+
+        </div>
+        <div className = 'bottombitch'>
         <Footer />
       </div>
+
+    </div>
     )
   }
 }
