@@ -28,16 +28,11 @@ class SignUpForm extends Component{
   }
   handleSubmit(event){
     event.preventDefault()
-    registerUser(this.state.user)
-          .then(Auth.login(this.state.user.email, this.state.user.password))
-          .then( successLogin => {
-            this.setState({registerSuccess: true, loginSuccess: true})
-          })
+    registerUser(this.state.user).then(res =>{
+      this.props.history.push('/dashboard')
+    })
   }
   render(){
-    if(this.state.loginSuccess){
-      <Redirect to="/dashboard" />
-    }
     let form = this.state.user
     return(
       <div id="sign-up-page">
@@ -96,9 +91,6 @@ class SignUpForm extends Component{
           <Button type="submit" variant="raised" color="primary" onClick={this.handleSubmit.bind(this)}>Sign Up</Button>
         </span>
         </Card>
-
-
-
       </div>
     )
   }

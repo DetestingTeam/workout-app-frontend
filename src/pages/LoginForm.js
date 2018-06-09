@@ -15,6 +15,12 @@ class LoginForm extends Component{
     }
   }
 
+  componentWillMount(){
+    let {loginSuccess} = this.state
+    loginSuccess = this.Auth.loggedIn()
+    this.setState({loginSuccess})
+  }
+
   handleChange(event){
     this.setState({[event.target.id]: event.target.value})
   }
@@ -28,9 +34,6 @@ class LoginForm extends Component{
   }
 
   render(){
-    if(this.Auth.loggedIn()){
-      <Redirect to="/dashboard" />
-    }
     let form = this.state
     return(
       <div className="sign-up-page">
@@ -61,8 +64,7 @@ class LoginForm extends Component{
             <Button type="submit" variant="raised" color="primary" onClick={this.handleSubmit.bind(this)}>Log in</Button>
           </span>
         </Card>
-
-
+        {this.state.loginSuccess && <Redirect to="/dashboard" />}
 
       </div>
     )
