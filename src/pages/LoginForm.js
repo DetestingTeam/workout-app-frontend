@@ -33,11 +33,19 @@ class LoginForm extends Component{
     })
     .catch(err =>{ alert(err) })
   }
-
+  enterPressed(event) {
+    if(event.key === 'Enter') {
+      this.Auth.login(this.state.email,this.state.password)
+      .then(res =>{
+        this.props.history.push(this.props.location.state || '/dashboard')
+      })
+      .catch(err =>{ alert(err) })
+    }
+  }
   render(){
     let form = this.state
     return(
-      <div className="sign-up-page">
+      <div className="sign-up-page" onKeyPress={this.enterPressed.bind(this)}>
         <Card className="form-card">
           <CardContent variant="headline" component="h2">Log in</CardContent>
           <CardContent id="log-in-form">
