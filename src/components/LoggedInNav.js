@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {AppBar, Toolbar, Typography, Button } from '@material-ui/core/';
+import { Typography, Button } from '@material-ui/core/';
 import LoggedInMobileMenu from './LoggedInMobileMenu'
 
 
@@ -9,7 +9,7 @@ class LoggedInNav extends Component{
     return (
       <div className="nav-container">
         <Typography variant="title" color="inherit">
-          <Button href="/"><img className="navlogo" src="./assets/images/fitology.png"/></Button>
+          <Button href="/"><img className="navlogo" src="./assets/images/fitology.png" alt="Fitology Logo"/></Button>
         </Typography>
         <span className="topnav desktop">
           <Button color="inherit" style={{color:'white'}} href="/dashboard">Dashboard</Button>
