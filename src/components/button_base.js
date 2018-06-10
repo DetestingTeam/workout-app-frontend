@@ -137,9 +137,8 @@ function ButtonBases(props) {
   return (
     <div className={classes.root}>
 
-      {images.map(image => (
-        <ButtonBase
-          
+
+
 
       {images.map((image,index) => (
 
@@ -172,7 +171,7 @@ function ButtonBases(props) {
               color="inherit"
               className={classes.imageTitle}
             >
-              {index==0?props.motivations[Math.floor(Math.random(2))]:image.title  }
+              {index===0?props.motivations[Math.floor(Math.random(2))]:image.title  }
               <span className={classes.imageMarked} />
             </Typography>
           </span>
