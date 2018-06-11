@@ -64,7 +64,7 @@ generateUrl(location){
     return(
         <div>
           <div style={{display: 'flex', justifyContent: 'center'}}>  <Paper className="paper1" style={{marginTop: '10px', width: '90vw', maxWidth: '1000px', backgroundImage: 'url("http://localhost:3001/assets/images/bannerworkout.jpeg")', backgroundColor:'rgba(1, 1, 1, 0.2)'}}>
-           <h1 style={{marginBottom: '5px', marginTop: '0px', color: 'white', font: 'primary', fontVariant: 'small-caps', textAlign: 'center' }}> Today's Workout</h1><h3 style={{textAlign: 'center'}} > {todayDate}</h3>
+           <h1 style={{marginBottom: '5px', marginTop: '0px', color: 'white', font: 'primary', fontVariant: 'small-caps', textAlign: 'center' }}> Today's Group Workouts</h1><h3 style={{textAlign: 'center'}} > {todayDate}</h3>
          </Paper></div><br/>
           <div className = 'cardcontainer'>
             {cards}
