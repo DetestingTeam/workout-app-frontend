@@ -1,10 +1,7 @@
 import React, {Component} from 'react'
 import withAuth from '../components/withAuth'
-//import AuthService from '../components/AuthService'  // <- We use the AuthService to logout
 //import MotivationMessage from '../components/motivation_message'
-//import {Grid, Paper, Typography} from '@material-ui/core'
 import '../styles/dashboard.css'
-//import FullWidthGrid from '../components/full_width_grid'
 import { withRouter } from 'react-router-dom'
 import ButtonBases from '../components/button_base'
 import anime from 'animejs'
