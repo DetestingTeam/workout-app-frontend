@@ -4,6 +4,7 @@ import LogHeader from '../components/log_header'
 import AuthService from '../components/AuthService'  // <- We use the AuthService to logout
 import withAuth from '../components/withAuth'
 import { withRouter } from 'react-router-dom'
+import './logworkout.css'
 
 
 const Auth = new AuthService()
