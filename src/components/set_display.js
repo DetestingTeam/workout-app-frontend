@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Card, Paper, Button, CardContent, Typography, CardActions, Table} from '@material-ui/core'
 import './set_display.css'
-import Stopwatch from 'react-stopwatch';
+
 
 class SetDisplay extends Component{
   constructor(props){

@@ -14,11 +14,15 @@ const styles = theme => ({
   },
   image: {
     position: 'relative',
-    backgroundColor: 'pink',
+    backgroundColor: 'primary',
     margin: '0.5%',
     padding: '40px',
     border: '40px',
     height: 200,
+    '& $imageTitle': {
+      border: '4px solid currentColor',
+    },
+
     [theme.breakpoints.down('xs')]: {
       width: '100% !important', // Overrides inline-style
       height: 100,
@@ -65,86 +69,60 @@ const styles = theme => ({
     top: 0,
     bottom: 0,
     backgroundColor: theme.palette.common.black,
-    opacity: 0.15,
+    opacity: .15,
     transition: theme.transitions.create('opacity'),
   },
   imageTitle: {
     position: 'relative',
     padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 4}px ${theme.spacing.unit + 6}px`,
   },
-  imageMarked: {
-    height: 3,
-    width: 18,
-    backgroundColor: theme.palette.common.white,
-    position: 'absolute',
-    bottom: -2,
-    left: 'calc(50% - 9px)',
-    transition: theme.transitions.create('opacity'),
-  },
+  // imageMarked: {
+  //   height: 3,
+  //   width: 18,
+  //   backgroundColor: theme.palette.common.white,
+  //   position: 'absolute',
+    // bottom: -2,
+    // left: 'calc(50% - 9px)',
+    // transition: theme.transitions.create('opacity'),
+  // },
 });
 
 
 
 const images = [
   {
-    url: '/assets/images/deadlift.jpeg',
-    title: "You've done 5 workouts this week! You're amazing!!!",
+    url: '/assets/images/padandpencil.jpeg',
+    title: "Log a Workout!",
     width: '100%',
     height: '30px',
   },
   {
-    url: '/assets/images/blankgraphpaper.jpeg',
-    title: 'Stats',
-    width: '32.3%',
-    link: '/stats',
-  },
-  {
-    url:  '/assets/images/padandpencil.jpeg',
-    title: 'Log a Workout',
-    width: '32.3%',
-    link: '/log',
-  },
-  {
-    url: '/assets/images/barbell.jpeg',
+    // url: '/assets/images/blankgraphpaper.jpeg',
     title: "Today's Workout",
-    width: '32.3%',
-    link: '/log',
+    width: '49%',
+    link: '/new',
   },
   {
-    url: '/assets/images/sdmap.png',
-    title: "Find a Class",
-    width: '32.3%',
-    link: '/groupworkouts',
+    // url:  '/assets/images/padandpencil.jpeg',
+    title: 'Browse Workouts',
+    width: '49%',
+    link: '/workouts',
   },
-  {
-    url: '/assets/images/findaworkout.jpeg',
-    title: "Browse Workouts",
-    width: '32.3%',
-    link: '/log',
-  },
-  {
-    url: '/assets/images/logaworkout.jpeg',
-    title: "Update Profile",
-    width: '32.3%',
-    link: '/stats',
-  },
+
 ];
 
 
-function ButtonBases(props) {
+function NewLog(props) {
   const { classes } = props;
 
   return (
     <div className={classes.root}>
 
-
-
-
       {images.map((image,index) => (
 
         <ButtonBase
           onClick={() => {console.log(props); if(index===0){
-            props.animate()
+            // props.animate()
           }  }}
 
           href={image.link}
@@ -171,7 +149,8 @@ function ButtonBases(props) {
               color="inherit"
               className={classes.imageTitle}
             >
-              {index===0?props.motivations[Math.floor(Math.random(2))]:image.title  }
+              {image.title}
+              {/* {index===0?props.motivations[Math.floor(Math.random(2))]:image.title  } */}
               <span className={classes.imageMarked} />
             </Typography>
           </span>
@@ -182,8 +161,8 @@ function ButtonBases(props) {
   );
 }
 
-ButtonBases.propTypes = {
+NewLog.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(ButtonBases);
+export default withStyles(styles)(NewLog);
