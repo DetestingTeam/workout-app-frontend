@@ -70,7 +70,7 @@ generateMapCards(){
   let {today, url} = this.state
   let mapCards = today.map((element, index) => {
     return(
-  <div class='map1'>
+  <div className='map1'>
 
       <iframe title='frame1'
       width="400"
@@ -107,7 +107,7 @@ return mapCards
           <div className = 'cardcontainer'>{this.generateMapCards()}
           </div>
               <Paper className="paper">
-                <div class = 'table-title'>
+                <div className = 'table-title'>
                 <h1>Upcoming Workouts</h1>
                 </div>
                 <Table className="upcoming">
@@ -124,7 +124,7 @@ return mapCards
                 <TableBody>
                   {this.state.future.map((n, index) => {
                     return(
-                    <TableRow>
+                    <TableRow key={index}>
                       <TableCell>{n.workout_name}</TableCell>
                         <TableCell>{n.workout_date}</TableCell>
                         <TableCell>{n.time}</TableCell>

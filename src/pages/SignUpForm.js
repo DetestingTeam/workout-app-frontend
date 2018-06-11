@@ -32,10 +32,17 @@ class SignUpForm extends Component{
       this.props.history.push('/dashboard')
     })
   }
+  enterPressed(event) {
+    if(event.key === 'Enter') {
+      registerUser(this.state.user).then(res =>{
+        this.props.history.push('/dashboard')
+      })
+    }
+  }
   render(){
     let form = this.state.user
     return(
-      <div id="sign-up-page">
+      <div id="sign-up-page" onKeyPress={this.enterPressed.bind(this)}>
         <Card className="form-card">
           <CardContent variant="headline" component="h2">Sign up for Fitology!</CardContent>
           <CardContent id="sign-up-form">
@@ -88,7 +95,10 @@ class SignUpForm extends Component{
           </span>
         </CardContent>
         <span className="action-button">
-          <Button type="submit" variant="raised" color="primary" onClick={this.handleSubmit.bind(this)}>Sign Up</Button>
+          <Button
+            variant="raised"
+            color="primary"
+            onClick={this.handleSubmit.bind(this)}>Sign Up</Button>
         </span>
         </Card>
       </div>
