@@ -8,8 +8,6 @@ class SetDisplay extends Component{
     super(props)
     this.state = {
       set: 1,
-
-
     }
 }
     render(){
