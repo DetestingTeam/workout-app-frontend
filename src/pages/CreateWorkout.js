@@ -4,7 +4,7 @@ import {TextField, Button, Card, CardContent} from '@material-ui/core'
 import {registerUser} from "../api"
 
 
-class SignUpForm extends Component{
+class CreateWorkout extends Component{
   constructor(props){
     super(props)
     this.state = {
@@ -47,9 +47,8 @@ class SignUpForm extends Component{
             <span className="text-field">
             <TextField
                 label="First Name"
-                style={{width: '300px'}}
+                style={{width: '200px'}}
                 id="first_name"
-                fullWidth
                 value={form.first_name}
                 onChange={this.handleChange.bind(this)}
             />
@@ -57,9 +56,8 @@ class SignUpForm extends Component{
           <span className="text-field">
             <TextField
                 label="Last Name"
-                style={{width: '300px'}}
+                style={{width: '200px'}}
                 id="last_name"
-                fullWidth
                 value={form.last_name}
                 onChange={this.handleChange.bind(this)}
             />
@@ -67,9 +65,8 @@ class SignUpForm extends Component{
           <span className="text-field">
             <TextField
                 label="Email"
-                style={{width: '300px'}}
+                style={{width: '200px'}}
                 id="email"
-                fullWidth
                 value={form.email}
                 onChange={this.handleChange.bind(this)}
             />
@@ -78,9 +75,8 @@ class SignUpForm extends Component{
             <TextField
                 type="password"
                 label="Create Password"
-                style={{width: '300px'}}
+                style={{width: '200px'}}
                 id="password"
-                fullWidth
                 value={form.password}
                 onChange={this.handleChange.bind(this)}
             />
@@ -88,9 +84,8 @@ class SignUpForm extends Component{
           <span className="text-field">
             <TextField
                 type="password"
-                fullWidth
                 label="Confirm Password"
-                style={{width: '300px'}}
+                style={{width: '200px'}}
                 id="password_confirmation"
                 value={form.password_confirmation}
                 onChange={this.handleChange.bind(this)}
@@ -108,4 +103,4 @@ class SignUpForm extends Component{
     )
   }
 }
-export default withRouter(SignUpForm)
+export default withRouter(CreateWorkout)

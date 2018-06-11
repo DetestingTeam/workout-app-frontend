@@ -7,8 +7,8 @@ import SignUpForm from './SignUpForm'
 import LoginForm from './LoginForm'
 import Dashboard from './Dashboard'
 import UserHistory from './user_history'
-import CreateMovement from './create_movement'
-import CreateWorkout from './create_workout'
+import CreateMovement from './CreateMovement'
+import CreateWorkout from './CreateWorkout'
 import LogWorkout from './log_workout'
 import WorkoutPage from './workout_page'
 import StopWatch from '../components/stopwatch'
@@ -24,7 +24,7 @@ class Main extends Component{
         <Route exact path="/dashboard" render={(props) => <Dashboard path="/dashboard" />} />
         <Route path="/groupworkouts" render={(props) => <Workouts path="/groupworkouts" />} />
         <Route path="/aboutus" component={About} />
-        <Route exact path ="/moves" render={(props) => <CreateMovement path="/moves"/>} />
+        <Route exact path ="/newmovement" render={(props) => <CreateMovement path="/newmovement"/>} />
         <Route exact path ="/newworkout" render={(props) => <CreateWorkout path="/newworkout"/>} />
         <Route exact path ="/stats" render={(props) => <UserHistory path="/stats"/>} />
         <Route exact path ="/log" render={(props) => <LogWorkout path="/log"/>} />
