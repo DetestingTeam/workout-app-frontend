@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Card, Paper, Button, CardContent, Typography, CardActions, Table} from '@material-ui/core'
+import {Card, Paper, Button, CardContent, Typography, CardActions} from '@material-ui/core'
 import './set_display.css'
 
 
@@ -23,7 +23,7 @@ class SetDisplay extends Component{
 
         <div className='setandpin'>
           <div className='pic'>
-            <img src='/images/pushpin1.png'/>
+            <img alt='pushpin' src='/images/pushpin1.png'/>
           </div>
 
 
