@@ -1,0 +1,253 @@
+.body {
+  height:100%;
+  margin:0;
+  font-size:16px;
+  font-family:"Lato", sans-serif;
+  font-weight:400;
+  line-height:1.8em;
+  color:#666;
+  }
+
+  .list {
+  list-style-type: none;
+  }
+
+
+  .lp-image {
+      height: 80px;
+  }
+
+  .lp-image:hover {
+    background: #833ab4;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #fcb045, #fd1d1d, #833ab4);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #fcb045, #fd1d1d, #833ab4); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    transform: scale(1.5);
+  }
+
+.full-image, .full-image2, .full-image3, .full-image4, .full-image5, .full-image6, .full-imagefunny {
+  opacity:0.70;
+  position: relative;
+}
+
+.primary-text{
+  font-family:'Cookie',cursive;
+}
+
+ .full-image {
+  height: 100vh;
+  width: 100vw;
+  /* background-image: url("./assets/images/fitology.png"); */
+  /* background-image: "./assets/images/fitology.png"; */
+  background-image: url("http://localhost:3001/assets/images/grouppicture.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+	background-attachment: fixed;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.full-imagefunny {
+ height: 100vh;
+ width: 100vw;
+ /* background-image: url("./assets/images/fitology.png"); */
+ /* background-image: "./assets/images/fitology.png"; */
+ background-image: url("http://localhost:3001/assets/images/groupfunny.jpg");
+ background-size: cover;
+ background-repeat: no-repeat;
+ background-position: center;
+ background-attachment: fixed;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+}
+
+.full-image2 {
+ height: 400px;
+ width: 100vw;
+ /* background-image: url("./assets/images/jp.jpg"); */
+ /* background-image: "./assets/images/jp.jpg"; */
+ background-image: url("http://localhost:3001/assets/images/jp.jpg");
+ background-size: cover;
+ background-repeat: no-repeat;
+ background-position: center;
+ background-attachment: fixed;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+}
+
+.full-image3 {
+ height: 400px;
+ width: 100vw;
+ /* background-image: url("./assets/images/brandonn.jpg.jpg"); */
+ /* background-image: "./assets/images/brandonn.jpg.jpg"; */
+ background-image: url("http://localhost:3001/assets/images/brandonn.jpg");
+ background-size: cover;
+ background-repeat: no-repeat;
+ background-position: center;
+ background-attachment: fixed;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+}
+
+.full-image4 {
+ height: 400px;
+ width: 100vw;
+ /* background-image: url("./assets/images/christine.jpg.jpg"); */
+ /* background-image: "./assets/images/christine.jpg.jpg"; */
+ background-image: url("http://localhost:3001/assets/images/christine.jpg");
+ background-size: cover;
+ background-repeat: no-repeat;
+ background-position: center;
+ background-attachment: fixed;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+}
+
+.full-image5 {
+ height: 400px;
+ width: 100vw;
+ /* background-image: url("./assets/images/michael.jpg.jpg"); */
+ /* background-image: "./assets/images/michael.jpg.jpg"; */
+ background-image: url("http://localhost:3001/assets/images/michael.jpg");
+ background-size: cover;
+ background-repeat: no-repeat;
+ background-position: center;
+ background-attachment: fixed;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+}
+
+.darklogocontainer {
+  height: 100px;
+}
+.darklogo {
+  height: 150px;
+}
+
+.full-image6 {
+ height: 400px;
+ width: 100vw;
+ /* background-image: url("./assets/images/michael.jpg.jpg"); */
+ /* background-image: "./assets/images/michael.jpg.jpg"; */
+ background-image: url("http://localhost:3001/assets/images/deiter.jpg");
+ background-size: cover;
+ background-repeat: no-repeat;
+ background-position: center;
+ background-attachment: fixed;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+}
+
+.section{
+  text-align:center;
+  padding:50px 80px;
+}
+
+
+.section-light{
+  background: #f4#f4#f4;
+  color:#666;
+  padding-top: 10px;
+}
+
+.section-dark{
+  background: #282e34;
+  color:#ddd;
+}
+
+.ptext{
+  position:absolute;
+  top:50%;
+  width:100%;
+  text-align:center;
+  color:#000;
+  font-size:27px;
+  letter-spacing:8px;
+  text-transform:uppercase;
+}
+
+.ptext .border{
+  background-color:#111;
+  color:#fff;
+  padding:20px;
+}
+
+.ptext .border.trans{
+  background-color:transparent;
+}
+
+@media(max-width:568px){
+  .full-image {
+   height: 400px;
+   width: 100vw;
+   /* background-image: url("./assets/images/fitology.png"); */
+   /* background-image: "./assets/images/fitology.png"; */
+   background-image: url("http://localhost:3001/assets/images/grouppicture.jpg");
+   background-attachment: scroll;
+  }
+
+   .full-image2 {
+    height: 400px;
+    width: 100vw;
+    /* background-image: url("./assets/images/jp.jpg"); */
+    /* background-image: "./assets/images/jp.jpg"; */
+    background-image: url("http://localhost:3001/assets/images/jp.jpg");
+    background-attachment: scroll;
+  }
+
+  .full-image3 {
+   height: 400px;
+   width: 100vw;
+   /* background-image: url("./assets/images/christine.jpg.jpg"); */
+   /* background-image: "./assets/images/christine.jpg.jpg"; */
+   background-image: url("http://localhost:3001/assets/images/brandonn.jpg");;
+   background-attachment: scroll;
+  }
+
+  .full-image4 {
+   height: 400px;
+   width: 100vw;
+   /* background-image: url("./assets/images/michael.jpg.jpg"); */
+   /* background-image: "./assets/images/michael.jpg.jpg"; */
+   background-image: url("http://localhost:3001/assets/images/christine.jpg");
+   background-attachment: scroll;
+  }
+
+  .full-image5 {
+   height: 400px;
+   width: 100vw;
+   /* background-image: url("./assets/images/michael.jpg.jpg"); */
+   /* background-image: "./assets/images/michael.jpg.jpg"; */
+   background-image: url("http://localhost:3001/assets/images/michael.jpg");
+   background-attachment: scroll;
+  }
+
+  .full-image6 {
+   height: 400px;
+   width: 100vw;
+   /* background-image: url("./assets/images/michael.jpg.jpg"); */
+   /* background-image: "./assets/images/michael.jpg.jpg"; */
+   background-image: url("http://localhost:3001/assets/images/deiter.jpg");
+   background-attachment: scroll;
+  }
+
+  .full-imagefunny {
+     height: 400px;
+     width: 100vw;
+   /* background-image: url("./assets/images/fitology.png"); */
+   /* background-image: "./assets/images/fitology.png"; */
+   background-image: url("http://localhost:3001/assets/images/groupfunny.jpg");
+   background-attachment: scroll;
+  }
+}
+
+.container{
+  margin:auto;
+}
