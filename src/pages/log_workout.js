@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {Paper, Snackbar, Button, Table, TableHead, TableCell, TableBody, TableRow, Input} from '@material-ui/core'
-import LogHeader from '../components/log_header'
 import AuthService from '../components/AuthService'  // <- We use the AuthService to logout
 import withAuth from '../components/withAuth'
 import { withRouter } from 'react-router-dom'
@@ -44,7 +43,7 @@ class LogWorkout extends Component{
   componentWillMount() {
     this.noStatsUser()
     let userID = Auth.getUserId()
-    return fetch(BASE + '/workoutdetails' +'?workout_id=' + this.state.workout_id)
+    return fetch(BASE + '/workoutdetails?workout_id=' + this.state.workout_id)
       .then((resp) => {
         return resp.json()
       })
@@ -67,7 +66,7 @@ class LogWorkout extends Component{
   noStatsUser(){
     let open = false
     if( this.props.history.location.state){
-    if(this.props.history.location.state.nodata == true){
+    if(this.props.history.location.state.nodata === true){
       open = true
   }}
 this.setState({open: open})
@@ -131,12 +130,10 @@ handleWeight(event){
 }
 
 nextSet(){
-  let {userID, leave, setNum, reps, weight, savedSet, movement, checked, workout, workout_id} = this.state
+  let {userID, setNum, reps, weight, workout, workout_id} = this.state
   let fullSet = []
   // savedSet.push(weight)
   setNum = setNum + 1
-  let blankreps = new Array(workout.length).fill('')
-  let blankweight = new Array(workout.length).fill('')
   let falseArr = new Array(workout.length).fill(false)
   workout.forEach((element, index) => {
     fullSet.push({userhistory:{user_id: userID, workout_id: workout_id, set: setNum, movement_id: element.movement_id, rep: reps[index], weight: weight[index]}})

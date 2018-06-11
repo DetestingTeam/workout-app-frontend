@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Card, Paper, Button, CardContent, Typography, CardActions, Table} from '@material-ui/core'
+import {Card, Paper, Button, CardContent, Typography, CardActions} from '@material-ui/core'
 import './set_display.css'
 
 
