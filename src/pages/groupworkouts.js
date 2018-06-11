@@ -1,145 +1,82 @@
 import React, {Component} from 'react';
-import Card from '@material-ui/core/Card';
-
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-
-import Typography from '@material-ui/core/Typography';
 import TableCell from '@material-ui/core/TableCell';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import MapCard from '../components/MapCard'
 
-  const BASE = 'http://localhost:3000'
+const BASE = process.env.REACT_APP_API_URL
+var todayDate = new Date();
+var dd = todayDate.getDate();
+var mm = todayDate.getMonth()+1; //January is 0!
+var yyyy = todayDate.getFullYear();
+
+
+if(dd<10) {
+    dd = '0'+dd
+}
+
+if(mm<10) {
+    mm = '0'+mm
+}
+
+todayDate = yyyy + '-' + mm + '-' + dd;
+
+
+
 class Workouts extends Component {
   constructor(props){
     super(props)
     this.state = {
-      workout_name: [],
-      workout_date: [],
-      time: [],
-      location: [],
-      instructor: [],
-      workouts: []
+      workouts: [],
+      today: []
     }
+  }
+
+
+componentWillMount() {
+  return fetch(BASE + '/groupworkout/future')
+    .then((resp) => {
+      return resp.json()
+    })
+    .then(workoutinfo => {
+      let today = workoutinfo.filter( element => element.workout_date === todayDate)
+
+      this.setState({ workouts: workoutinfo, today: today })
+
+    })
 }
 
-
-  componentWillMount() {
-    return fetch(BASE + '/groupworkout/future')
-      .then((resp) => {
-        return resp.json()
-      })
-      .then(workoutinfo => {
-        console.log(workoutinfo);
-        this.setState({ workouts: workoutinfo })
-      })
+generateUrl(location){
+  let locationNoSpaces = location.toString().split(' ').join('+')
+  let url = 'https://www.google.com/maps/embed/v1/place?key=AIzaSyDGC6QAps8ZE8-q3f_quRFafP_n13n3P0Y&q=' + locationNoSpaces
+  return url
 }
 
-todaysworkouts(){
-  let {workouts} = this.state
-  workouts.map((element, index) => {
-    if(element.workout_date == '2018-08-07')
-    console.log(element.workout_name)
-  })
-
-}
-
-
-    render(){
-      this.todaysworkouts()
-        return(
+  render(){
+    let cards = this.state.today.map((element, index) => {
+      return(
+        <MapCard oneElement={element} key={index} genUrl={this.generateUrl.bind(this)}/>
+      )
+    })
+    return(
         <div>
-            <div class='main-container'>
-                <div class='map1'>
-
-                    <iframe title='frame1'
-                    width="400"
-                    height="350"
-                    frameborder="0"
-                    src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDGC6QAps8ZE8-q3f_quRFafP_n13n3P0Y&q=Learn+Academy,San+Diego,CA" allowfullscreen>
-                    </iframe>
-
-                    <Card className='card1'>
-                            <CardMedia
-                                className='card1'
-                            />
-                            <CardContent>
-                                <Typography gutterBottom variant="headline" component="h2">
-                                    Maximum Thruster
-                                </Typography>
-                                <Typography component="date">
-                                    Date/Time:
-                                </Typography>
-                                <Typography component="instructor">
-                                    Instructor:
-                                </Typography>
-                            </CardContent>
-                    </Card>
+          <div style={{display: 'flex', justifyContent: 'center'}}>  <Paper className="paper1" style={{marginTop: '10px', width: '90vw', maxWidth: '1000px', backgroundImage: 'url("http://localhost:3001/assets/images/bannerworkout.jpeg")', backgroundColor:'rgba(1, 1, 1, 0.2)'}}>
+           <h1 style={{marginBottom: '5px', marginTop: '0px', color: 'white', font: 'primary', fontVariant: 'small-caps', textAlign: 'center' }}> Today's Group Workouts</h1><h3 style={{textAlign: 'center'}} > {todayDate}</h3>
+         </Paper></div><br/>
+          <div className = 'cardcontainer'>
+            {cards}
+          </div>
+              <Paper className="paper">
+                <div className = 'table-title'>
+                <h1>Upcoming Workouts</h1>
                 </div>
-
-
-            <div class='map2'>
-                <iframe title="frame2"
-                    width="400"
-                    height="350"
-                    frameborder="0"
-                    src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDGC6QAps8ZE8-q3f_quRFafP_n13n3P0Y&q=Learn+Academy,San+Diego,CA" allowfullscreen>
-                </iframe>
-
-                <Card className='card2'>
-                        <CardMedia
-                            className='card2'
-                        />
-                        <CardContent>
-                            <Typography gutterBottom variant="headline">
-                                Maximum Thruster
-                            </Typography>
-                            <Typography component="date">
-                                Date/Time:
-                            </Typography>
-                            <Typography component="instructor">
-                                Instructor:
-                            </Typography>
-                        </CardContent>
-                </Card>
-            </div>
-
-                <div class='map3'>
-                    <iframe title='frame3'
-                        width="400"
-                        height="350"
-                        frameborder="0"
-                        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDGC6QAps8ZE8-q3f_quRFafP_n13n3P0Y&q=Le    arn+Academy,San+Diego,CA" allowfullscreen>
-                    </iframe>
-
-                    <Card className='card3'>
-                            <CardMedia
-                                className='card3'
-                            />
-                            <CardContent>
-                                <Typography gutterBottom variant="headline" component="h2">
-                                    Maximum Thruster
-                                </Typography>
-                                <Typography component="date">
-                                    Date/Time:
-                                </Typography>
-                                <Typography component="instructor">
-                                    Instructor:
-                                </Typography>
-                            </CardContent>
-                    </Card>
-                </div>
-            </div>
-
-
-
-                <Paper className="paper">
-            <Table className="upcoming">
+                <Table className="upcoming">
                 <TableHead>
                     <TableRow>
+                        <TableCell>Workout</TableCell>
                         <TableCell>Date</TableCell>
                         <TableCell>Time</TableCell>
                         <TableCell>Location</TableCell>
@@ -148,36 +85,20 @@ todaysworkouts(){
                 </TableHead>
 
                 <TableBody>
-
-                    <TableRow>
-                        <TableCell>testing</TableCell>
-                        <TableCell>testing</TableCell>
-                        <TableCell>testing</TableCell>
-                        <TableCell>testing</TableCell>
+                  {this.state.workouts.map((n, index) => {
+                    return(
+                    <TableRow key={index}>
+                      <TableCell>{n.workout_name}</TableCell>
+                        <TableCell>{n.workout_date}</TableCell>
+                        <TableCell>{n.time}</TableCell>
+                        <TableCell>{n.location}</TableCell>
+                        <TableCell>{n.instructor}</TableCell>
                     </TableRow>
-                    <TableRow>
-                        <TableCell>testing</TableCell>
-                        <TableCell>testing</TableCell>
-                        <TableCell>testing</TableCell>
-                        <TableCell>testing</TableCell>
-                    </TableRow>
-                    <TableRow>
-                        <TableCell>testing</TableCell>
-                        <TableCell>testing</TableCell>
-                        <TableCell>testing</TableCell>
-                        <TableCell>testing</TableCell>
-                    </TableRow>
-                    <TableRow>
-                        <TableCell>testing</TableCell>
-                        <TableCell>testing</TableCell>
-                        <TableCell>testing</TableCell>
-                        <TableCell>testing</TableCell>
-                    </TableRow>
-
+                  )
+                  })}
                 </TableBody>
             </Table>
             </Paper>
-
         </div>
         )
     }

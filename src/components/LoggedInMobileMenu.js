@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import MenuIcon from '@material-ui/icons/Menu';
-import {IconButton, List, ListItemText, ListItem, Divider} from '@material-ui/core'
+import {IconButton, List, ListItemText, ListItem } from '@material-ui/core'
 import AuthService from './AuthService'
 
 const styles = {
@@ -46,7 +46,7 @@ class LoggedInMobileMenu extends React.Component {
           </Link>
           <Link to="/log">
             <ListItem button>
-              <ListItemText primary="Workout Journal" />
+              <ListItemText primary="Log Workout" />
             </ListItem>
           </Link>
           <Link to="/stats">

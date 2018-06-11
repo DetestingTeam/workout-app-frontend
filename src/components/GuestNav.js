@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
-import { AppBar, Toolbar, Typography, Button, IconButton } from '@material-ui/core/';
-import MenuIcon from '@material-ui/icons/Menu';
+import { Typography, Button } from '@material-ui/core/';
 import GuestMobileMenu from './GuestMobileMenu'
 
 
@@ -10,7 +9,7 @@ class GuestNav extends Component{
 
       <div className="nav-container">
           <Typography variant="title" color="inherit" >
-            <Button href="/"><img className="navlogo" src="./assets/images/fitology.png"/></Button>
+            <Button href="/"><img className="navlogo" src="./assets/images/fitology.png" alt="Fitology Logo"/></Button>
           </Typography>
           <span className="topnav desktop">
             <Button className="navbutton" style={{color:'white'}} color="inherit" href="/login">Login</Button>
