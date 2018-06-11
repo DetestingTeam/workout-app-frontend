@@ -52,8 +52,9 @@ class LoginForm extends Component{
           <span className="text-field">
             <TextField
                 label="Email"
-                style={{width: '200px'}}
+                style={{width: '300px'}}
                 id="email"
+                fullWidth
                 value={form.email}
                 onChange={this.handleChange.bind(this)}
             />
@@ -62,8 +63,9 @@ class LoginForm extends Component{
             <TextField
                 type="password"
                 label="Password"
-                style={{width: '200px'}}
+                style={{width: '300px'}}
                 id="password"
+                fullWidth
                 value={form.password}
                 onChange={this.handleChange.bind(this)}
             />
