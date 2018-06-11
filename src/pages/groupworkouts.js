@@ -40,7 +40,7 @@ componentWillMount() {
       return resp.json()
     })
     .then(workoutinfo => {
-      let today = workoutinfo.filter( element => element.workout_date == '2018-06-11')
+      let today = workoutinfo.filter( element => element.workout_date === '2018-06-11')
       this.setState({ workouts: workoutinfo, today: today })
     })
 }

@@ -10,8 +10,6 @@ import LoggedInNav from  './components/LoggedInNav'
 import GuestNav from './components/GuestNav'
 
 
-const BASE = 'localhost:3000'
-
 const Auth = new AuthService()
 class App extends Component {
   constructor(props) {
