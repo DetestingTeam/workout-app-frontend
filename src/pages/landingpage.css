@@ -2,14 +2,14 @@
 
     width: 100vw;
     display: flex;
-    flex-flow:wrap;
+    /* flex-flow:wrap; */
     justify-content: center;
     /* background-color: black; */
     margin-top: 40px;
-    max-height: 100vh;
+    /* max-height: 100vh; */
 }
 .picone{
-  min-width: 300px;
+  /* min-width: 300px; */
   width: 50vw;
   height: 80vh;
   background-color: pink;
@@ -25,7 +25,7 @@
 }
 
 .pictwo{
-  min-width: 300px;
+  /* min-width: 300px; */
   width: 50vw;
   height: 80vh;
   background-color: pink;
