@@ -42,7 +42,7 @@ class Dashboard extends Component{
     var toAnimate = [];
     var radius = window.innerWidth < window.innerHeight ? window.innerWidth : window.innerHeight;
     var distance = radius / 4 <= 150 ? 150 : radius / 4;
-    // var colors = ['#FF1461', '#18FF92', '#5A87FF', '#FBF38C'];
+    var colors = ['#833ab4', '#fd1d1d', '#fcb045', '#3f2b96'];
 
     // var createElements = (function() {
     // var fragment = document.createDocumentFragment();
