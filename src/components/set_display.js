@@ -19,15 +19,7 @@ class SetDisplay extends Component{
 
         <div className="contain-box">
             <div className='workout-note'><Card>Today's Workout <div className='workout-name'> Ab Blaster 5000</div></Card> </div>
-            <div className='workout-note-overlay'><Card>Today's Workout <div className='workout-name'> Ab Blaster 5000   <Stopwatch
-                 seconds={0}
-                 minutes={0}
-                 hours={0}
-                 limit="00:00:00"
-                 withLoop={true}
-                 onCallback={console.log("test");}
-                 theme='primary' // theme='secondary'
-                />,</div></Card> </div>
+            <div className='workout-note-overlay'><Card>Today's Workout <div className='workout-name'> Ab Blaster 5000  </div></Card> </div>
 
         <div className='setandpin'>
           <div className='pic'>
