@@ -8,10 +8,10 @@ import Paper from '@material-ui/core/Paper';
 import MapCard from '../components/MapCard'
 
 const BASE = process.env.REACT_APP_API_URL
-var today = new Date();
-var dd = today.getDate();
-var mm = today.getMonth()+1; //January is 0!
-var yyyy = today.getFullYear();
+var todayDate = new Date();
+var dd = todayDate.getDate();
+var mm = todayDate.getMonth()+1; //January is 0!
+var yyyy = todayDate.getFullYear();
 
 if(dd<10) {
     dd = '0'+dd
@@ -21,7 +21,7 @@ if(mm<10) {
     mm = '0'+mm
 }
 
-today = mm + '/' + dd + '/' + yyyy;
+todayDate = yyyy + '-' + mm + '-' + dd;
 
 
 class Workouts extends Component {
@@ -40,7 +40,7 @@ componentWillMount() {
       return resp.json()
     })
     .then(workoutinfo => {
-      let today = workoutinfo.filter( element => element.workout_date === '2018-06-11')
+      let today = workoutinfo.filter( element => element.workout_date === todayDate)
       this.setState({ workouts: workoutinfo, today: today })
     })
 }
@@ -60,7 +60,7 @@ generateUrl(location){
     return(
         <div>
           <div style={{display: 'flex', justifyContent: 'center'}}>  <Paper className="paper1" style={{marginTop: '10px', width: '90vw', maxWidth: '1000px', backgroundImage: 'url("http://localhost:3001/assets/images/bannerworkout.jpeg")', backgroundColor:'rgba(1, 1, 1, 0.2)'}}>
-           <h1 style={{marginBottom: '5px', marginTop: '0px', color: 'white', font: 'primary', fontVariant: 'small-caps', textAlign: 'center' }}> Today's Workout</h1><h3 style={{textAlign: 'center'}} > {today}</h3>
+           <h1 style={{marginBottom: '5px', marginTop: '0px', color: 'white', font: 'primary', fontVariant: 'small-caps', textAlign: 'center' }}> Today's Workout</h1><h3 style={{textAlign: 'center'}} > {todayDate}</h3>
          </Paper></div><br/>
           <div className = 'cardcontainer'>
             {cards}
