@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Paper, Snackbar, Button, Checkbox, Table, TableHead, TableCell, TableBody, TableRow, Input} from '@material-ui/core'
+import {Button} from '@material-ui/core'
 
 class StopWatch extends Component{
   constructor(props){

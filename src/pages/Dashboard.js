@@ -1,39 +1,39 @@
 import React, {Component} from 'react'
 import withAuth from '../components/withAuth'
-import AuthService from '../components/AuthService'  // <- We use the AuthService to logout
-import MotivationMessage from '../components/motivation_message'
-import {Grid, Paper, Typography} from '@material-ui/core'
+//import AuthService from '../components/AuthService'  // <- We use the AuthService to logout
+//import MotivationMessage from '../components/motivation_message'
+//import {Grid, Paper, Typography} from '@material-ui/core'
 import '../styles/dashboard.css'
-import FullWidthGrid from '../components/full_width_grid'
+//import FullWidthGrid from '../components/full_width_grid'
 import { withRouter } from 'react-router-dom'
 import ButtonBases from '../components/button_base'
 import anime from 'animejs'
 
 
-const Auth = new AuthService()
-const styles = theme => ({
-  root: {
-    flexGrow: 1,
-  },
-  paper: {
-    padding: theme.spacing.unit * 2,
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-  },
-});
+//const Auth = new AuthService()
+// const styles = theme => ({
+//   root: {
+//     flexGrow: 1,
+//   },
+//   paper: {
+//     padding: theme.spacing.unit * 2,
+//     textAlign: 'center',
+//     color: theme.palette.text.secondary,
+//   },
+// });
 
   var motivations = ["You can do it!", "Keep up the good work", "You're amazing!"]
 
 class Dashboard extends Component{
 
-  AutoGrid(props) {
-    const { classes } = props;
-  }
+  // AutoGrid(props) {
+  //   const { classes } = props;
+  // }
 
-  motivate(){
-    var motivations = ["You can do it!", "Keep up the good work", "You're amazing!"]
-
-  }
+  // motivate(){
+  //   var motivations = ["You can do it!", "Keep up the good work", "You're amazing!"]
+  //
+  // }
 
   buttonAnimation(){
 
@@ -42,19 +42,19 @@ class Dashboard extends Component{
     var toAnimate = [];
     var radius = window.innerWidth < window.innerHeight ? window.innerWidth : window.innerHeight;
     var distance = radius / 4 <= 150 ? 150 : radius / 4;
-    var colors = ['#FF1461', '#18FF92', '#5A87FF', '#FBF38C'];
+    // var colors = ['#FF1461', '#18FF92', '#5A87FF', '#FBF38C'];
 
-    var createElements = (function() {
-    var fragment = document.createDocumentFragment();
-    for (var i = 0; i < maxElements; i++) {
-      var el = document.createElement('div');
-      el.classList.add('particule');
-      el.style.color = colors[anime.random(0, 3)];
-      toAnimate.push(el);
-      fragment.appendChild(el);
-    }
-    document.body.appendChild(fragment);
-    })();
+    // var createElements = (function() {
+    // var fragment = document.createDocumentFragment();
+    // for (var i = 0; i < maxElements; i++) {
+    //   var el = document.createElement('div');
+    //   el.classList.add('particule');
+    //   el.style.color = colors[anime.random(0, 3)];
+    //   toAnimate.push(el);
+    //   fragment.appendChild(el);
+    // }
+    // document.body.appendChild(fragment);
+    // })();
 
     var animate = function(el, i) {
     var angle = Math.random() * Math.PI * 2;

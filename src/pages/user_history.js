@@ -4,13 +4,13 @@ import './user_history.css';
 
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
-import {Paper, FormControl, Button, Checkbox, Table, TableHead, TableCell, TableBody, TableRow, Input, Snackbar, IconButton} from '@material-ui/core'
-import CloseIcon from '@material-ui/icons/Close';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+import {Paper, FormControl, Button, Table, TableHead, TableCell, TableBody, TableRow, Input} from '@material-ui/core'
+//import CloseIcon from '@material-ui/icons/Close';
+//import PropTypes from 'prop-types';
+//import { withStyles } from '@material-ui/core/styles';
 import FormHelperText from '@material-ui/core/FormHelperText';
-import ReactChartkick, { LineChart, PieChart } from 'react-chartkick'
-import Chart from 'chart.js'
+import { LineChart } from 'react-chartkick'
+// import Chart from 'chart.js'
 import AuthService from '../components/AuthService'
 import withAuth from '../components/withAuth'
 import { withRouter } from 'react-router-dom'
@@ -45,14 +45,14 @@ class UserHistory extends Component {
   componentWillMount() {
     let userID = Auth.getUserId()
 
-    return fetch(BASE + '/user_histories' +'?id=' + userID)
+    return fetch(BASE + '/user_histories?id=' + userID)
       .then((resp) => {
         return resp.json()
       })
       .then(APIinfo => {
         console.log("APIinfo")
         console.log(APIinfo)
-        if(APIinfo == [] || APIinfo == ''){
+        if(APIinfo === [] || APIinfo ===''){
           debugger
           console.log("TEST PASSED");
           let nodata = true
@@ -87,7 +87,7 @@ selectProperty = event => {
 }
 
 popSelectChart(){
-  if(this.state.selectedMove != ''){
+  if(this.state.selectedMove !== ''){
     return(
       <div className='sidegraph'>
         <Paper className = 'datapaper'>
@@ -167,7 +167,7 @@ this.setState({chartdata: chartdata})
 showFullHistory(){
   let fullHistoryGraph
   let {show} = this.state
-if(this.state.show == "show"){
+if(this.state.show === "show"){
   show = "hide"
 fullHistoryGraph = <div className="table">
   <Paper className = 'datapaper'>
