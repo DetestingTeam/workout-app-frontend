@@ -1,110 +1,69 @@
 import React, {Component} from 'react';
-import Card from '@material-ui/core/Card';
-
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-
-import Typography from '@material-ui/core/Typography';
 import TableCell from '@material-ui/core/TableCell';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import MapCard from '../components/MapCard'
 
-  const BASE = process.env.REACT_APP_API_URL
+const BASE = process.env.REACT_APP_API_URL
+var today = new Date();
+var dd = today.getDate();
+var mm = today.getMonth()+1; //January is 0!
+var yyyy = today.getFullYear();
+
+if(dd<10) {
+    dd = '0'+dd
+}
+
+if(mm<10) {
+    mm = '0'+mm
+}
+
+today = mm + '/' + dd + '/' + yyyy;
+
+
 class Workouts extends Component {
   constructor(props){
     super(props)
     this.state = {
-      workout_name: [],
-      workout_date: [],
-      time: [],
-      location: [],
-      instructor: [],
       workouts: [],
-      today: [],
-      future: [],
-      url: [],
-
+      today: []
     }
-}
+  }
 
 
 componentWillMount() {
-    return fetch(BASE + '/groupworkout/future')
-      .then((resp) => {
-        return resp.json()
-      })
-      .then(workoutinfo => {
-        this.setState({ workouts: workoutinfo }, this.todaysWorkouts)
-      })
+  return fetch(BASE + '/groupworkout/future')
+    .then((resp) => {
+      return resp.json()
+    })
+    .then(workoutinfo => {
+      let today = workoutinfo.filter( element => element.workout_date == '2018-06-11')
+      this.setState({ workouts: workoutinfo, today: today })
+    })
 }
 
-todaysWorkouts(){
-  let array = []
-  let farray = []
-  let {workouts} = this.state
-  workouts.map((element, index) => {
-    if(element.workout_date == '2018-06-08'){
-      array.push(element)
-    } else {
-      farray.push(element)
-    }
-  })
-    this.setState({ today: array, future: farray }, this.generateUrl)
-
- }
-
-generateUrl(){
-  let newURL = []
-  let {today} = this.state
-  today.map((element, index) => {
-    return(
-    newURL.push('https://www.google.com/maps/embed/v1/place?key=AIzaSyDGC6QAps8ZE8-q3f_quRFafP_n13n3P0Y&q=' + element.location.replace(/\s/g, '+'))
-  )})
-  this.setState({ url: newURL})
-  console.log(newURL);
+generateUrl(location){
+  let locationNoSpaces = location.toString().split(' ').join('+')
+  let url = 'https://www.google.com/maps/embed/v1/place?key=AIzaSyDGC6QAps8ZE8-q3f_quRFafP_n13n3P0Y&q=' + locationNoSpaces
+  return url
 }
-generateMapCards(){
-  let {today, url} = this.state
-  let mapCards = today.map((element, index) => {
-    return(
-  <div className='map1'>
 
-      <iframe title='frame1'
-      width="400"
-      height="350"
-      frameborder="0"
-      src={url[index]} allowfullscreen>
-      </iframe>
-
-      <Card className='card1'>
-              <CardContent>
-                  <Typography gutterBottom variant="headline" component="h2">
-                      Workout: {element.workout_name}
-                  </Typography>
-                  <Typography component="date">
-                      Time: {element.time}
-                  </Typography>
-                  <Typography component="instructor">
-                      Instructor: {element.instructor}
-                  </Typography>
-              </CardContent>
-      </Card>
-  </div>
-)
-})
-
-return mapCards
-}
   render(){
+    let cards = this.state.today.map((element, index) => {
+      return(
+        <MapCard oneElement={element} key={index} genUrl={this.generateUrl.bind(this)}/>
+      )
+    })
     return(
         <div>
-          <div className = 'daily-workouts'>
-            <h1>Today's Workouts</h1>
-          </div>
-          <div className = 'cardcontainer'>{this.generateMapCards()}
+          <div style={{display: 'flex', justifyContent: 'center'}}>  <Paper className="paper1" style={{marginTop: '10px', width: '90vw', maxWidth: '1000px', backgroundImage: 'url("http://localhost:3001/assets/images/bannerworkout.jpeg")', backgroundColor:'rgba(1, 1, 1, 0.2)'}}>
+           <h1 style={{marginBottom: '5px', marginTop: '0px', color: 'white', font: 'primary', fontVariant: 'small-caps', textAlign: 'center' }}> Today's Workout</h1><h3 style={{textAlign: 'center'}} > {today}</h3>
+         </Paper></div><br/>
+          <div className = 'cardcontainer'>
+            {cards}
           </div>
               <Paper className="paper">
                 <div className = 'table-title'>
@@ -122,7 +81,7 @@ return mapCards
                 </TableHead>
 
                 <TableBody>
-                  {this.state.future.map((n, index) => {
+                  {this.state.workouts.map((n, index) => {
                     return(
                     <TableRow key={index}>
                       <TableCell>{n.workout_name}</TableCell>

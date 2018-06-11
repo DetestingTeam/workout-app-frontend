@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Paper, Snackbar, Button, Checkbox, Table, TableHead, TableCell, TableBody, TableRow, Input} from '@material-ui/core'
+import {Paper, Snackbar, Button, Table, TableHead, TableCell, TableBody, TableRow, Input} from '@material-ui/core'
 import LogHeader from '../components/log_header'
 import AuthService from '../components/AuthService'  // <- We use the AuthService to logout
 import withAuth from '../components/withAuth'
