@@ -13,6 +13,7 @@ var dd = todayDate.getDate();
 var mm = todayDate.getMonth()+1; //January is 0!
 var yyyy = todayDate.getFullYear();
 
+
 if(dd<10) {
     dd = '0'+dd
 }
@@ -21,7 +22,9 @@ if(mm<10) {
     mm = '0'+mm
 }
 
-todayDate =  yyyy + '-' + mm + '-' + dd
+
+todayDate = yyyy + '-' + mm + '-' + dd;
+
 
 
 

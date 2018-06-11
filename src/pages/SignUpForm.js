@@ -19,24 +19,37 @@ class SignUpForm extends Component{
       loginSuccess:false
     }
   }
+
   handleChange(event){
     let { user } = this.state
     user[event.target.id] = event.target.value
     this.setState({user: user})
   }
+
   handleSubmit(event){
-    event.preventDefault()
-    registerUser(this.state.user).then(res =>{
-      this.props.history.push('/dashboard')
-    })
-  }
-  enterPressed(event) {
-    if(event.key === 'Enter') {
-      registerUser(this.state.user).then(res =>{
-        this.props.history.push('/dashboard')
-      })
+    let { user } = this.state
+    if(user.password.length >= 5){    //Special Characters?
+        event.preventDefault()
+        registerUser(user).then(res =>{
+            this.props.history.push('/dashboard')
+  })} else {
+      alert("Password needs to be at least 5 characters!")
     }
   }
+
+  enterPressed(event) {
+let { user } = this.state
+    if(event.key === 'Enter'){
+        if(user.password.length >= 5){
+            registerUser(user).then(res =>{
+              this.props.history.push('/dashboard')
+          })}
+            else {
+                alert("Password needs to be at least 5 characters!")
+            }
+  }
+}
+
   render(){
     let form = this.state.user
     return(
