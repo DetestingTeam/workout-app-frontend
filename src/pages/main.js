@@ -11,6 +11,7 @@ import CreateMovement from './CreateMovement'
 import CreateWorkout from './CreateWorkout'
 import LogWorkout from './log_workout'
 import WorkoutPage from './workout_page'
+import StopWatch from '../components/stopwatch'
 
 class Main extends Component{
   render(){
@@ -27,6 +28,7 @@ class Main extends Component{
         <Route exact path ="/stats" render={(props) => <UserHistory path="/stats"/>} />
         <Route exact path ="/log" render={(props) => <LogWorkout path="/log"/>} />
         <Route exact path ="/new" render={(props) => <WorkoutPage path="/new"/>} />
+        <Route path="/stopwatch" component={StopWatch} />
       </Switch>
     )
   }

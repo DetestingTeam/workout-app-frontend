@@ -21,7 +21,8 @@ if(mm<10) {
     mm = '0'+mm
 }
 
-todayDate = yyyy + '-' + mm + '-' + dd;
+todayDate = mm + '-' + dd + '-' + yyyy;
+
 
 
 class Workouts extends Component {
@@ -41,7 +42,8 @@ componentWillMount() {
     })
     .then(workoutinfo => {
       let today = workoutinfo.filter( element => element.workout_date === todayDate)
-      this.setState({ workouts: workoutinfo, today: today })
+      this.setState({ workouts: workoutinfo, today: todayDate })
+
     })
 }
 
