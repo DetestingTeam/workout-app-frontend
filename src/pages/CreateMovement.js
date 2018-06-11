@@ -37,7 +37,12 @@ class CreateMovement extends Component{
   handleSubmit(event){
     event.preventDefault()
     addMove(this.state.movement).then(res =>{
-      this.setState({message: "Movement Created"})
+      this.setState({ open: true,  movement: {
+        movement_name: "",
+        movement_description: "",
+        url: "",
+        bodypart: "" }
+      })
     })
   }
   enterPressed(event) {
