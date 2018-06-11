@@ -4,7 +4,6 @@ const BASE = process.env.REACT_APP_API_URL
 const Auth = new AuthService()
 
 let registerUser = function(user){
-
   let newUser = {user: user}
   return Auth.fetch(BASE+'/users', {
       body: JSON.stringify(newUser),
@@ -18,24 +17,19 @@ let registerUser = function(user){
   })
 }
 
- export {registerUser}
-
-let addMove = function(form){
-  return fetch(BASE+"/users", {
-    body: JSON.stringify(form),
-    header: {'Content-Type': 'application/json'
+let addMove = function(movement){
+  let newMovement = {movement: movement}
+  return fetch(BASE+"/movements", {
+    body: JSON.stringify(newMovement),
+    headers: {
+      'Content-Type': 'application/json'
     },
     method: "POST"
-  }).then(handleErrors)
-  .then( rawResponse => {
+  }).then( rawResponse => {
     let parsedResponse = rawResponse.json()
     return parsedResponse
-  }).catch(error => {
-    console.log("error")
   })
 }
-
-
 
 let handleErrors = function(response){
   if(!response.ok){
@@ -44,4 +38,4 @@ let handleErrors = function(response){
   return response
 }
 
-export {handleErrors, addMove}
+export {handleErrors, addMove, registerUser}
