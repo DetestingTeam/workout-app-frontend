@@ -41,7 +41,7 @@
   background-image: url("http://localhost:3001/assets/images/grouppicture.jpg");
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: fixed;
 	background-attachment: fixed;
 	display: flex;
 	justify-content: center;
@@ -138,7 +138,7 @@
  background-image: url("http://localhost:3001/assets/images/deiter.jpg");
  background-size: cover;
  background-repeat: no-repeat;
- background-position: center;
+ background-position: fixed;
  background-attachment: fixed;
  display: flex;
  justify-content: center;
