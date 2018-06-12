@@ -74,15 +74,15 @@ generateUrl(location){
           <div className = 'cardcontainer'>
             {cards}
           </div>
-          <div>
-          <ExpansionPanel>
+          <div className='panel'>
+          <ExpansionPanel className="expansionpanel">
              <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                <Typography className="classes.heading">
                  <h4>Upcoming Workouts</h4>
                </Typography>
              </ExpansionPanelSummary>
              <ExpansionPanelDetails>
-               <Table className="upcoming">
+               <Table className="upcoming" >
                <TableHead>
                     <TableRow>
                         <TableCell>Workout</TableCell>
