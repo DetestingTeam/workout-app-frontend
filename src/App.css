@@ -220,11 +220,16 @@
   justify-content: center;
 }
 
-.upcoming{
-  justify-content: center;
 
+.upcoming{
+	display: flex;
+  justify-content: center;
 }
 
+.panel{
+	self-align: center;
+
+}
 
 
 @media (max-width: 60em) {
