@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
-
 import './user_history.css';
-
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
+import { LineChart } from 'react-chartkick';
 import {Paper, FormControl, Button, Table, TableHead, TableCell, TableBody, TableRow, Input} from '@material-ui/core'
-//import CloseIcon from '@material-ui/icons/Close';
-//import PropTypes from 'prop-types';
-//import { withStyles } from '@material-ui/core/styles';
+import CloseIcon from '@material-ui/icons/Close';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
 import FormHelperText from '@material-ui/core/FormHelperText';
-import { LineChart } from 'react-chartkick'
-// import Chart from 'chart.js'
+
+import Chart from 'chart.js'
 import AuthService from '../components/AuthService'
 import withAuth from '../components/withAuth'
 import { withRouter } from 'react-router-dom'

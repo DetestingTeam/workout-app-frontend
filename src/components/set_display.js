@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Card, Paper, Button, CardContent, Typography, CardActions, ButtonBase} from '@material-ui/core'
 import './set_display.css'
+import { withStyles } from '@material-ui/core/styles';
 import NewLog from './newlog'
 
 
@@ -140,11 +141,49 @@ class SetDisplay extends Component{
               <span className='myimagebackdrop'></span>
               <span className='myimagebutton'>
                 <Typography className='myimagetitle'>
-                  <span className='myimagemarked'> Log a Workout</span>
+                  <span className='mytopimagemarked'>Log a Workout!</span>
                 </Typography>
               {/* <img className='myimage' src='/assets/images/padandpencil.jpeg'/> Picture here */}
             </span>
             </ButtonBase>
+            <div className='myimage' focusVisibleClassName='myfocusvisible' style={{
+              
+              }}>
+              <span className='myimageSRC' style={{
+                backgroundPosition: 'fixed',
+                opacity: '.1',
+                backgroundImage: "url('/assets/images/barbell.jpeg')"
+              }}></span>
+              <span className='myimagebackdrop'></span>
+              <span className='myimagebutton'>
+                <Typography className='myimagetitle'>
+                  <span className='myimagemarked'>
+                    <h3>Today's Workout:<br/>
+                    Ab Blaster 5000</h3>
+                    <h4> Set 1: </h4>
+                    <table className='setTable'>
+                     <tr>
+                       <th>Sit ups:</th>  <td>45 sec</td>
+                     </tr>
+                     <tr>
+                       <th>Push ups:</th>  <td>45 sec</td>
+                     </tr>
+                     <tr>
+                       <th>Pull ups:</th>  <td>45 sec</td>
+                     </tr>
+
+
+                     </table>
+                  </span>
+                </Typography>
+              {/* <img className='myimage' src='/assets/images/padandpencil.jpeg'/> Picture here */}
+            </span>
+          </div>
+
+
+
+
+
             </div>
 
 
@@ -201,4 +240,4 @@ class SetDisplay extends Component{
 
 }
 
-export default SetDisplay
+export default withStyles(styles)(SetDisplay)
