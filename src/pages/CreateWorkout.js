@@ -3,20 +3,28 @@ import {withRouter} from 'react-router-dom'
 import {TextField, Button, Card, CardContent, Snackbar} from '@material-ui/core'
 import {addMove} from "../api"
 import withAuth from '../components/withAuth'
+import MovementSelector from '../components/MovementSelector'
 
 
-class CreateMovement extends Component{
+class CreateWorkout extends Component{
   constructor(props){
     super(props)
     this.state = {
-      movement: {
-        movement_name: "",
-        movement_description: "",
-        url: "",
-        bodypart: ""
+      workout: {
+        workout_name: "",
+        workout_date: "",
+        duration: "",
+        difficulty: "",
+        location: "",
+        instructor: "",
+        time: "",
+        movements: [{
+          movement_id: "",
+          reps: "",
+          weight: "",
+          set: ""
+        }]
       },
-      setSuccess: false,
-      loginSuccess:false,
       open: false
     }
   }
@@ -58,7 +66,7 @@ class CreateMovement extends Component{
     }
   }
   render(){
-    let form = this.state.movement
+    let form = this.state.workout
     return(
       <div id="sign-up-page" onKeyPress={this.enterPressed.bind(this)}>
         <Snackbar
@@ -69,54 +77,57 @@ class CreateMovement extends Component{
             'aria-describedby': 'message-id',
           }}
           message={<span style={{display: 'flex',
-    alignItems: 'center'}} id="message-id">Movement Created</span>}
+    alignItems: 'center'}} id="message-id">Workout Created</span>}
         />
-        <Card className="form-card">
-          <CardContent variant="headline" component="h2">Create Movement</CardContent>
+
+
+        <Card className="workout-form-card">
+          <CardContent variant="headline" component="h2">Create Workout</CardContent>
           <CardContent id="sign-up-form">
-            <span className="text-field">
+            <span className="workout-field">
             <TextField
-                label="Movement Name"
-                style={{width: '300px'}}
-                id="movement_name"
+                label="Workout Name"
+                style={{width: '200px'}}
+                id="workout_name"
                 fullWidth
-                value={form.movement_name}
+                value={form.workout_name}
                 onChange={this.handleChange.bind(this)}
             />
-          </span><br />
-          <span className="text-field">
+          </span>
+          <span className="workout-field">
             <TextField
-                label="Movement Description"
-                style={{width: '300px'}}
-                id="movement_description"
-                multiline
+                type="date"
+                style={{width: '200px'}}
+                id="workout_date"
                 fullWidth
                 rows="4"
-                value={form.movement_description}
+                value={form.workout_date}
                 onChange={this.handleChange.bind(this)}
                 margin="normal"
             />
           </span><br />
-          <span className="text-field">
+          <span className="workout-field">
             <TextField
-                label="Video URL"
-                style={{width: '300px'}}
-                id="url"
+                label="Duration"
+                style={{width: '100px'}}
+                id="duration"
                 fullWidth
-                value={form.url}
+                value={form.duration}
                 onChange={this.handleChange.bind(this)}
             />
-          </span><br />
-          <span className="text-field">
+          </span>
+          <span className="workout-field">
             <TextField
-                type="text"
-                label="Body Part Focused"
-                style={{width: '300px'}}
-                id="bodypart"
+                label="Location"
+                style={{width: '200px'}}
+                id="location"
                 fullWidth
-                value={form.bodypart}
+                value={form.location}
                 onChange={this.handleChange.bind(this)}
             />
+          </span>
+          <span>
+            <MovementSelector />
           </span>
         </CardContent>
         <span className="action-button">
@@ -130,4 +141,4 @@ class CreateMovement extends Component{
     )
   }
 }
-export default withRouter(withAuth(CreateMovement))
+export default withRouter(withAuth(CreateWorkout))
