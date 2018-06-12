@@ -1,3 +1,75 @@
+.myroot{
+  margin-top: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  min-width: 300px;
+  width: 100%;
+  justify-content: center;
+}
+
+.myimage{
+  position: relative;
+  background-color: black;
+  margin: 0.5%;
+  padding: 40px;
+  border: 40px;
+  height: 200px;
+}
+
+.myimageSRC{
+  margin-right: 40px;
+  margin-left: 40px;
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+  background-size: cover;
+  background-position: center 40%;
+  background-color: black;
+  /* background-image: image('/assets/images/padandpencil.jpeg'); */
+  background-image: url('http://localhost:3000/public/assets/images/padandpencil.jpeg');
+}
+
+.myimagebutton{
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  color: white;
+
+}
+
+.myimagebackdrop{
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    bottom: 0px;
+    background-color: black;
+    opacity: 0;
+
+    /* transition: theme.transitions.create('opacity'); */
+  }
+
+  .myimagetitle{
+      position: relative;
+      padding: 4px 16px 10px;
+    }
+
+
+
+
+.myfocusvisible{
+
+}
+
+
 
 .flextits{
   display: flex;

@@ -1,10 +1,7 @@
 import React, {Component} from 'react'
 import withAuth from '../components/withAuth'
-//import AuthService from '../components/AuthService'  // <- We use the AuthService to logout
 //import MotivationMessage from '../components/motivation_message'
-//import {Grid, Paper, Typography} from '@material-ui/core'
 import '../styles/dashboard.css'
-//import FullWidthGrid from '../components/full_width_grid'
 import { withRouter } from 'react-router-dom'
 import ButtonBases from '../components/button_base'
 import anime from 'animejs'
@@ -42,7 +39,7 @@ class Dashboard extends Component{
     var toAnimate = [];
     var radius = window.innerWidth < window.innerHeight ? window.innerWidth : window.innerHeight;
     var distance = radius / 4 <= 150 ? 150 : radius / 4;
-    // var colors = ['#FF1461', '#18FF92', '#5A87FF', '#FBF38C'];
+    var colors = ['#833ab4', '#fd1d1d', '#fcb045', '#3f2b96'];
 
     // var createElements = (function() {
     // var fragment = document.createDocumentFragment();
