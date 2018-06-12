@@ -4,7 +4,7 @@ import {TextField, Button, Card, CardContent} from '@material-ui/core'
 import {registerUser} from "../api"
 
 
-class SignUpForm extends Component{
+class CreateWorkout extends Component{
   constructor(props){
     super(props)
     this.state = {
@@ -19,37 +19,24 @@ class SignUpForm extends Component{
       loginSuccess:false
     }
   }
-
   handleChange(event){
     let { user } = this.state
     user[event.target.id] = event.target.value
     this.setState({user: user})
   }
-
   handleSubmit(event){
-    let { user } = this.state
-    if(user.password.length >= 5){    //Special Characters?
-        event.preventDefault()
-        registerUser(user).then(res =>{
-            this.props.history.push('/dashboard')
-  })} else {
-      alert("Password needs to be at least 5 characters!")
+    event.preventDefault()
+    registerUser(this.state.user).then(res =>{
+      this.props.history.push('/dashboard')
+    })
+  }
+  enterPressed(event) {
+    if(event.key === 'Enter') {
+      registerUser(this.state.user).then(res =>{
+        this.props.history.push('/dashboard')
+      })
     }
   }
-
-  enterPressed(event) {
-let { user } = this.state
-    if(event.key === 'Enter'){
-        if(user.password.length >= 5){
-            registerUser(user).then(res =>{
-              this.props.history.push('/dashboard')
-          })}
-            else {
-                alert("Password needs to be at least 5 characters!")
-            }
-  }
-}
-
   render(){
     let form = this.state.user
     return(
@@ -60,9 +47,8 @@ let { user } = this.state
             <span className="text-field">
             <TextField
                 label="First Name"
-                style={{width: '300px'}}
+                style={{width: '200px'}}
                 id="first_name"
-                fullWidth
                 value={form.first_name}
                 onChange={this.handleChange.bind(this)}
             />
@@ -70,9 +56,8 @@ let { user } = this.state
           <span className="text-field">
             <TextField
                 label="Last Name"
-                style={{width: '300px'}}
+                style={{width: '200px'}}
                 id="last_name"
-                fullWidth
                 value={form.last_name}
                 onChange={this.handleChange.bind(this)}
             />
@@ -80,9 +65,8 @@ let { user } = this.state
           <span className="text-field">
             <TextField
                 label="Email"
-                style={{width: '300px'}}
+                style={{width: '200px'}}
                 id="email"
-                fullWidth
                 value={form.email}
                 onChange={this.handleChange.bind(this)}
             />
@@ -91,9 +75,8 @@ let { user } = this.state
             <TextField
                 type="password"
                 label="Create Password"
-                style={{width: '300px'}}
+                style={{width: '200px'}}
                 id="password"
-                fullWidth
                 value={form.password}
                 onChange={this.handleChange.bind(this)}
             />
@@ -101,9 +84,8 @@ let { user } = this.state
           <span className="text-field">
             <TextField
                 type="password"
-                fullWidth
                 label="Confirm Password"
-                style={{width: '300px'}}
+                style={{width: '200px'}}
                 id="password_confirmation"
                 value={form.password_confirmation}
                 onChange={this.handleChange.bind(this)}
@@ -121,4 +103,4 @@ let { user } = this.state
     )
   }
 }
-export default withRouter(SignUpForm)
+export default withRouter(CreateWorkout)

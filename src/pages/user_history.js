@@ -4,13 +4,13 @@ import './user_history.css';
 
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
-import {Paper, FormControl, Button, Checkbox, Table, TableHead, TableCell, TableBody, TableRow, Input, Snackbar, IconButton} from '@material-ui/core'
-import CloseIcon from '@material-ui/icons/Close';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+import {Paper, FormControl, Button, Table, TableHead, TableCell, TableBody, TableRow, Input} from '@material-ui/core'
+//import CloseIcon from '@material-ui/icons/Close';
+//import PropTypes from 'prop-types';
+//import { withStyles } from '@material-ui/core/styles';
 import FormHelperText from '@material-ui/core/FormHelperText';
-import ReactChartkick, { LineChart, PieChart } from 'react-chartkick'
-import Chart from 'chart.js'
+import { LineChart } from 'react-chartkick'
+// import Chart from 'chart.js'
 import AuthService from '../components/AuthService'
 import withAuth from '../components/withAuth'
 import { withRouter } from 'react-router-dom'
@@ -18,7 +18,7 @@ import { withRouter } from 'react-router-dom'
 
 // ReactChartkick.addAdapter(Chart)
 const Auth = new AuthService()
-const BASE = 'https://workout-app-backend.herokuapp.com'
+const BASE = process.env.REACT_APP_API_URL
 
 class UserHistory extends Component {
   constructor(props) {
@@ -35,24 +35,25 @@ class UserHistory extends Component {
       uniquemoves: [],
       filteredData: [],
       selectedMove: '',
-      selectedProperty: '',
+      selectedProperty: 'reps',
       show: "show",
       fullHistoryGraph: '',
       nodata: false,
+      chart: '',
 
         }
       }
   componentWillMount() {
     let userID = Auth.getUserId()
 
-    return fetch(BASE + '/user_histories' +'?id=' + userID)
+    return fetch(BASE + '/user_histories?id=' + userID)
       .then((resp) => {
         return resp.json()
       })
       .then(APIinfo => {
         console.log("APIinfo")
         console.log(APIinfo)
-        if(APIinfo == [] || APIinfo == ''){
+        if(APIinfo === [] || APIinfo ===''){
           debugger
           console.log("TEST PASSED");
           let nodata = true
@@ -63,11 +64,20 @@ class UserHistory extends Component {
           // this.props.history.push('/log', nodata.true)
         } else{
         this.setState({
-          userHistory: APIinfo, firstname: APIinfo[0].first_name, lastname: APIinfo[0].last_name
+          userHistory: APIinfo, firstname: APIinfo[0].first_name, lastname: APIinfo[0].last_name, selectedMove: APIinfo[0].movement_name
           })
         }
           this.filterMoves()
+          this.generateChartData()
+          console.log(this.state.chartdata);
+          this.initialSelectChart()
+          this.popSelectChart()
       })
+  }
+
+  componentDidMount(){
+    this.generateChartData()
+    console.log(this.state.chartdata);
   }
 
   filterMoves(){
@@ -75,11 +85,16 @@ class UserHistory extends Component {
     this.setState({uniquemoves: unique});
   }
 
+
+initialSelectChart(){
+  let arrByID = this.state.userHistory.filter(item => { return item.movement_name === this.state.selectedMove? true : false })
+    this.setState({filteredData: arrByID})
+}
+
   selectMove = event => {
   // Filter out selected movements data:
     let arrByID = this.state.userHistory.filter(item => { return item.movement_name === event.target.value ? true : false })
-          console.log(arrByID);
-      this.setState({ [event.target.name]: event.target.value, selectedMove: event.target.value, filteredData: arrByID})
+      this.setState({ [event.target.name]: event.target.value, selectedMove: event.target.value, filteredData: arrByID}, this.popSelectChart)
    };
 
 selectProperty = event => {
@@ -87,8 +102,7 @@ selectProperty = event => {
 }
 
 popSelectChart(){
-  if(this.state.selectedMove != ''){
-    return(
+  this.setState({selectChart:
       <div className='sidegraph'>
         <Paper className = 'datapaper'>
           <h2>{this.state.selectedMove} Table </h2>
@@ -122,7 +136,7 @@ popSelectChart(){
           </Table>
         </Paper>
       </div>
-    )}
+    })
 }
 
 generateChartData(){
@@ -134,7 +148,7 @@ generateChartData(){
   let selectedProp = this.state.selectedProperty
     let num = index
   if(element.movement_name === this.state.selectedMove && selectedProp === "reps"){
-    console.log("THIS RUNNING");
+
     //make some fake ranged dates:
     //make some fake ranged dates:
     if(num<30){
@@ -167,7 +181,7 @@ this.setState({chartdata: chartdata})
 showFullHistory(){
   let fullHistoryGraph
   let {show} = this.state
-if(this.state.show == "show"){
+if(this.state.show === "show"){
   show = "hide"
 fullHistoryGraph = <div className="table">
   <Paper className = 'datapaper'>
@@ -222,19 +236,19 @@ this.setState({fullHistoryGraph: fullHistoryGraph, show: show})
       <div className='sidegraph'>
           <Paper className = 'datapaper'>
             <h2>Progress for {this.state.firstname} {this.state.lastname} </h2>
-            <h4> {this.state.selectedMove}</h4>
-              {console.log(this.state.chartData)}
+            <h4> Movement: {this.state.selectedMove}</h4>
+              {/* {console.log(this.state.chartData)} */}
               {/* {console.log(this.state.uniquemoves)} */}
             <form className="root">
                 <FormControl className="dropdown">
                     <Select
-                       value={this.state.movement_name}
+                       value={this.state.selectedMove}
                        onChange={this.selectMove}
                        input={<Input name="movement_name" id="movement_id" />}
                      >
-                       <MenuItem value="">
-                         <em>Select Movement:</em>
-                       </MenuItem>
+                       {/* <MenuItem value={this.state.movement_name}> */}
+                         {/* <em>Select Movement:</em> */}
+                       {/* </MenuItem> */}
                        {this.state.uniquemoves.map((element)=>{
                          return(
                         <MenuItem value={element}> {element}</MenuItem>
@@ -247,15 +261,12 @@ this.setState({fullHistoryGraph: fullHistoryGraph, show: show})
 
               <FormControl className="dropdown">
               <Select
-                value={this.state.age}
+                value={this.state.selectedProperty}
                 onChange={this.selectProperty}
                 displayEmpty
-                name="age"
+                name="property"
                 className=""
               >
-                <MenuItem value="">
-                  <em>All</em>
-                </MenuItem>
                 <MenuItem value={"reps"}>Reps</MenuItem>
                 <MenuItem value={"weight"}>Weight</MenuItem>
               </Select>
@@ -267,6 +278,7 @@ this.setState({fullHistoryGraph: fullHistoryGraph, show: show})
               </Button>
             </form>
 
+            {this.state.chart}
             <div id="chartbox">
               <LineChart id="chart" width="400px" height="200px" data={ this.state.chartdata }   />
             </div>
@@ -274,7 +286,7 @@ this.setState({fullHistoryGraph: fullHistoryGraph, show: show})
       </div>
     <br/>
 
-{this.popSelectChart()}
+{this.state.selectChart}
 
 
 

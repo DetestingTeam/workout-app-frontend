@@ -38,22 +38,19 @@
   background: #833ab4;
   background: -webkit-linear-gradient(to left, #fcb045, #fd1d1d, #833ab4);  /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to left, #fcb045, #fd1d1d, #833ab4); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  background: linear-gradient(to left, #fcb045, #fd1d1d, #833ab4)
+ 	min-height: 80vh;
+	padding-bottom: 40px;
+
+
 }
 
-/* .back{
-  background: #EEEEFF;
-  background: linear-gradient(to left, #DDDDFF, #EEEEFF, #DDDDFF)
-} */
 
 .navlogo {
   max-height: 200px;
   max-width: 200px;
 }
 
-.logworkout {
-  height: 63vh;
-}
+
 
 .navlogo:hover {
   background: #00c6ff;  /* fallback for old browsers */
@@ -61,14 +58,7 @@
   background: linear-gradient(to right, #0072ff, #00c6ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
-/* .logworkout {
-  margin-bottom: 218px;
-} */
 
-
-/* .sidegraph {
-  margin-bottom: 218px;
-} */
 
 
 .btn:hover {opacity: 0.7;}
@@ -80,12 +70,13 @@
 
 .footer {
   border: 20px;
+
 }
 
 .nav-container{
   display: flex;
   background: #3f2b96;  /* fallback for old browsers */  /* Chrome 10-25, Safari 5.1-6 */
-  /* background: linear-gradient(to right, #3f2b96, #a8c0ff); */
+  /* background: linear-gradient(to left, #3f2b96, #a8c0ff); */
   width:100%;
   margin-right: 100px;
   justify-content: space-between;
@@ -123,8 +114,10 @@
 	text-align: center;
 	font: normal 18px sans-serif;
   padding: 45px;
-	margin-top: 40px;
+
+	/* margin-top: 40px; */
   box-shadow: 0px -10px 50px black;
+
 }
 
 .footer-basic-centered .footer-company-motto{
@@ -201,7 +194,9 @@
   min-width: 200px;
   text-align: center
 }
-
+.card1{
+  width: 400px;
+}
 .map1 {
   padding: 20px;
 }
@@ -214,6 +209,11 @@
   padding: 20px;
 }
 
+.cardcontainer{
+  display: flex;
+	flex-wrap: wrap;
+  justify-content: center;
+}
 
 .main-container{
   display: flex;
@@ -222,7 +222,9 @@
 
 .upcoming{
   justify-content: center;
+
 }
+
 
 
 @media (max-width: 60em) {
@@ -234,4 +236,9 @@
   .mobile {
     display: none;
   }
+}
+
+.table-title{
+
+  text-align: center;
 }

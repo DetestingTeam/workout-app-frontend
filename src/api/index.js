@@ -1,39 +1,35 @@
-const BASE = "https://workout-app-backend.herokuapp.com"
+import AuthService from '../components/AuthService'
 
+const BASE = process.env.REACT_APP_API_URL
+const Auth = new AuthService()
 
 let registerUser = function(user){
   let newUser = {user: user}
-  return fetch(BASE+'/users', {
+  return Auth.fetch(BASE+'/users', {
       body: JSON.stringify(newUser),
       headers: {
           'Content-Type': 'application/json'
       },
       method: "POST"
+  }).then(res => {
+    Auth.setToken(res.jwt)
+    return Promise.resolve(res)
   })
-      .then((rawResponse) => {
-          let parsedResponse = rawResponse.json()
-          return parsedResponse
-      })
 }
 
- export {registerUser}
-
-let addMove = function(form){
-  return fetch(BASE+"/users", {
-    body: JSON.stringify(form),
-    header: {'Content-Type': 'application/json'
+let addMove = function(movement){
+  let newMovement = {movement: movement}
+  return fetch(BASE+"/movements", {
+    body: JSON.stringify(newMovement),
+    headers: {
+      'Content-Type': 'application/json'
     },
     method: "POST"
-  }).then(handleErrors)
-  .then( rawResponse => {
+  }).then( rawResponse => {
     let parsedResponse = rawResponse.json()
     return parsedResponse
-  }).catch(error => {
-    console.log("error")
   })
 }
-
-
 
 let handleErrors = function(response){
   if(!response.ok){
@@ -42,4 +38,4 @@ let handleErrors = function(response){
   return response
 }
 
-export {handleErrors, addMove}
+export {handleErrors, addMove, registerUser}

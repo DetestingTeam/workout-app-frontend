@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title> Number Guessing Game</title>
+  </head>
+  <body style="background-color: <%= color %>; text-align: center">
+    I'm thinking of a number between 0 and 100. Try to guess it... <br/><br/>
+    <form class="" action="/" method="get">
+      <input type="text" name="guess" value="">
+      <input type="submit" name="" value="Submit Guess!">
+
+    </form>
+  <h1><%= message %> </h1>
+      <hr/>
+        <p>
+    Tries:  <%= tries %>
+    </p>
+
+    <form class="" action="/" method="get">
+      <input type="hidden" name="resetit" value="reset">
+      <input type="submit" name="" value="Reset">
+
+    </form>
+
+    <div id="secretmessage" style="color:<%= color %>;">  The secret number is <%= randNum %> </div>
+  </body>
+</html>

@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
-import {Paper, Snackbar, Button, Checkbox, Table, TableHead, TableCell, TableBody, TableRow, Input} from '@material-ui/core'
-import LogHeader from '../components/log_header'
+import {Paper, Snackbar, Button, Table, TableHead, TableCell, TableBody, TableRow, Input} from '@material-ui/core'
 import AuthService from '../components/AuthService'  // <- We use the AuthService to logout
 import withAuth from '../components/withAuth'
 import { withRouter } from 'react-router-dom'
+import './logworkout.css'
 
 
 const Auth = new AuthService()
-const BASE = 'https://workout-app-backend.herokuapp.com'
+
+const BASE = process.env.REACT_APP_API_URL
+
 
 class LogWorkout extends Component{
   constructor(props){
@@ -20,10 +22,10 @@ class LogWorkout extends Component{
       userID: '',
       userhistoryAdded: false,
       workout: [],
-      checked: [],
+      // checked: [],
       reps: [],
       weight: [],
-      workout_name: "test",
+      workout_name: "No Workouts Created Yet! Create a workout!",
       name: '',
       savedSet: [],
       setNum: 1,
@@ -32,24 +34,29 @@ class LogWorkout extends Component{
       nodata: '',
       fancypopshit: '',
       open: false,
+      stayhere: false,
     }
 
   }
 
 
   componentWillMount() {
-    console.log(this.props.history.location.state);
-
     this.noStatsUser()
     let userID = Auth.getUserId()
-    return fetch(BASE + '/workoutdetails' +'?workout_id=' + this.state.workout_id)
+    return fetch(BASE + '/workoutdetails?workout_id=' + this.state.workout_id)
       .then((resp) => {
         return resp.json()
       })
       .then(APIinfo => {
+        console.log(APIinfo);
         this.setState({ workout: APIinfo, userID: userID, workout_name: APIinfo[0].workout_name, workout_date: APIinfo[0].workout_date})
       })
   }
+
+
+
+
+
 
   handleClose = () => {
     console.log("test");
@@ -59,13 +66,14 @@ class LogWorkout extends Component{
   noStatsUser(){
     let open = false
     if( this.props.history.location.state){
-    if(this.props.history.location.state.nodata == true){
+    if(this.props.history.location.state.nodata === true){
       open = true
   }}
 this.setState({open: open})
 }
 
   handleSubmit(event){
+    let {leave} = this.state
     console.log("this.state.fullSet");
     console.log(this.state.fullSet);
     this.state.fullSet.map((element)=>{
@@ -84,24 +92,26 @@ this.setState({open: open})
         })
     })
     console.log(this.state.userhistory);
+    leave ? this.props.history.push({ pathname: '/dashboard'}) :  this.generateTable()
+
 
   }
 
-
-  isChecked(index){
-  return this.state.checked[index]
-  }
-
-  handleCheck(n, index){
-console.log(this.props.location.query.__firebase_request_key);
-    let {checked, ttoF} = this.state
-    if (checked[index] === true){
-      checked[index] = false
-    } else checked[index] = true
-    console.log(checked);
-    ttoF == false ? ttoF = true : ttoF = false
-    this.setState({checked: checked, ttoF: ttoF})
- };
+//
+//   isChecked(index){
+//   return this.state.checked[index]
+//   }
+//
+//   handleCheck(n, index){
+// console.log(this.props.location.query.__firebase_request_key);
+//     let {checked, ttoF} = this.state
+//     if (checked[index] === true){
+//       checked[index] = false
+//     } else checked[index] = true
+//     console.log(checked);
+//     ttoF == false ? ttoF = true : ttoF = false
+//     this.setState({checked: checked, ttoF: ttoF})
+//  };
 
 
 
@@ -110,23 +120,26 @@ handleReps(event){
   // this.generateHistory()
   let { reps } = this.state
   reps[event.target.id] = event.target.value
-  this.setState({reps: reps})
+  this.setState({[event.target.name]: event.target.value, reps: reps})
 }
 
 handleWeight(event){
   let weight = this.state.weight
   weight[event.target.id] = event.target.value
-  this.setState({weight: weight})
+  this.setState({weight: weight, [event.target.name]: event.target.value})
 }
 
 nextSet(){
-  let {setNum, reps, weight, savedSet, movement, checked, workout} = this.state
-  // savedSet.push(reps)
+  let {userID, setNum, reps, weight, workout, workout_id} = this.state
+  let fullSet = []
   // savedSet.push(weight)
   setNum = setNum + 1
-  let blankArr = new Array(workout.length).fill('')
   let falseArr = new Array(workout.length).fill(false)
-  this.setState({setNum: setNum, reps: blankArr, weight: blankArr, checked: falseArr})
+  workout.forEach((element, index) => {
+    fullSet.push({userhistory:{user_id: userID, workout_id: workout_id, set: setNum, movement_id: element.movement_id, rep: reps[index], weight: weight[index]}})
+  })
+
+  this.setState({leave: false, setNum: setNum, reps: new Array(workout.length).fill(''), weight: new Array(workout.length).fill(''), checked: falseArr, fullSet: fullSet}, this.handleSubmit)
 
 }
 
@@ -153,7 +166,7 @@ workout.forEach((element, index) => {
   fullSet.push({userhistory:{user_id: userID, workout_id: workout_id, set: setNum, movement_id: element.movement_id, rep: reps[index], weight: weight[index]}})
 })
 
-this.setState({fullSet: fullSet},
+this.setState({fullSet: fullSet, leave: true},
 this.handleSubmit
 )
 
@@ -164,6 +177,34 @@ randomWorkout(){
   let workout_id = Math.ceil(Math.random()*totalWorkouts)
   this.setState({workout_id: workout_id})
   this.componentWillMount()
+}
+
+
+
+generateTable(){
+  let chart = this.state.workout.map((n, index) => {
+    return (
+
+      <TableRow key={n.id}>
+        <TableCell component="th" scope="row" style={{padding: '8px', width: '5px', textAlign: 'center'}}>
+          {index+1}
+        </TableCell>
+        <TableCell component="th" scope="row" style={{padding: '8px', width: '50px', textAlign: 'center'}}>
+          {n.movement_name}
+        </TableCell>
+        <TableCell numeric style={{width: '50px',  padding: '8px', textAlign: 'center'}}>{n.rec_duration}</TableCell>
+        {console.log("IN generate table: reps, weight")}
+        {console.log(this.state.reps[index])}
+        {console.log(this.state.weight[index])}
+        <TableCell numeric style={{width: '60px',  padding: '8px', textAlign: 'center'}}><Input id={index} value={this.state.weight[index]} placeholder='lbs' type='number' style={{width: '45px'}} onChange={this.handleWeight.bind(this)}/></TableCell>
+        <TableCell numeric style={{width: '60px',  padding: '8px', textAlign: 'center'}}><Input id={index} value={this.state.reps[index]} onChange={this.handleReps.bind(this)} placeholder='0' type='number' style={{width: '30px'}} /></TableCell>
+        <TableCell numeric style={{padding: '0px',width: '20px', textAlign: 'center'}}>
+           {/* <Checkbox name="checked" checked={this.state.checked[index]} onChange={this.handleCheck.bind(this,n,index)} color="primary"/> */}
+       </TableCell>
+      </TableRow>
+    );
+  })
+  return chart
 }
 
 
@@ -210,50 +251,31 @@ console.log(this.state.open)
               message={<span id="message-id">Do a workout first!</span>}
             />
 
-       <div style={{display: 'flex', justifyContent: 'center'}}>  <Paper className="paper" style={{marginTop: '10px', borderRadius: '6px', width: '800px', maxWidth: '1000px'}}>
-        <h3 style={{textAlign: 'left', marginLeft: '10vw',  marginBottom: '10px', marginTop: '10px', marginRight: '0px'}} ><h1 style={{marginBottom: '10px'}}> {this.state.workout_name}</h1> {this.state.workout_date}</h3>
+       <div style={{display: 'flex', justifyContent: 'center'}}>  <Paper className="paper1" style={{marginTop: '10px', width: '90vw', maxWidth: '1000px', backgroundImage: 'url("http://localhost:3001/assets/images/bannerworkout.jpeg")', backgroundColor:'rgba(1, 1, 1, 0.2)'}}>
+        <h3 style={{textAlign: 'center'}} ><h1 style={{marginBottom: '5px', marginTop: '0px', color: 'white', font: 'primary', fontVariant: 'small-caps' }}> {this.state.workout_name}</h1> {this.state.workout_date}</h3>
       </Paper></div><br/>
 
-        <div style={{display: 'flex', justifyContent: 'center'}}>  <Paper className="paper" style={{marginTop: '0px',  borderRadius: '6px',  width: '800px', maxWidth: '1000px'}}>
+        <div style={{display: 'flex', justifyContent: 'center'}}>  <Paper className="paper" style={{marginTop: '0px',  borderRadius: '6px',  width: '20vw', maxWidth: '1000px', backgroundColor:'rgba(1, 1, 1, 0.2)'}}>
         <h3 style={{textAlign: 'center', color: 'black', fontSize: '20px'}} >Set {this.state.setNum}</h3>
       </Paper></div>
       <br/>
-    
+
         <div style={{display: 'flex', justifyContent: 'center'}}>
         <Paper className="paper" style={{marginTop: '0px', width: '800px', maxWidth: '1000px'}}>
              <Table className="log-table">
 
                <TableHead>
                  <TableRow>
-                   <TableCell style={{padding: '8px',width: '5px', textAlign: 'center'}}></TableCell>
+                   <TableCell style={{padding: '8px',width: '5px', textAlign: 'center'}}>#</TableCell>
                    <TableCell style={{padding: '8px',width: '50px', textAlign: 'center'}}>Movement</TableCell>
                    <TableCell numeric style={{width: '50px',  padding: '8px', textAlign: 'center'}} >Time/Reps</TableCell>
-                   <TableCell numeric style={{width: '60px',  padding: '8px', textAlign: 'center'}}>Reps</TableCell>
                    <TableCell numeric style={{width: '60px',  padding: '8px', textAlign: 'center'}}>Weight</TableCell>
-                   <TableCell numeric style={{padding: '0px',width: '20px', textAlign: 'center'}}>Complete</TableCell>
+                   <TableCell numeric style={{width: '60px',  padding: '8px', textAlign: 'center'}}>Reps</TableCell>
+
                  </TableRow>
                </TableHead>
                <TableBody>
-                 {this.state.workout.map((n, index) => {
-                   return (
-
-                     <TableRow key={n.id}>
-                       <TableCell component="th" scope="row" style={{padding: '8px', width: '5px', textAlign: 'center'}}>
-                         {index+1}
-                       </TableCell>
-                       <TableCell component="th" scope="row" style={{padding: '8px', width: '50px', textAlign: 'center'}}>
-                         {n.movement_name}
-                       </TableCell>
-                       <TableCell numeric style={{width: '50px',  padding: '8px', textAlign: 'center'}}>{n.rec_duration}</TableCell>
-
-                       <TableCell numeric style={{width: '60px',  padding: '8px', textAlign: 'center'}}><Input id={index} value={this.state.reps[index]} onChange={this.handleReps.bind(this)} placeholder='0' type='number' style={{width: '30px'}} /></TableCell>
-                       <TableCell numeric style={{width: '60px',  padding: '8px', textAlign: 'center'}}><Input id={index} value={this.state.weight[index]} placeholder='lbs' type='number' style={{width: '45px'}} onChange={this.handleWeight.bind(this)}/></TableCell>
-                       <TableCell numeric style={{padding: '0px',width: '20px', textAlign: 'center'}}>
-                          <Checkbox name="checked" checked={this.state.checked[index]} onChange={this.handleCheck.bind(this,n,index)} color="primary"/>
-                      </TableCell>
-                     </TableRow>
-                   );
-                 })}
+                 {this.generateTable()}
 
              <TableRow >
                <TableCell colspan='6'>
