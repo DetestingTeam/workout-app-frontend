@@ -6,11 +6,6 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import MapCard from '../components/MapCard'
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import Typography from '@material-ui/core/Typography';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 const BASE = process.env.REACT_APP_API_URL
 var todayDate = new Date();
@@ -74,16 +69,12 @@ generateUrl(location){
           <div className = 'cardcontainer'>
             {cards}
           </div>
-          <div>
-          <ExpansionPanel>
-             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-               <Typography className="classes.heading">
-                 <h4>Upcoming Workouts</h4>
-               </Typography>
-             </ExpansionPanelSummary>
-             <ExpansionPanelDetails>
-               <Table className="upcoming">
-               <TableHead>
+              <Paper className="paper">
+                <div className = 'table-title'>
+                <h1>Upcoming Workouts</h1>
+                </div>
+                <Table className="upcoming">
+                <TableHead>
                     <TableRow>
                         <TableCell>Workout</TableCell>
                         <TableCell>Date</TableCell>
@@ -91,30 +82,26 @@ generateUrl(location){
                         <TableCell>Location</TableCell>
                         <TableCell>Instructor</TableCell>
                     </TableRow>
-                  </TableHead>
-                    <TableBody>
-                      {this.state.workouts.map((n, index) => {
-                        return(
-                        <TableRow key={index}>
-                          <TableCell>{n.workout_name}</TableCell>
-                            <TableCell>{n.workout_date}</TableCell>
-                            <TableCell>{n.time}</TableCell>
-                            <TableCell>{n.location}</TableCell>
-                            <TableCell>{n.instructor}</TableCell>
-                        </TableRow>
-                      )
-                      })}
-                  </TableBody>
-              </Table>
-             </ExpansionPanelDetails>
-           </ExpansionPanel>
-         </div>
+                </TableHead>
 
+                <TableBody>
+                  {this.state.workouts.map((n, index) => {
+                    return(
+                    <TableRow key={index}>
+                      <TableCell>{n.workout_name}</TableCell>
+                        <TableCell>{n.workout_date}</TableCell>
+                        <TableCell>{n.time}</TableCell>
+                        <TableCell>{n.location}</TableCell>
+                        <TableCell>{n.instructor}</TableCell>
+                    </TableRow>
+                  )
+                  })}
+                </TableBody>
+            </Table>
+            </Paper>
         </div>
         )
+    }
 }
-}
-
-
 
 export default Workouts;
