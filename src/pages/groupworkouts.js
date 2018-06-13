@@ -95,7 +95,7 @@ generateUrl(location){
                     <TableBody>
                       {this.state.workouts.map((n, index) => {
                         return(
-                        <TableRow key={index}>
+                        <TableRow key={index} className='expansionrow'>
                           <TableCell>{n.workout_name}</TableCell>
                             <TableCell>{n.workout_date}</TableCell>
                             <TableCell>{n.time}</TableCell>

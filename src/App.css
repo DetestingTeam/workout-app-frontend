@@ -231,7 +231,10 @@
 
 }
 
-
+.expansionrow{
+	display: flex;
+	flex-wrap: wrap;
+}
 @media (max-width: 60em) {
   .desktop {
     display: none;
