@@ -10,6 +10,7 @@ import LoggedInNav from  './components/LoggedInNav'
 import GuestNav from './components/GuestNav'
 
 
+
 const Auth = new AuthService()
 class App extends Component {
   constructor(props) {

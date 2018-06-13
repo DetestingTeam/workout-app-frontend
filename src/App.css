@@ -242,7 +242,10 @@
     display: none;
   }
 }
-
+.datapaper1 {
+	display: flex;
+	justifyContent: center;
+}
 .table-title{
 
   text-align: center;

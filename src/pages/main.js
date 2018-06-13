@@ -13,6 +13,7 @@ import LogWorkout from './log_workout'
 import WorkoutPage from './workout_page'
 import StopWatch from '../components/stopwatch'
 import NewLogPage from './newlogpage'
+import WorkoutCreation from './workoutcreation'
 
 class Main extends Component{
   render(){
@@ -30,6 +31,7 @@ class Main extends Component{
         <Route exact path ="/log" render={(props) => <LogWorkout path="/log"/>} />
         <Route exact path ="/new" render={(props) => <WorkoutPage path="/new"/>} />
         <Route exact path ="/newlog" render={(props) => <NewLogPage path="/newlog"/>} />
+        <Route exact path ="/workoutcreation" render={(props) => <WorkoutCreation path="/workoutcreation"/>} />
         <Route path="/stopwatch" component={StopWatch} />
       </Switch>
     )
