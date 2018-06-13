@@ -262,6 +262,17 @@
 }
 
 .table-title{
-
   text-align: center;
+}
+
+#create-workout-form{
+	display: inline-flex;
+	flex-wrap: wrap;
+	align-items: flex-start;
+	text-align: left;
+}
+
+#selector-block{
+	display: inline-flex;
+	padding-top: .6em;
 }

@@ -15,45 +15,7 @@ import Chip from '@material-ui/core/Chip';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 
-const suggestions = [
-  { label: 'Afghanistan' },
-  { label: 'Aland Islands' },
-  { label: 'Albania' },
-  { label: 'Algeria' },
-  { label: 'American Samoa' },
-  { label: 'Andorra' },
-  { label: 'Angola' },
-  { label: 'Anguilla' },
-  { label: 'Antarctica' },
-  { label: 'Antigua and Barbuda' },
-  { label: 'Argentina' },
-  { label: 'Armenia' },
-  { label: 'Aruba' },
-  { label: 'Australia' },
-  { label: 'Austria' },
-  { label: 'Azerbaijan' },
-  { label: 'Bahamas' },
-  { label: 'Bahrain' },
-  { label: 'Bangladesh' },
-  { label: 'Barbados' },
-  { label: 'Belarus' },
-  { label: 'Belgium' },
-  { label: 'Belize' },
-  { label: 'Benin' },
-  { label: 'Bermuda' },
-  { label: 'Bhutan' },
-  { label: 'Bolivia, Plurinational State of' },
-  { label: 'Bonaire, Sint Eustatius and Saba' },
-  { label: 'Bosnia and Herzegovina' },
-  { label: 'Botswana' },
-  { label: 'Bouvet Island' },
-  { label: 'Brazil' },
-  { label: 'British Indian Ocean Territory' },
-  { label: 'Brunei Darussalam' },
-].map(suggestion => ({
-  value: suggestion.label,
-  label: suggestion.label,
-}));
+
 
 class Option extends React.Component {
   handleClick = event => {
@@ -122,8 +84,10 @@ const ITEM_HEIGHT = 48;
 
 const styles = theme => ({
   root: {
+
     flexGrow: 1,
     height: 250,
+    width: 250,
   },
   chip: {
     margin: theme.spacing.unit / 4,
@@ -135,7 +99,7 @@ const styles = theme => ({
   '@global': {
     '.Select-control': {
       display: 'flex',
-      alignItems: 'center',
+      alignItems: 'flex-end',
       border: 0,
       height: 'auto',
       background: 'transparent',
@@ -229,42 +193,28 @@ const styles = theme => ({
 });
 
 class MovementSelector extends React.Component {
-  state = {
-    movement: null,
-  };
-
-  handleChange = name => value => {
-    this.setState({
-      [name]: value,
-    });
-  };
 
   render() {
     const { classes } = this.props;
-
+    const suggestions = this.props.allMovements.map( movement => ({
+      value: movement.id,
+      label: movement.movement_name,
+    }));
     return (
       <div className={classes.root}>
-        <TextField
+        <Input
           fullWidth
-          value={this.state.multiLabel}
-          onChange={this.handleChange('multiLabel')}
-          placeholder="Select multiple"
-          name="react-select-chip-label"
-          label="Movements"
-          style={{width: '400px'}}
-          InputLabelProps={{
-            shrink: true,
-          }}
-          InputProps={{
-            inputComponent: SelectWrapped,
-            inputProps: {
-              classes,
-              multi: true,
-              instanceId: 'react-select-chip-label',
-              id: 'react-select-chip-label',
-              simpleValue: true,
-              options: suggestions,
-            },
+          inputComponent={SelectWrapped}
+          value={this.props.movement}
+          onChange={this.props.handleChange('movement')}
+          placeholder="Search for a movement..."
+          id="react-select-single"
+          inputProps={{
+            classes,
+            name: 'react-select-single',
+            instanceId: 'react-select-single',
+            simpleValue: true,
+            options: suggestions,
           }}
         />
       </div>

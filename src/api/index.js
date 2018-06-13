@@ -31,6 +31,14 @@ let addMove = function(movement){
   })
 }
 
+let getAllMovements = function(){
+  return fetch(BASE+"/movements")
+    .then(rawResponse => {
+      let parsedResponse = rawResponse.json()
+      return parsedResponse
+    })
+}
+
 let handleErrors = function(response){
   if(!response.ok){
     throw Error(response.statusText)
@@ -38,4 +46,4 @@ let handleErrors = function(response){
   return response
 }
 
-export {handleErrors, addMove, registerUser}
+export {handleErrors, addMove, registerUser, getAllMovements}
