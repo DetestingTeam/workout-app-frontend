@@ -15,7 +15,7 @@
   background-color: pink;
   /* background-image: url("./assets/images/findaworkout.jpeg"); */
   /* background-image: "./assets/images/findaworkout.jpeg"; */
-  background-image: url("http://localhost:3001/assets/images/findaworkout.jpeg");
+  background-image: url("/assets/images/findaworkout.jpeg");
   background-size: cover;
   background-position: center;
   display: flex;
@@ -31,7 +31,7 @@
   background-color: pink;
   /* background-image: url("./assets/images/findaworkout.jpeg"); */
   /* background-image: "./assets/images/findaworkout.jpeg"; */
-  background-image: url("http://localhost:3001/assets/images/logaworkout.jpeg");
+  background-image: url("/assets/images/logaworkout.jpeg");
   background-size: cover;
   background-position: center;
   display: flex;
