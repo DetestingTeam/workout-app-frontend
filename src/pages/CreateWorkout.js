@@ -1,10 +1,11 @@
 import React, {Component} from 'react'
 import {withRouter} from 'react-router-dom'
-import {TextField, Button, Card, CardContent, Snackbar} from '@material-ui/core'
+import {TextField, Button, Card, CardContent, Snackbar, Divider} from '@material-ui/core'
 import AddIcon from '@material-ui/icons/Add';
 import { addMove, getAllMovements } from "../api"
 import withAuth from '../components/withAuth'
 import MovementSelector from '../components/MovementSelector'
+import MovementTable from '../components/MovementTable'
 
 
 
@@ -24,6 +25,9 @@ class CreateWorkout extends Component{
       },
       open: false,
       movement: "", //movement we are currently adding
+      sets: "",
+      reps:"",
+      moveDuration: "",
       allMovements:[] //from fetch
     }
   }
@@ -49,10 +53,21 @@ class CreateWorkout extends Component{
   };
 //for form state
   handleChange(event){
-    let { movement } = this.state
-    movement[event.target.id] = event.target.value
-    this.setState({movement: movement})
+    this.setState({[event.target.id]: event.target.value})
   }
+
+  pushToArray(event){
+    let { movements } = this.state.workout
+    let oneMovement = {movement: this.state.movement, rec_set: this.state.sets, rec_rep: this.state.reps, rec_duration: this.state.moveDuration}
+    movements = movements.push(oneMovement)
+    this.setState({
+      movements,
+      movement: "", //movement we are currently adding
+      sets: "",
+      reps:"",
+      moveDuration: ""})
+  }
+
 //TODO: change for workout and workout detail fetch POSTs
   handleSubmit(event){
     event.preventDefault()
@@ -100,14 +115,14 @@ class CreateWorkout extends Component{
 
         <Card className="workout-form-card">
           <CardContent variant="headline" component="h2">Create Workout</CardContent>
-          <CardContent id="create-workout-form">
+          <CardContent className="create-workout-form">
             <span className="workout-field">
             <TextField
                 label="Workout Name"
                 style={{width: '300px'}}
-                id="workout_name"
+                id="workout.workout_name"
                 fullWidth
-                value={form.workout_name}
+                value={form.workout.workout_name}
                 onChange={this.handleChange.bind(this)}
             />
           </span>
@@ -115,10 +130,10 @@ class CreateWorkout extends Component{
             <TextField
                 type="date"
                 style={{width: '200px'}}
-                id="workout_date"
+                id="workout.workout_date"
                 fullWidth
                 rows="4"
-                value={form.workout_date}
+                value={form.workout.workout_date}
                 onChange={this.handleChange.bind(this)}
                 margin="normal"
             />
@@ -127,9 +142,9 @@ class CreateWorkout extends Component{
             <TextField
                 label="Duration"
                 style={{width: '100px'}}
-                id="duration"
+                id="workout.duration"
                 fullWidth
-                value={form.duration}
+                value={form.workout.duration}
                 onChange={this.handleChange.bind(this)}
             />
           </span>
@@ -137,9 +152,9 @@ class CreateWorkout extends Component{
             <TextField
                 label="Location"
                 style={{width: '200px'}}
-                id="location"
+                id="workout.location"
                 fullWidth
-                value={form.location}
+                value={form.workout.location}
                 onChange={this.handleChange.bind(this)}
             />
           </span>
@@ -147,9 +162,9 @@ class CreateWorkout extends Component{
             <TextField
                 label="Instructor"
                 style={{width: '200px'}}
-                id="location"
+                id="workout.location"
                 fullWidth
-                value={form.location}
+                value={form.workout.location}
                 onChange={this.handleChange.bind(this)}
             />
           </span>
@@ -157,48 +172,59 @@ class CreateWorkout extends Component{
             <TextField
                 label="Time"
                 style={{width: '200px'}}
-                id="location"
+                id="workout.location"
                 fullWidth
-                value={form.location}
+                value={form.workout.location}
                 onChange={this.handleChange.bind(this)}
             />
           </span>
-          <span id="selector-block">
-            <MovementSelector movement={this.state.movement} handleChange={this.movementChange.bind(this)} allMovements={this.state.allMovements}/>
+          <span>
+            <Divider />
           </span>
-          <span className="workout-field">
-            <TextField
-                label="Sets"
-                style={{width: '100px'}}
-                id="rec_set"
-                fullWidth
-                value={form.duration}
-                onChange={this.handleChange.bind(this)}
-            />
+
+          <div style={{width: "100%"}} className="create-workout-form">
+            <span id="selector-block">
+              <MovementSelector movement={this.state.movement} handleChange={this.movementChange.bind(this)} allMovements={this.state.allMovements}/>
+            </span>
+            <span className="workout-field">
+              <TextField
+                  label="Sets"
+                  style={{width: '100px'}}
+                  id="sets"
+                  fullWidth
+                  value={form.sets}
+                  onChange={this.handleChange.bind(this)}
+              />
+            </span>
+            <span className="workout-field">
+              <TextField
+                  label="Reps"
+                  style={{width: '75px'}}
+                  id="reps"
+                  fullWidth
+                  value={form.reps}
+                  onChange={this.handleChange.bind(this)}
+              />
+            </span>
+            <span className="workout-field">
+              <TextField
+                  label="Duration"
+                  style={{width: '100px'}}
+                  id="moveDuration"
+                  fullWidth
+                  value={form.moveDuration}
+                  onChange={this.handleChange.bind(this)}
+              />
+            </span>
+            <span id="selector-block">
+              <Button variant="fab" mini color="primary" aria-label="add" onClick={this.pushToArray.bind(this)}>
+                <AddIcon />
+              </Button>
+            </span>
+          </div>
+          <span>
+            <MovementTable movements={this.state.workout.movements}/>
           </span>
-          <span className="workout-field">
-            <TextField
-                label="Reps"
-                style={{width: '75px'}}
-                id="rec_rep"
-                fullWidth
-                value={form.duration}
-                onChange={this.handleChange.bind(this)}
-            />
-          </span>
-          <span className="workout-field">
-            <TextField
-                label="Duration"
-                style={{width: '100px'}}
-                id="rec_duration"
-                fullWidth
-                value={form.duration}
-                onChange={this.handleChange.bind(this)}
-            />
-          </span>
-          <Button variant="fab" mini color="secondary" aria-label="add" >
-            <AddIcon />
-          </Button>
         </CardContent>
         <span className="action-button">
           <Button
