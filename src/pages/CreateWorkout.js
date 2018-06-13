@@ -61,8 +61,14 @@ class CreateWorkout extends Component{
     });
   };
 //for form state
-  handleChange(event){
+  handleMoveChange(event){
     this.setState({[event.target.id]: event.target.value})
+  }
+
+  handleChange(event){
+    let {workout} = this.state
+    workout[event.target.id] = event.target.value
+    this.setState({workout})
   }
 
   pushToArray(event){
@@ -105,8 +111,9 @@ class CreateWorkout extends Component{
   }
 
   render(){
-    let form = this.state
-    console.log(this.state);
+    let form = this.state.workout
+    let one = this.state
+    console.log(this.state.workout);
     return(
       <div id="sign-up-page" onKeyPress={this.enterPressed.bind(this)}>
 {/* component for pop up confirmation snackbar  */}
@@ -118,7 +125,7 @@ class CreateWorkout extends Component{
             'aria-describedby': 'message-id',
           }}
           message={<span style={{display: 'flex',
-    alignItems: 'center'}} id="message-id">Workout Created</span>}
+          alignItems: 'center'}} id="message-id">Workout Created</span>}
         />
 
 
@@ -129,9 +136,9 @@ class CreateWorkout extends Component{
             <TextField
                 label="Workout Name"
                 style={{width: '300px'}}
-                id="workout.workout_name"
+                id="workout_name"
                 fullWidth
-                value={form.workout.workout_name}
+                value={form.workout_name}
                 onChange={this.handleChange.bind(this)}
             />
           </span>
@@ -139,10 +146,10 @@ class CreateWorkout extends Component{
             <TextField
                 type="date"
                 style={{width: '200px'}}
-                id="workout.workout_date"
+                id="workout_date"
                 fullWidth
                 rows="4"
-                value={form.workout.workout_date}
+                value={form.workout_date}
                 onChange={this.handleChange.bind(this)}
                 margin="normal"
             />
@@ -151,9 +158,9 @@ class CreateWorkout extends Component{
             <TextField
                 label="Duration"
                 style={{width: '100px'}}
-                id="workout.duration"
+                id="duration"
                 fullWidth
-                value={form.workout.duration}
+                value={form.duration}
                 onChange={this.handleChange.bind(this)}
             />
           </span>
@@ -161,9 +168,9 @@ class CreateWorkout extends Component{
             <TextField
                 label="Location"
                 style={{width: '200px'}}
-                id="workout.location"
+                id="location"
                 fullWidth
-                value={form.workout.location}
+                value={form.location}
                 onChange={this.handleChange.bind(this)}
             />
           </span>
@@ -171,9 +178,9 @@ class CreateWorkout extends Component{
             <TextField
                 label="Instructor"
                 style={{width: '200px'}}
-                id="workout.location"
+                id="instructor"
                 fullWidth
-                value={form.workout.location}
+                value={form.instructor}
                 onChange={this.handleChange.bind(this)}
             />
           </span>
@@ -181,9 +188,9 @@ class CreateWorkout extends Component{
             <TextField
                 label="Time"
                 style={{width: '200px'}}
-                id="workout.location"
+                id="time"
                 fullWidth
-                value={form.workout.location}
+                value={form.time}
                 onChange={this.handleChange.bind(this)}
             />
           </span>
@@ -201,8 +208,8 @@ class CreateWorkout extends Component{
                   style={{width: '100px'}}
                   id="sets"
                   fullWidth
-                  value={form.sets}
-                  onChange={this.handleChange.bind(this)}
+                  value={one.sets}
+                  onChange={this.handleMoveChange.bind(this)}
               />
             </span>
             <span className="workout-field">
@@ -211,8 +218,8 @@ class CreateWorkout extends Component{
                   style={{width: '75px'}}
                   id="reps"
                   fullWidth
-                  value={form.reps}
-                  onChange={this.handleChange.bind(this)}
+                  value={one.reps}
+                  onChange={this.handleMoveChange.bind(this)}
               />
             </span>
             <span className="workout-field">
@@ -221,8 +228,8 @@ class CreateWorkout extends Component{
                   style={{width: '100px'}}
                   id="moveDuration"
                   fullWidth
-                  value={form.moveDuration}
-                  onChange={this.handleChange.bind(this)}
+                  value={one.moveDuration}
+                  onChange={this.handleMoveChange.bind(this)}
               />
             </span>
             <span id="selector-block">
