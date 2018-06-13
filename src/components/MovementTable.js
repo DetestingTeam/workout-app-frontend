@@ -20,42 +20,45 @@ const styles = theme => ({
 });
 
 
-function SimpleTable(props) {
-  const { classes } = props;
-    let data = [{name: "", rec_set: "", re_rep: "", rec_duration: ""}]
+class MovementTable extends React.Component{
+  render(){
+    let data = [{id: "", movement_name: "", rec_set: "", re_rep: "", rec_duration: ""}]
+    if(this.props.selectedMovements){
+      data = this.props.selectedMovements
+    }
 
-  return (
-    <Paper className={classes.root}>
-      <Table className={classes.table}>
-        <TableHead>
-          <TableRow>
-            <TableCell>Movement Name</TableCell>
-            <TableCell numeric>Sets</TableCell>
-            <TableCell numeric>Reps</TableCell>
-            <TableCell >Duration</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {data.map((n,index) => {
-            return (
-              <TableRow key={index}>
-                <TableCell component="th" scope="row">
-                  {n.name}
-                </TableCell>
-                <TableCell numeric>{n.rec_set}</TableCell>
-                <TableCell numeric>{n.rec_rep}</TableCell>
-                <TableCell numeric>{n.rec_duration}</TableCell>
-              </TableRow>
-            );
-          })}
-        </TableBody>
-      </Table>
-    </Paper>
-  );
+    return (
+      <Paper>
+        <Table >
+          <TableHead>
+            <TableRow>
+              <TableCell>Movement Name</TableCell>
+              <TableCell numeric>Sets</TableCell>
+              <TableCell numeric>Reps</TableCell>
+              <TableCell >Duration</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {data.map((n,index) => {
+              return (
+                <TableRow key={index}>
+                  <TableCell component="th" scope="row">
+                    {n.movement_name}
+                  </TableCell>
+                  <TableCell numeric>{n.rec_set}</TableCell>
+                  <TableCell numeric>{n.rec_rep}</TableCell>
+                  <TableCell numeric>{n.rec_duration}</TableCell>
+                </TableRow>
+              );
+            })}
+          </TableBody>
+        </Table>
+      </Paper>
+    );
+  }
 }
-
-SimpleTable.propTypes = {
+MovementTable.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(SimpleTable);
+export default withStyles(styles)(MovementTable);

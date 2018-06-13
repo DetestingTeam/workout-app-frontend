@@ -25,6 +25,7 @@ class CreateWorkout extends Component{
       },
       open: false,
       movement: "", //movement we are currently adding
+      movementName: "",
       sets: "",
       reps:"",
       moveDuration: "",
@@ -47,8 +48,16 @@ class CreateWorkout extends Component{
   }
 // for selector component
   movementChange = name => value => {
+    let {allMovements} = this.state
+    let newName
+    for (var i=0; i < allMovements.length; i++) {
+      if (allMovements[i].id === value) {
+        newName = allMovements[i].movement_name;
+      }
+    }
     this.setState({
       [name]: value,
+      movementName: newName
     });
   };
 //for form state
@@ -58,7 +67,7 @@ class CreateWorkout extends Component{
 
   pushToArray(event){
     let { movements } = this.state.workout
-    let oneMovement = {movement: this.state.movement, rec_set: this.state.sets, rec_rep: this.state.reps, rec_duration: this.state.moveDuration}
+    let oneMovement = {movement: this.state.movement, movement_name: this.state.movementName, rec_set: this.state.sets, rec_rep: this.state.reps, rec_duration: this.state.moveDuration}
     movements = movements.push(oneMovement)
     this.setState({
       movements,
@@ -223,7 +232,7 @@ class CreateWorkout extends Component{
             </span>
           </div>
           <span>
-            <MovementTable movements={this.state.workout.movements}/>
+            <MovementTable selectedMovements={this.state.workout.movements}/>
           </span>
         </CardContent>
         <span className="action-button">
