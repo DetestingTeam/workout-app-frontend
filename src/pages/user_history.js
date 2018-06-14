@@ -61,7 +61,7 @@ class UserHistory extends Component {
           // this.props.history.push('/log', nodata.true)
         } else{
         this.setState({
-          userHistory: APIinfo, firstname: APIinfo[0].first_name, lastname: APIinfo[0].last_name, selectedMove: APIinfo[0].movement_name
+          userHistory: APIinfo, firstname: APIinfo[0].first_name, lastname: APIinfo[0].last_name, date_done: APIinfo[0].created_at, selectedMove: APIinfo[0].movement_name
           })
         }
           this.filterMoves()
@@ -118,7 +118,7 @@ popSelectChart(){
                 return (
                   <TableRow key={n.id}>
                     <TableCell component="th" scope="row" style={{padding: '8px', width: '5px', textAlign: 'center'}}>
-                      {n.workout_date.slice(0,8) + index}
+                      {n.created_at.slice(0,10)}
                     </TableCell>
                     <TableCell component="th" scope="row" style={{padding: '8px', width: '50px', textAlign: 'center'}}>
                       {n.movement_name}
@@ -143,19 +143,19 @@ generateChartData(){
 {
 
   let selectedProp = this.state.selectedProperty
-    // let num = index
+    let num = index
   if(element.movement_name === this.state.selectedMove && selectedProp === "reps"){
-
-  //   //make some fake ranged dates:
+    num = element.created_at.slice(0,10)
+  
   //   //make some fake ranged dates:
   //   if(num<30){
-  //   num = element.workout_date.slice(0,8) + num
+  //
   // } else{ num = index - 30
   //   num = element.workout_date.slice(0,8) + num}
     //   // USE THIS FOR REAL:
     index = element.workout_date
     // TODO: fix: this only allows for one data point per date:
-    chartdata[index] = (element.rep)
+    chartdata[num] = (element.rep)
 }
 if(element.movement_name === this.state.selectedMove && selectedProp === "weight"){
 //make some fake ranged dates:
@@ -166,7 +166,8 @@ if(element.movement_name === this.state.selectedMove && selectedProp === "weight
 //   // USE THIS FOR REAL:
   // index = element.workout_date
       // TODO: fix: this only allows for one data point per date:
-  chartdata[index] = (element.weight)
+      num = element.created_at.slice(0,10)
+  chartdata[num] = (element.weight)
 }
 }
 )
@@ -201,7 +202,7 @@ fullHistoryGraph = <div className="table">
 
           <TableRow key={n.id}>
             <TableCell component="th" scope="row" style={{padding: '8px', width: '5px', textAlign: 'center'}}>
-              {n.workout_date.slice(0,8) + index}
+              {n.created_at.slice(0,10)}
             </TableCell>
             <TableCell component="th" scope="row" style={{padding: '8px', width: '50px', textAlign: 'center'}}>
               {n.movement_name}
