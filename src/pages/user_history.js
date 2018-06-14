@@ -52,8 +52,7 @@ class UserHistory extends Component {
       .then(APIinfo => {
         console.log("APIinfo")
         console.log(APIinfo)
-        if(APIinfo === [] || APIinfo ===''){
-          debugger
+        if(APIinfo.length ==0 ){
           console.log("TEST PASSED");
           let nodata = true
           this.props.history.push({

@@ -311,7 +311,7 @@ generateList(){
           <div className='innerbox'>
           </div>
         </div>
-        <div className='imgright'>
+        <div className='imgright' onClick={this.randomWorkout.bind(this)}>
           <div className='innerbox'>
 
               <div className='boxbox'>
