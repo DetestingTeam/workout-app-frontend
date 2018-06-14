@@ -51,7 +51,7 @@ class LogWorkout extends Component{
       })
       .then(APIinfo => {
         console.log(APIinfo);
-        this.setState({ workout: APIinfo, userID: userID, workout_name: APIinfo[0].workout_name, workout_date: APIinfo[0].workout_date})
+        this.setState({ workout: APIinfo, userID: userID, workout_name: APIinfo[0].workout_name, workout_date: APIinfo[0].workout_date, difficulty: APIinfo[0].difficulty})
       })
   }
 
@@ -329,7 +329,8 @@ generateList(){
     <div className = 'textbox'>
       <div className='workoutname'>
       {this.state.workout_name} </div>
-      {this.state.workout_date} <br/>
+      {console.log(this.state.workout)}
+      {this.state.difficulty} <br/>
     Core</div>
   </div>
   </div>
@@ -360,7 +361,7 @@ generateList(){
         <div className='testbox'></div>
         <div className='boxbox'>
         <div className='shadingbox'></div>
-        <div className = 'textbox' onClick={this.generateHistory.bind(this)}>Save and Quit</div>
+        <div className = 'logbutton' onClick={this.generateHistory.bind(this)}>Save and Quit</div>
       </div>
 
     </div>
@@ -368,7 +369,7 @@ generateList(){
         <div className='testbox'></div>
         <div className='boxbox'>
         <div className='shadingbox'></div>
-        <div className = 'textbox' onClick={this.nextSet.bind(this)}>Next Set</div>
+        <div className = 'logbutton' onClick={this.nextSet.bind(this)}>Next Set</div>
       </div>
 
     </div>

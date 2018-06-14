@@ -8,8 +8,6 @@ import CloseIcon from '@material-ui/icons/Close';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import FormHelperText from '@material-ui/core/FormHelperText';
-
-import Chart from 'chart.js'
 import AuthService from '../components/AuthService'
 import withAuth from '../components/withAuth'
 import { withRouter } from 'react-router-dom'
