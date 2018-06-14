@@ -143,30 +143,30 @@ generateChartData(){
 {
 
   let selectedProp = this.state.selectedProperty
-    let num = index
+    // let num = index
   if(element.movement_name === this.state.selectedMove && selectedProp === "reps"){
 
-    //make some fake ranged dates:
-    //make some fake ranged dates:
-    if(num<30){
-    num = element.workout_date.slice(0,8) + num
-  } else{ num = index - 30
-    num = element.workout_date.slice(0,8) + num}
+  //   //make some fake ranged dates:
+  //   //make some fake ranged dates:
+  //   if(num<30){
+  //   num = element.workout_date.slice(0,8) + num
+  // } else{ num = index - 30
+  //   num = element.workout_date.slice(0,8) + num}
     //   // USE THIS FOR REAL:
-    // index = element.workout_date
+    index = element.workout_date
     // TODO: fix: this only allows for one data point per date:
-    chartdata[num] = (element.rep)
+    chartdata[index] = (element.rep)
 }
 if(element.movement_name === this.state.selectedMove && selectedProp === "weight"){
 //make some fake ranged dates:
-if(num<30){
-num = element.workout_date.slice(0,8) + num
-} else{ num = 1
-num = element.workout_date.slice(0,8) + num}
-  // USE THIS FOR REAL:
+// if(num<30){
+// num = element.workout_date.slice(0,8) + num
+// } else{ num = 1
+// num = element.workout_date.slice(0,8) + num}
+//   // USE THIS FOR REAL:
   // index = element.workout_date
       // TODO: fix: this only allows for one data point per date:
-  chartdata[num] = (element.weight)
+  chartdata[index] = (element.weight)
 }
 }
 )

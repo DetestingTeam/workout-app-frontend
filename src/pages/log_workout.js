@@ -224,12 +224,12 @@ generateList(){
             </div>
             <div className = 'movementtextbox'>
               Reps
-              <TableCell numeric style={{width: '60px',  padding: '8px', textAlign: 'center'}}><Input id={index} value={this.state.reps[index]} onChange={this.handleReps.bind(this)} placeholder='0' type='number' style={{width: '30px'}} /></TableCell>
+              <TableCell numeric style={{width: '60px', border: 'none', padding: '8px', textAlign: 'center'}}><Input id={index} value={this.state.reps[index]} onChange={this.handleReps.bind(this)} placeholder='0' type='number' style={{width: '30px', border:'none'}} /></TableCell>
 
             </div>
             <div className = 'movementtextbox'>
               Weight
-              <TableCell numeric style={{width: '60px',  padding: '8px', textAlign: 'center'}}><Input id={index} value={this.state.weight[index]} placeholder='lbs' type='number' style={{width: '45px'}} onChange={this.handleWeight.bind(this)}/></TableCell>
+              <TableCell numeric style={{width: '60px', border:'none', padding: '8px', textAlign: 'center'}}><Input id={index} value={this.state.weight[index]} placeholder='lbs' type='number' style={{width: '45px'}} onChange={this.handleWeight.bind(this)}/></TableCell>
 
             </div>
           </div>
