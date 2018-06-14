@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Paper, Typography, Snackbar, Button, Table, TableHead, TableCell, TableBody, TableRow, Input} from '@material-ui/core'
+import {Paper, Select, MenuItem, Typography, Snackbar, Button, Table, TableHead, TableCell, TableBody, TableRow, Input} from '@material-ui/core'
 import AuthService from '../components/AuthService'  // <- We use the AuthService to logout
 import withAuth from '../components/withAuth'
 import { withRouter } from 'react-router-dom';
@@ -19,12 +19,12 @@ class LogWorkout extends Component{
       rounds: 2,
       totalWorkouts: 2,
       fullSet: [],
-      workout_id: 2,
+      workout_id: 1,
       userhistory: {},
       userID: '',
       userhistoryAdded: false,
       workout: [],
-      // checked: [],
+      allworkouts: [],
       reps: [],
       weight: [],
       workout_name: "No Workouts Created Yet! Create a workout!",
@@ -45,16 +45,30 @@ class LogWorkout extends Component{
   componentWillMount() {
     this.noStatsUser()
     let userID = Auth.getUserId()
-    return fetch(BASE + '/workoutdetails?workout_id=' + this.state.workout_id)
+    return fetch(BASE + '/workouts')
       .then((resp) => {
         return resp.json()
       })
-      .then(APIinfo => {
-        console.log(APIinfo);
-        this.setState({ workout: APIinfo, userID: userID, workout_name: APIinfo[0].workout_name, workout_date: APIinfo[0].workout_date, difficulty: APIinfo[0].difficulty})
+      .then(workoutlist => {
+        console.log(workoutlist);
+        this.setState({ allworkouts: workoutlist, userID: userID})
       })
+
   }
 
+componentDidMount(){
+  this.noStatsUser()
+  let userID = Auth.getUserId()
+  return fetch(BASE + '/workoutdetails?workout_id=' + this.state.workout_id)
+    .then((resp) => {
+      return resp.json()
+    })
+    .then(APIinfo => {
+      if(APIinfo.length>0){
+      this.setState({ workout: APIinfo, userID: userID, workout_name: APIinfo[0].workout_name, workout_date: APIinfo[0].workout_date, difficulty: APIinfo[0].difficulty})
+    } else{console.log("No API Info For that workout!")}
+    })
+}
 
 
 
@@ -161,7 +175,7 @@ randomWorkout(){
   let {totalWorkouts} = this.state
   let workout_id = Math.ceil(Math.random()*totalWorkouts)
   this.setState({workout_id: workout_id})
-  this.componentWillMount()
+  this.componentDidMount()
 }
 
 
@@ -223,14 +237,14 @@ generateList(){
 
             </div>
             <div className = 'movementtextbox'>
-              Reps
-              <TableCell numeric style={{width: '60px', border: 'none', padding: '8px', textAlign: 'center'}}><Input id={index} value={this.state.reps[index]} onChange={this.handleReps.bind(this)} placeholder='0' type='number' style={{width: '30px', border:'none'}} /></TableCell>
 
+              <input className ='inputfield' id={index} placeholder='Reps' value={this.state.reps[index]} onChange={this.handleReps.bind(this)}  type='number' min='0' style={{width: '62px', border: 'none', borderBottom: '2px #3f51b5 solid', position: 'center', fontSize: '14px'}} />
+              <div className='hiddenpop'> Reps: </div>
             </div>
             <div className = 'movementtextbox'>
-              Weight
-              <TableCell numeric style={{width: '60px', border:'none', padding: '8px', textAlign: 'center'}}><Input id={index} value={this.state.weight[index]} placeholder='lbs' type='number' style={{width: '45px'}} onChange={this.handleWeight.bind(this)}/></TableCell>
 
+              <input className ='inputfield' id={index} value={this.state.weight[index]} placeholder='Weight' type='number' min='0' style={{width: '62px', border: 'none', borderBottom: '2px #3f51b5 solid'}} onChange={this.handleWeight.bind(this)}/>
+              <div className='hiddenpop'> Weight: </div>
             </div>
           </div>
         </div>
@@ -242,14 +256,21 @@ generateList(){
       </div>
       </div>
 
-
     </div>
     );
   })
   return chart
 }
 
+selectWorkout(event){
+let {workout_name, workout_id} = this.state
 
+workout_id = event.target.value
+console.log(workout_name);
+console.log(workout_id);
+  this.setState({[event.target.name]: event.target.value, workout_id: workout_id}, this.componentDidMount)
+
+}
   // let userhistory = {set: {set: setNum, user_id: userID, movement_id:, workout_id: 2, weight: 99, set: 99, rep: 99}
 
   // let userhistory = {set: {set: setNum, user_id: userID, movement_id: 2, workout_id: 2, weight: 99, set: 99, rep: 99}
@@ -321,23 +342,59 @@ generateList(){
           </div>
         </div>
       </div>
-  <div className='fullwidth'>
+  <div className='fullwidth2'>
 
 
-    <div className='boxbox'>
+    <div className='buttonbox'>
     <div className='shadingbox'></div>
     <div className = 'textbox'>
       <div className='workoutname'>
-      {this.state.workout_name} </div>
-      {console.log(this.state.workout)}
+
+
+
+        {console.log(this.state.workout_name)}
+
+        <Select className='workoutselect'
+          value={this.state.workout_name}
+          onChange={this.selectWorkout.bind(this)}
+          displayEmpty
+          name="age"
+          className='empty'
+          IconComponent='none'
+          style={{
+          textAlign:'center', position: 'center'}}
+        >
+
+          <MenuItem   style={{
+            textAlign:'center'}} value={this.state.workout_name}>
+            <em>{this.state.workout_name}</em>
+          </MenuItem>
+
+          {/* Map over all workouts: */}
+          {this.state.allworkouts.map((element,index)=>{
+            return(
+          <MenuItem value={element.id}>{element.workout_name}</MenuItem>
+        )
+          })}
+
+        </Select>
+
+      {/* {this.state.workout_name}  */}
+    </div>
+
       {this.state.difficulty} <br/>
-    Core</div>
+    Core
+
+      <div className='stopwatch'><img src='/assets/images/stopwatch.png'/>   {this.state.allworkouts.map((element,index)=>{ if(index==0){return(element.duration)}})}</div>
+
+    </div>
+
   </div>
   </div>
 
 
 
-    <div className='fullwidth'>
+    <div className='fullwidth2'>
       <div className='banner'>
         <div className='bannerinnerbox'>
             <div className='bannerboxbox'>
@@ -355,7 +412,7 @@ generateList(){
 {this.generateList()}
 
 
-<div className='fullwidth'>
+<div className='fullwidth2'>
   <div className='buttonbox'>
     <div className='abutton'>
         <div className='testbox'></div>
