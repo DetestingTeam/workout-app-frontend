@@ -127,8 +127,7 @@ class CreateWorkout extends Component{
           message={<span style={{display: 'flex',
           alignItems: 'center'}} id="message-id">Workout Created</span>}
         />
-
-
+{/* start form  */}
         <Card className="workout-form-card">
           <CardContent variant="headline" component="h2">Create Workout</CardContent>
           <CardContent className="create-workout-form">
@@ -186,7 +185,7 @@ class CreateWorkout extends Component{
           </span>
           <span className="workout-field">
             <TextField
-                label="Time"
+                label="Start Time"
                 style={{width: '200px'}}
                 id="time"
                 fullWidth
@@ -194,11 +193,7 @@ class CreateWorkout extends Component{
                 onChange={this.handleChange.bind(this)}
             />
           </span>
-          <span>
-            <Divider />
-          </span>
-
-          <div style={{width: "100%"}} className="create-workout-form">
+          <div style={{width: "100%", marginTop: "3em"}} className="create-workout-form">
             <span id="selector-block">
               <MovementSelector movement={this.state.movement} handleChange={this.movementChange.bind(this)} allMovements={this.state.allMovements}/>
             </span>
@@ -237,10 +232,11 @@ class CreateWorkout extends Component{
                 <AddIcon />
               </Button>
             </span>
+            <span>
+              <MovementTable selectedMovements={this.state.workout.movements}/>
+            </span>
           </div>
-          <span>
-            <MovementTable selectedMovements={this.state.workout.movements}/>
-          </span>
+
         </CardContent>
         <span className="action-button">
           <Button

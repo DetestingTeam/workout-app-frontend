@@ -28,7 +28,7 @@ class MovementTable extends React.Component{
     }
 
     return (
-      <Paper>
+      <Paper><h3>Movements Assigned to this Workout</h3>
         <Table >
           <TableHead>
             <TableRow>
