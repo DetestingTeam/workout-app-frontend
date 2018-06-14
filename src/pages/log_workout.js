@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import {Paper, Snackbar, Button, Table, TableHead, TableCell, TableBody, TableRow, Input} from '@material-ui/core'
+import {Paper, Typography, Snackbar, Button, Table, TableHead, TableCell, TableBody, TableRow, Input} from '@material-ui/core'
 import AuthService from '../components/AuthService'  // <- We use the AuthService to logout
 import withAuth from '../components/withAuth'
-import { withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom';
 import './logworkout.css'
+
 
 
 const Auth = new AuthService()
@@ -15,6 +16,7 @@ class LogWorkout extends Component{
   constructor(props){
     super(props)
     this.state = {
+      rounds: 2,
       totalWorkouts: 2,
       fullSet: [],
       workout_id: 2,
@@ -92,27 +94,10 @@ this.setState({open: open})
         })
     })
     console.log(this.state.userhistory);
-    leave ? this.props.history.push({ pathname: '/dashboard'}) :  this.generateTable()
+    leave ? this.props.history.push({ pathname: '/dashboard'}) :  this.generateList()
 
 
   }
-
-//
-//   isChecked(index){
-//   return this.state.checked[index]
-//   }
-//
-//   handleCheck(n, index){
-// console.log(this.props.location.query.__firebase_request_key);
-//     let {checked, ttoF} = this.state
-//     if (checked[index] === true){
-//       checked[index] = false
-//     } else checked[index] = true
-//     console.log(checked);
-//     ttoF == false ? ttoF = true : ttoF = false
-//     this.setState({checked: checked, ttoF: ttoF})
-//  };
-
 
 
 
@@ -180,28 +165,85 @@ randomWorkout(){
 }
 
 
+//
+// generateTable(){
+//   let chart = this.state.workout.map((n, index) => {
+//     return (
+//
+//       <TableRow key={n.id}>
+//         <TableCell component="th" scope="row" style={{padding: '8px', width: '5px', textAlign: 'center'}}>
+//           {index+1}
+//         </TableCell>
+//         <TableCell component="th" scope="row" style={{padding: '8px', width: '50px', textAlign: 'center'}}>
+//           {n.movement_name}
+//         </TableCell>
+//         <TableCell numeric style={{width: '50px',  padding: '8px', textAlign: 'center'}}>{n.rec_duration}</TableCell>
+//         {console.log("IN generate table: reps, weight")}
+//         {console.log(this.state.reps[index])}
+//         {console.log(this.state.weight[index])}
+//         <TableCell numeric style={{width: '60px',  padding: '8px', textAlign: 'center'}}><Input id={index} value={this.state.weight[index]} placeholder='lbs' type='number' style={{width: '45px'}} onChange={this.handleWeight.bind(this)}/></TableCell>
+//         <TableCell numeric style={{width: '60px',  padding: '8px', textAlign: 'center'}}><Input id={index} value={this.state.reps[index]} onChange={this.handleReps.bind(this)} placeholder='0' type='number' style={{width: '30px'}} /></TableCell>
+//         <TableCell numeric style={{padding: '0px',width: '20px', textAlign: 'center'}}>
+//            {/* <Checkbox name="checked" checked={this.state.checked[index]} onChange={this.handleCheck.bind(this,n,index)} color="primary"/> */}
+//        </TableCell>
+//       </TableRow>
+//     );
+//   })
+//   return chart
+// }
 
-generateTable(){
+generateList(){
   let chart = this.state.workout.map((n, index) => {
     return (
+      <div>
+      <div className='amovement'>
+      <div className='movementbox'>
 
-      <TableRow key={n.id}>
-        <TableCell component="th" scope="row" style={{padding: '8px', width: '5px', textAlign: 'center'}}>
-          {index+1}
-        </TableCell>
-        <TableCell component="th" scope="row" style={{padding: '8px', width: '50px', textAlign: 'center'}}>
-          {n.movement_name}
-        </TableCell>
-        <TableCell numeric style={{width: '50px',  padding: '8px', textAlign: 'center'}}>{n.rec_duration}</TableCell>
-        {console.log("IN generate table: reps, weight")}
-        {console.log(this.state.reps[index])}
-        {console.log(this.state.weight[index])}
-        <TableCell numeric style={{width: '60px',  padding: '8px', textAlign: 'center'}}><Input id={index} value={this.state.weight[index]} placeholder='lbs' type='number' style={{width: '45px'}} onChange={this.handleWeight.bind(this)}/></TableCell>
-        <TableCell numeric style={{width: '60px',  padding: '8px', textAlign: 'center'}}><Input id={index} value={this.state.reps[index]} onChange={this.handleReps.bind(this)} placeholder='0' type='number' style={{width: '30px'}} /></TableCell>
-        <TableCell numeric style={{padding: '0px',width: '20px', textAlign: 'center'}}>
-           {/* <Checkbox name="checked" checked={this.state.checked[index]} onChange={this.handleCheck.bind(this,n,index)} color="primary"/> */}
-       </TableCell>
-      </TableRow>
+        <div className='movementimgbox'>
+            <div className='moveshadingbox'></div>
+            <div className='boxbox'>
+            <div className='shadingbox'></div>
+            <div className = 'movementimg'>
+            <h3> {index+1} </h3>
+
+            </div>
+          </div>
+        </div>
+
+        <div className='movementinnerbox'>
+            {/* <div className='moveshadingbox'></div> */}
+            <div className='moveboxbox'>
+            {/* <div className='shadingbox'></div> */}
+            <div className='moveandtime'>
+              <div className = 'movementtextbox'>
+                  <p>{n.movement_name} <br/> {n.rec_duration}</p>
+              </div>
+            </div>
+            <div className = 'movementtextbox'>
+
+            </div>
+            <div className = 'movementtextbox'>
+              Reps
+              <TableCell numeric style={{width: '60px',  padding: '8px', textAlign: 'center'}}><Input id={index} value={this.state.reps[index]} onChange={this.handleReps.bind(this)} placeholder='0' type='number' style={{width: '30px'}} /></TableCell>
+
+            </div>
+            <div className = 'movementtextbox'>
+              Weight
+              <TableCell numeric style={{width: '60px',  padding: '8px', textAlign: 'center'}}><Input id={index} value={this.state.weight[index]} placeholder='lbs' type='number' style={{width: '45px'}} onChange={this.handleWeight.bind(this)}/></TableCell>
+
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+      </div>
+      </div>
+
+
+    </div>
     );
   })
   return chart
@@ -228,81 +270,117 @@ generateTable(){
 
   render(){
 
-
-
-//     // let {workout} = this.state
-//     // {console.log("THis.state,workout:")}
-//     //   {console.log(workout[0
-//     {console.log("this.state.workout")}
-// {console.log(this.state.workout)}
-// console.log(this.props.history.location.state.nodata);
-console.log(this.state.open)
-
     return(
+      <div className='maindiv'>
 
-        <div className="logworkout">
-          <Snackbar
-              anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-              open={this.state.open}
-              onClose={this.handleClose.bind(this)}
-              ContentProps={{
-                'aria-describedby': 'message-id',
-              }}
-              message={<span id="message-id">Do a workout first!</span>}
-            />
+        <Snackbar
+            anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+            open={this.state.open}
+            onClose={this.handleClose.bind(this)}
+            ContentProps={{
+              'aria-describedby': 'message-id',
+            }}
+            message={<span id="message-id">Do a workout first!</span>}
+          />
+{/*
+        <div className='fullwidth'>
+          <div className='imagebox'>
+            <div className='innerbox'>
+                <div className='testbox'></div>
+                <div className='boxbox'>
+                <div className='shadingbox'></div>
+                <div className = 'textbox'>Workout Log</div>
+              </div>
 
-       <div style={{display: 'flex', justifyContent: 'center'}}>  <Paper className="paper1" style={{marginTop: '10px', width: '90vw', maxWidth: '1000px', backgroundImage: 'url("http://localhost:3001/assets/images/bannerworkout.jpeg")', backgroundColor:'rgba(1, 1, 1, 0.2)'}}>
-        <h3 style={{textAlign: 'center'}} ><h1 style={{marginBottom: '5px', marginTop: '0px', color: 'white', font: 'primary', fontVariant: 'small-caps' }}> {this.state.workout_name}</h1> {this.state.workout_date}</h3>
-      </Paper></div><br/>
-
-        <div style={{display: 'flex', justifyContent: 'center'}}>  <Paper className="paper" style={{marginTop: '0px',  borderRadius: '6px',  width: '20vw', maxWidth: '1000px', backgroundColor:'rgba(1, 1, 1, 0.2)'}}>
-        <h3 style={{textAlign: 'center', color: 'black', fontSize: '20px'}} >Set {this.state.setNum}</h3>
-      </Paper></div>
-      <br/>
-
-        <div style={{display: 'flex', justifyContent: 'center'}}>
-        <Paper className="paper" style={{marginTop: '0px', width: '800px', maxWidth: '1000px'}}>
-             <Table className="log-table">
-
-               <TableHead>
-                 <TableRow>
-                   <TableCell style={{padding: '8px',width: '5px', textAlign: 'center'}}>#</TableCell>
-                   <TableCell style={{padding: '8px',width: '50px', textAlign: 'center'}}>Movement</TableCell>
-                   <TableCell numeric style={{width: '50px',  padding: '8px', textAlign: 'center'}} >Time/Reps</TableCell>
-                   <TableCell numeric style={{width: '60px',  padding: '8px', textAlign: 'center'}}>Weight</TableCell>
-                   <TableCell numeric style={{width: '60px',  padding: '8px', textAlign: 'center'}}>Reps</TableCell>
-
-                 </TableRow>
-               </TableHead>
-               <TableBody>
-                 {this.generateTable()}
-
-             <TableRow >
-               <TableCell colspan='6'>
-                 <div  style={{textAlign: 'right'}}>
-
-
-<Button variant="contained" type='submit' color="primary" onClick={this.randomWorkout.bind(this)}>
-   Random Workout
-</Button> <nbws/>
-                  <Button variant="contained" type='submit' color="primary" onClick={this.nextSet.bind(this)}>
-                     Next Set
-                  </Button> <nbsp/>
-                  <Button variant="contained" color="primary" onClick={this.generateHistory.bind(this)}>
-                         Save and Quit
-                  </Button>
-                </div>
-              </TableCell>
-
-
-             </TableRow>
-           </TableBody>
-         </Table>
-       </Paper>
-   </div>
-
-
+            </div>
       </div>
+      </div> */}
+
+<div className='row2'>
+      <div className='fullwidth'>
+
+        <div className='imgleft'>
+          <div className='innerbox'>
+
+              <div className='boxbox'>
+
+            </div>
+          </div>
+        </div>
+        <div className='imgcenter'>
+          <div className='innerbox'>
+          </div>
+        </div>
+        <div className='imgright'>
+          <div className='innerbox'>
+
+              <div className='boxbox'>
+              <div className='shadingbox'></div>
+              <div className = 'textbox'></div>
+            </div>
+          </div>
+        </div>
+      </div>
+  <div className='fullwidth'>
+
+
+    <div className='boxbox'>
+    <div className='shadingbox'></div>
+    <div className = 'textbox'>
+      <div className='workoutname'>
+      {this.state.workout_name} </div>
+      {this.state.workout_date} <br/>
+    Core</div>
+  </div>
+  </div>
+
+
+
+    <div className='fullwidth'>
+      <div className='banner'>
+        <div className='bannerinnerbox'>
+            <div className='bannerboxbox'>
+            <div className='bannershadingbox'></div>
+            <div className = 'bannertextbox'>Set {this.state.setNum}: {this.state.rounds} rounds</div>
+          </div>
+
+        </div>
+  </div>
+  </div>
+
+</div>
+
+
+{this.generateList()}
+
+
+<div className='fullwidth'>
+  <div className='buttonbox'>
+    <div className='abutton'>
+        <div className='testbox'></div>
+        <div className='boxbox'>
+        <div className='shadingbox'></div>
+        <div className = 'textbox' onClick={this.generateHistory.bind(this)}>Save and Quit</div>
+      </div>
+
+    </div>
+    <div className='abutton'>
+        <div className='testbox'></div>
+        <div className='boxbox'>
+        <div className='shadingbox'></div>
+        <div className = 'textbox' onClick={this.nextSet.bind(this)}>Next Set</div>
+      </div>
+
+    </div>
+</div>
+</div>
+
+
+
+
+
+
+    </div>
     )
   }
 

@@ -5,112 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 import NewLog from './newlog'
 
 
-const styles = theme => ({
-  root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    minWidth: 300,
-    width: '100%',
 
-  },
-  image: {
-    position: 'relative',
-    backgroundColor: 'primary',
-    margin: '0.5%',
-    padding: '40px',
-    border: '40px',
-    height: 200,
-    '& $imageTitle': {
-      border: '4px solid currentColor',
-    },
-
-    [theme.breakpoints.down('xs')]: {
-      width: '100% !important', // Overrides inline-style
-      height: 100,
-    },
-    '&:hover, &$focusVisible': {
-      zIndex: 1,
-      '& $imageBackdrop': {
-        opacity: .15,
-      },
-      '& $imageMarked': {
-        opacity: 0,
-      },
-      '& $imageTitle': {
-        border: '4px solid currentColor',
-      },
-    },
-  },
-  focusVisible: {},
-  imageButton: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
-    display: 'flex',
-    alignItems: 'center',
-    textAlign: 'center',
-    justifyContent: 'center',
-    color: theme.palette.common.white,
-  },
-  imageSrc: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
-    backgroundSize: 'cover',
-    backgroundPosition: 'center 40%',
-  },
-  imageBackdrop: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
-    backgroundColor: theme.palette.common.black,
-    opacity: 0,
-    transition: theme.transitions.create('opacity'),
-  },
-  imageTitle: {
-    position: 'relative',
-    padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 4}px ${theme.spacing.unit + 6}px`,
-  },
-  // imageMarked: {
-  //   height: 3,
-  //   width: 18,
-  //   backgroundColor: theme.palette.common.white,
-  //   position: 'absolute',
-    // bottom: -2,
-    // left: 'calc(50% - 9px)',
-    // transition: theme.transitions.create('opacity'),
-  // },
-});
-
-
-
-const images = [
-  {
-    url: '/assets/images/padandpencil.jpeg',
-    title: "Booty Blaster!",
-    width: '100%',
-    height: '30px',
-  },
-  // {
-  //   // url: '/assets/images/blankgraphpaper.jpeg',
-  //   title: "Today's Workout",
-  //   width: '49%',
-  //   link: '/new',
-  // },
-  // {
-  //   // url:  '/assets/images/padandpencil.jpeg',
-  //   title: 'Browse Workouts',
-  //   width: '49%',
-  //   link: '/workouts',
-  // },
-
-];
 
 
 class SetDisplay extends Component{
@@ -130,39 +25,31 @@ class SetDisplay extends Component{
 
       <div>
           <div className='myroot'>
-            <ButtonBase className='myimage' focusVisibleClassName='myfocusvisible' style={{
-                width: '100%',
-                height: '80px',
-              }}>
-              <span className='myimageSRC' style={{
-                backgroundPosition: 'fixed',
-                backgroundImage: "url('/assets/images/padandpencil.jpeg')"
-              }}></span>
+            <div className='mytopimage'>
+              <span className='myimageSRC'></span>
               <span className='myimagebackdrop'></span>
               <span className='myimagebutton'>
                 <Typography className='myimagetitle'>
-                  <span className='mytopimagemarked'>Log a Workout!</span>
+                  <span className='mytopimagemarked'>The Log</span>
                 </Typography>
               {/* <img className='myimage' src='/assets/images/padandpencil.jpeg'/> Picture here */}
             </span>
-            </ButtonBase>
-            <div className='myimage' focusVisibleClassName='myfocusvisible' style={{
-              
-              }}>
-              <span className='myimageSRC' style={{
-                backgroundPosition: 'fixed',
-                opacity: '.1',
-                backgroundImage: "url('/assets/images/barbell.jpeg')"
-              }}></span>
+          </div>
+
+
+          <div className='workoutflexbox'>
+            <div className='myimage'>
+              <span className='myimageSRC1'></span>
               <span className='myimagebackdrop'></span>
               <span className='myimagebutton'>
                 <Typography className='myimagetitle'>
                   <span className='myimagemarked'>
-                    <h3>Today's Workout:<br/>
-                    Ab Blaster 5000</h3>
-                    <h4> Set 1: </h4>
                     <table className='setTable'>
                      <tr>
+                       <div className='th1'>Today's Workout:    Ab Blaster 5000</div> </tr>
+                       <tr>
+                           <th>Set 1: </th> </tr>
+                           <tr>
                        <th>Sit ups:</th>  <td>45 sec</td>
                      </tr>
                      <tr>
@@ -180,8 +67,44 @@ class SetDisplay extends Component{
             </span>
           </div>
 
+          {/* //Second box: */}
+          <div className='myimage'>
+            <span className='myimageSRC2' style={{
+              backgroundPosition: 'fixed',
 
 
+            }}></span>
+            <span className='myimagebackdrop'></span>
+            <span className='myimagebutton'>
+              <Typography className='myimagetitle'>
+                <span className='myimagemarked2'>
+
+                  <table className='setTable'>
+                   <tr>
+                     <div className='th1'>Record your stats:</div> </tr>
+                     <tr>
+                         <th>Set 1: </th> </tr>
+                         <tr>
+                     <th>Sit ups:</th>  <td>45 sec</td>
+                   </tr>
+                   <tr>
+                     <th>Push ups:</th>  <td>45 sec</td>
+                   </tr>
+                   <tr>
+                     <th>Pull ups:</th>  <td>45 sec</td>
+                   </tr>
+
+
+                   </table>
+                </span>
+              </Typography>
+            {/* <img className='myimage' src='/assets/images/padandpencil.jpeg'/> Picture here */}
+          </span>
+        </div>
+        {/* //end */}
+
+
+        </div>
 
 
             </div>
@@ -240,4 +163,4 @@ class SetDisplay extends Component{
 
 }
 
-export default withStyles(styles)(SetDisplay)
+export default SetDisplay
