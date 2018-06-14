@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {withRouter} from 'react-router-dom'
 import {TextField, Button, Card, CardContent, Snackbar, Divider} from '@material-ui/core'
 import AddIcon from '@material-ui/icons/Add';
-import { addMove, getAllMovements } from "../api"
+import { addWorkout, getAllMovements } from "../api"
 import withAuth from '../components/withAuth'
 import MovementSelector from '../components/MovementSelector'
 import MovementTable from '../components/MovementTable'
@@ -83,29 +83,36 @@ class CreateWorkout extends Component{
       moveDuration: ""})
   }
 
-//TODO: change for workout and workout detail fetch POSTs
+
   handleSubmit(event){
     event.preventDefault()
-    addMove(this.state.movement).then(res =>{
-      this.setState({ open: true,  movement: {
-        movement_name: "",
-        movement_description: "",
-        url: "",
-        bodypart: "" }
+    addWorkout(this.state.workout).then(res =>{
+      this.setState({ open: true,
+        workout: {
+          workout_date: "",
+          duration: "",
+          difficulty: "",
+          location: "",
+          instructor: "",
+          time: "",
+          movements:[]}
       })
     })
   }
   //to force form to response to 'Enter' keypress
-  //TODO: change for workout and workout detail fetch POSTs
   enterPressed(event) {
     if(event.key === 'Enter') {
-      addMove(this.state.movement).then(res =>{
+      addWorkout(this.state.workout).then(res =>{
         this.setState({ open: true,
-          movement_name: "",
-          movement_description: "",
-          url: "",
-          bodypart: ""
-        })
+          workout: {
+            workout_date: "",
+            duration: "",
+            difficulty: "",
+            location: "",
+            instructor: "",
+            time: "",
+            movements:[]}
+          })
       })
     }
   }
