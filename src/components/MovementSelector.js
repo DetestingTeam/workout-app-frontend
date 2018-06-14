@@ -200,7 +200,7 @@ class MovementSelector extends React.Component {
       value: movement.id,
       label: movement.movement_name
     }));
-    
+
     return (
       <div className={classes.root}>
         <Input

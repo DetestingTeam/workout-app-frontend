@@ -201,7 +201,7 @@ class CreateWorkout extends Component{
             />
           </span>
           <div style={{width: "100%", marginTop: "3em"}} className="create-workout-form">
-            <span id="selector-block">
+            <span className="selector-block">
               <MovementSelector movement={this.state.movement} handleChange={this.movementChange.bind(this)} allMovements={this.state.allMovements}/>
             </span>
             <span className="workout-field">
@@ -234,12 +234,12 @@ class CreateWorkout extends Component{
                   onChange={this.handleMoveChange.bind(this)}
               />
             </span>
-            <span id="selector-block">
+            <span className="selector-block">
               <Button variant="fab" mini color="primary" aria-label="add" onClick={this.pushToArray.bind(this)}>
                 <AddIcon />
               </Button>
             </span>
-            <span>
+            <span className="move-table">
               <MovementTable selectedMovements={this.state.workout.movements}/>
             </span>
           </div>

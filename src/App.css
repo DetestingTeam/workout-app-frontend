@@ -208,11 +208,12 @@
 .workout-form-card{
   line-height: 300%;
   margin-top: 5%;
+	flex-wrap: wrap;
   margin-left: auto;
   margin-right: auto;
   padding-bottom: 5%;
   max-width: 800px;
-  min-width: 300px;
+  min-width: 200px;
   text-align: center
 }
 
@@ -269,7 +270,15 @@
 	justify-content: space-around;
 }
 
-#selector-block{
+.selector-block{
 	display: inline-flex;
+	flex-wrap: wrap;
 	padding-top: .6em;
+	margin-bottom: 0;
+}
+.move-table{
+	position: relative;
+	bottom: 10em;
+	padding-top: 0em;
+	margin-top: 0em;
 }
