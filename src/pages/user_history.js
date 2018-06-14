@@ -2,14 +2,13 @@ import React, { Component } from 'react';
 import './user_history.css';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
+import Chart from 'chart.js'
 import { LineChart } from 'react-chartkick';
 import {Paper, FormControl, Button, Table, TableHead, TableCell, TableBody, TableRow, Input} from '@material-ui/core'
 import CloseIcon from '@material-ui/icons/Close';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import FormHelperText from '@material-ui/core/FormHelperText';
-
-import Chart from 'chart.js'
 import AuthService from '../components/AuthService'
 import withAuth from '../components/withAuth'
 import { withRouter } from 'react-router-dom'
@@ -276,7 +275,9 @@ this.setState({fullHistoryGraph: fullHistoryGraph, show: show})
               </Button>
             </form>
 
-            {this.state.chart}
+
+
+
             <div id="chartbox">
               <LineChart id="chart" width="400px" height="200px" data={ this.state.chartdata }   />
             </div>
