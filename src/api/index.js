@@ -31,6 +31,28 @@ let addMove = function(movement){
   })
 }
 
+let addWorkout = function(workout){
+  let newWorkout = {workout: workout}
+  return fetch(BASE+"/workouts", {
+    body: JSON.stringify(newWorkout),
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    method: "POST"
+  }).then( rawResponse => {
+    let parsedResponse = rawResponse.json()
+    return parsedResponse
+  })
+}
+
+let getAllMovements = function(){
+  return fetch(BASE+"/movements")
+    .then(rawResponse => {
+      let parsedResponse = rawResponse.json()
+      return parsedResponse
+    })
+}
+
 let handleErrors = function(response){
   if(!response.ok){
     throw Error(response.statusText)
@@ -38,4 +60,4 @@ let handleErrors = function(response){
   return response
 }
 
-export {handleErrors, addMove, registerUser}
+export {handleErrors, addMove, addWorkout, registerUser, getAllMovements}
