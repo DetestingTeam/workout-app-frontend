@@ -119,7 +119,11 @@ class SetDisplay extends Component{
 
         <div className='setandpin'>
           <div className='pic'>
-            <img alt='pin' src='/images/pushpin1.png'/>
+
+            <img alt='pushpin' src='/images/pushpin1.png'/>
+
+            <img alt='picture of a pin' src='/images/pushpin1.png'/>
+
           </div>
 
 
