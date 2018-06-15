@@ -1,3 +1,594 @@
-.logworkout {
-  margin-bottom: 700px;
+/* .back{
+  background: white;
+} */
+.workoutname{
+  text-shadow: 5px;
+  size: 15px;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
 }
+.workoutselect{
+  background-color: green;
+  text-align: center;
+}
+.stopwatch{
+
+  display: flex;
+  justify-content: center;
+}
+.stopwatch img{
+  height: 20px;
+  width: 20px;
+  margin-right: 6px;
+}
+.empty{
+  display: flex;
+  border: none;
+  text-align: center;
+  justify-content: center;
+  position: center;
+  align-items: center;
+  align-self: center;
+  padding-left: 30px;
+}
+.fullwidth{
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  /* background-color: white; */
+  width: 100%;
+  padding-left: 20%;
+  padding-right: 20%;
+}
+
+.fullwidth2{
+  display: flex;
+  justify-content: center;
+
+  /* background-color: white; */
+  width: 100%;
+  padding-left: 20%;
+  padding-right: 20%;
+}
+.imagebox{
+  height: 50px;
+  width: 100%;
+  background-color: red;
+  display: flex;
+  justify-content: center;
+  align-items:stretch;
+  align-items: center;
+  background-image: url('/assets/images/padandpencil.jpeg');
+  background-size: cover;
+  background-position:center 40%;
+  opacity: .9;
+}
+.buttonbox{
+  height: 100%;
+  width: 100%;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items:stretch;
+  align-items: center;
+
+  /* background-color: black; */
+}
+
+
+.imgleft{
+  height: 120px;
+  width: 25%;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items:stretch;
+  align-items: center;
+  background-image: url('/assets/images/padandpencil.jpeg');
+  background-size: cover;
+  background-position:center 40%;
+  opacity: .2;
+}
+.imgcenter{
+  height: 120px;
+  width: 50%;
+  /* background-color: red; */
+  display: flex;
+  justify-content: center;
+  /* align-items:stretch; */
+  /* align-items: center; */
+  background-image: url('/assets/images/barbell.jpeg');
+  background-size: cover;
+  background-position:center 40%;
+  opacity: .9;
+}
+
+.imgright{
+  height: 120px;
+  width: 25%;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items:stretch;
+  align-items: center;
+  background-image: url('/assets/images/blankgraphpaper.jpeg');
+  background-size: cover;
+  background-position:center 40%;
+  opacity: .2;
+}
+
+.imagebox:hover{
+  opacity: 1;
+}
+.imgcenter:hover{
+  opacity: 1;
+}
+.imgleft:hover{
+  opacity: .3;
+}
+.imgright:hover{
+  opacity: .3;
+}
+
+.innerbox{
+  height: 35px;
+  width: 180px;
+  display: flex;
+  justify-content: center;
+  align-items:stretch;
+  align-items: center;
+}
+.abutton{
+  height: 35px;
+  width: 180px;
+  /* background-color: purple; */
+  display: flex;
+  justify-content: center;
+  align-items:stretch;
+  align-items: center;
+  cursor: pointer;
+}
+.testbox{
+
+      position: absolute;
+      /* background-color: lightgrey; */
+      height: inherit;
+
+      z-index: 1;
+      padding-bottom: 10px;
+      margin-bottom: 10px;
+      width: 160px;
+      background-color: #3f51b5;
+}
+
+.testbox:hover{
+  opacity: .8;
+}
+
+.boxbox{
+  display: flex;
+  align-items: center;
+  position: relative;
+  /* padding: 15px 30px; */
+  /* border: 5px black solid; */
+  opacity: 1;
+}
+
+
+.shadingbox{
+  background-color: green;
+  height: 40px;
+  z-index: 10;
+
+}
+.textbox{
+  opacity: 1;
+  /* background-color: white; */
+  text-align: center;
+  color: black;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+
+}
+
+.logbutton{
+  opacity: 1;
+  text-align: center;
+  color: white;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+}
+.logbutton:hover{
+  opacity: .4;
+}
+
+
+.banner{
+  height: 20px;
+  width: 100%;
+  background-color: black;
+}
+
+.bannerinnerbox{
+  height: 20px;
+  width: 180px;
+  display: flex;
+  justify-content: center;
+
+}
+
+
+.bannerboxbox{
+  display: flex;
+  align-items: center;
+  position: relative;
+
+  /* border: 5px black solid; */
+  /* background-color: green; */
+  opacity: 1;
+}
+
+
+.bannershadingbox{
+  background-color: green;
+  height: 10px;
+  z-index: 10;
+
+}
+.bannertextbox{
+  opacity: 1;
+  /* background-color: white; */
+  text-align: center;
+  color: white;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+}
+
+.amovement{
+  display: flex;
+  justify-content: center;
+  /* background-color: white; */
+  width: 100%;
+  padding-left: 20%;
+  padding-right: 20%;
+}
+
+.movementbox{
+  height: 80px;
+  width: 100%;
+  /* background-color: red; */
+  display: flex;
+  justify-content: center;
+  /* align-items:stretch;
+  align-items: center;
+  background-image: url('/assets/images/padandpencil.jpeg');
+  background-size: cover;
+  background-position:center 40%;
+  opacity: .9; */
+}
+.moveandtime{
+  width: 400px;
+  height: 80px;
+  /* background-color: black; */
+  display: flex;
+  justify-content: center;
+}
+.movementtextbox{
+  opacity: 1;
+  /* background-color:red; */
+  text-align: left;
+  color: black;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+}
+.maindiv{
+  /* background-color: white; */
+}
+.movementimgbox{
+  width: 10%;
+  height: 100%;
+  /* background-color: green; */
+  display: flex;
+  justify-content: center;
+  align-items:stretch;
+  align-items: center;
+  background-image: url('/assets/images/barbell.jpeg');
+  background-size: cover;
+  background-position:center 40%;
+}
+.movementimg{
+  height: 100%;
+  width: 100%;
+  /* background-color: red; */
+  display: flex;
+  justify-content: center;
+  align-items:stretch;
+  align-items: center;
+  /* opacity: .8; */
+}
+
+
+.movementinnerbox{
+  width: 90%;
+  height: 100%;
+  background-color: white;
+  display: flex;
+  justify-content: left;
+  padding-left: 20px;
+  align-items:stretch;
+  align-items: center;
+}
+    .moveshadingbox{
+      position: absolute;
+      height: 30px;
+      width: 30px;
+      background-color: purple;
+      z-index: 1;
+      opacity: .4;
+      border: 4px white solid;
+}
+
+.moveboxbox{
+  display: flex;
+
+  position: relative;
+  width: 100%;
+
+  /* padding: 15px 30px; */
+  /* border: 5px black solid; */
+  /* background-color: green; */
+  /* opacity: .9; */
+}
+
+.inputfield{
+  font-size: 14px;
+  position: absolute;
+  z-index: 1;
+  /* background-color: red; */
+  /* margin-left: -1.6px; */
+  opacity: 1;
+  placeholder: 'Reps';
+}
+
+.inputfield:placeholder-shown{
+
+}
+.inputfield::placeholder{
+color:grey;
+}
+.inputfield:focus::placeholder{
+color:white;
+}
+
+.hiddenpop{
+  font-size: 14px;
+  color: grey;
+  position: relative;
+  z-index: 0;
+  margin-top: -10px;
+  top:15px
+}
+
+.inputfield:focus ~ .hiddenpop{
+  -webkit-animation-name: example; /* Safari 4.0 - 8.0 */
+-webkit-animation-duration: .5s; /* Safari 4.0 - 8.0 */
+animation-name: example;
+animation-duration: .5s;
+animation-fill-mode:forwards;
+}
+
+@-webkit-keyframes example {
+0% { color: purple; font-size: 8px; left:0px; top:-15px; opacity: 1;}
+    1%   { left:0px; top:15px; opacity: 1;}
+    100% { color: purple; font-size: 8px; left:0px; top:-15px; opacity: 1;}
+}/* Standard syntax */
+@keyframes example {
+    0% { color: grey; font-size: 14px; left:0px; top:0px;}
+    1%   {color: grey; font-size: 14px; left:0px; top:15px;opacity: 1;}
+
+    100% { color: purple; font-size: 8px; left:0px; top:0px;opacity: 1;}
+}
+
+
+
+
+
+.myroot{
+  display: flex;
+  flex-wrap: wrap;
+  min-width: 300px;
+  width: 100%;
+  justify-content: center;
+}
+
+.workoutflexbox{
+  margin-top: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  min-width: 300px;
+  width: 95%;
+  justify-content: center;
+  justify-content: space-between;
+}
+.myimagebutton{
+  /* position: absolute;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  bottom: 0px; */
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  color: white;
+
+
+}
+
+
+.myimageSRC{
+  min-width: 300px;
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+  background-size: cover;
+  background-position:center 40%;
+  background-color: red;
+
+  /* background-image: image('/assets/images/padandpencil.jpeg'); */
+  background-image: url('/assets/images/padandpencil.jpeg');
+}
+
+.myimageSRC1{
+  min-width: 300px;
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+  background-size: cover;
+  background-position:center;
+  background-position:fixed;
+  background-color: red;
+  margin-right: 10px;
+  /* backgroundPosition: 'fixed', */
+  opacity: .1;
+  /* background-image: image('/assets/images/padandpencil.jpeg'); */
+  background-image: url('/assets/images/barbell.jpeg');
+}
+
+.myimageSRC2{
+  min-width: 300px;
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+  background-size: cover;
+  background-position:center;
+  opacity: 1;
+  /* background-image: image('/assets/images/padandpencil.jpeg'); */
+  background-image: url('/assets/images/pencil-top-banner.jpg');
+}
+
+.mytopimage{
+  position: relative;
+   width: 95%;
+   height: 80px;
+   align-content: center;
+   align-items: center;
+   justify-content: center;
+   background-color: green;
+
+ }
+ .myimage{
+   position: relative;
+   margin-top: 20px;
+   height: 200px;
+   width: 50%;
+   min-width: 300px;
+ }
+
+ .myimage2{
+   position: relative;
+   margin-top: 20px;
+   height: 200px;
+   width: 50%;
+   min-width: 300px;
+ }
+
+.th1{
+  position: center;
+  text-align: center;
+  align-content: center;
+  align-self: center;
+}
+.setTable{
+  width: 100%;
+
+
+
+}
+th{
+  text-align: left;
+}
+
+
+.myimagemarked{
+  color: white;
+  font-size: 18px;
+  padding: 4px;
+}
+
+.mytopimagemarked{
+  /* position: absolute; */
+  color: black;
+  font-size: 18px;
+  padding: 17px;
+  border: 4px solid;
+  border-color: white;
+  background-color: red;
+  opacity: .7;
+}
+
+.myimagemarked2{
+  color: black;
+  font-size: 18px;
+  padding: 4px;
+}
+
+
+.myimagebackdrop{
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    bottom: 0px;
+    background-color: black;
+    opacity: 0;
+  }
+
+  .myimagetitle{
+      position: relative;
+      padding: 4px 16px 10px;
+      border: 1px;
+    }
+
+
+
+
+    @media only screen and (max-width: 632px) {
+        .myimage {
+            width: 100%;
+        }
+        .myimagebox2 {
+            width: 100%;
+        }
+        .myimageSRC1{
+          margin-right: 0px;
+        }
+        .amovement{
+          padding-left: 0%;
+          padding-right: 0%;
+        }
+        .fullwidth{
+          padding-left: 0%;
+          padding-right: 0%;
+        }
+        .fullwidth2{
+          padding-left: 0%;
+          padding-right: 0%;
+        }
+    }
+
+
+/* .logworkout {
+  height: 63vh;
+} */
