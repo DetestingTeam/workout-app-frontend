@@ -106,9 +106,9 @@ const images = [
   },
   {
     url: '/assets/images/barbell.jpeg',
-    title: "Today's Workout",
+    title: "Create a Workout",
     width: '32.3%',
-    link: '/log',
+    link: '/newworkout',
   },
   {
     url: '/assets/images/sdmap.png',
@@ -118,9 +118,9 @@ const images = [
   },
   {
     url: '/assets/images/findaworkout.jpeg',
-    title: "Browse Workouts",
+    title: "Add a Movement",
     width: '32.3%',
-    link: '/log',
+    link: '/newmovement',
   },
   {
     url: '/assets/images/logaworkout.jpeg',

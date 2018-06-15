@@ -4,6 +4,11 @@ body{
   position: center;
 }
 
+#chart{
+
+}
+
+
 .mybutton{
   background-color: green;
   color: green;
@@ -24,6 +29,7 @@ div{
   display: flex;
   font-size: small;
   justify-content: center;
+
 }
 #blankspace{
   width: 40px;

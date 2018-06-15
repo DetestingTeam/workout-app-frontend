@@ -77,39 +77,38 @@ class CreateMovement extends Component{
             <span className="text-field">
             <TextField
                 label="Movement Name"
-                style={{width: '300px'}}
+                style={{width: '300px', marginBotton: '0px'}}
                 id="movement_name"
                 fullWidth
                 value={form.movement_name}
                 onChange={this.handleChange.bind(this)}
             />
-          </span><br />
+          </span>
           <span className="text-field">
             <TextField
                 label="Movement Description"
-                style={{width: '300px'}}
+                style={{width: '300px', marginTop: '0px'}}
                 id="movement_description"
                 multiline
                 fullWidth
                 rows="4"
                 value={form.movement_description}
                 onChange={this.handleChange.bind(this)}
-                margin="normal"
+                // margin="normal"
             />
-          </span><br />
+          </span>
           <span className="text-field">
             <TextField
-                label="Video URL"
+                label="Picture/Video Link"
                 style={{width: '300px'}}
                 id="url"
                 fullWidth
                 value={form.url}
                 onChange={this.handleChange.bind(this)}
             />
-          </span><br />
+          </span>
           <span className="text-field">
             <TextField
-                type="text"
                 label="Body Part Focused"
                 style={{width: '300px'}}
                 id="bodypart"
