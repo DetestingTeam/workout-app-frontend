@@ -21,11 +21,10 @@ class CreateWorkout extends Component{
         location: "",
         instructor: "",
         time: "",
-        movements:[], //array we will push each new movement+reps+weight+time object into
+        workoutdetails_attributes:[], //array we will push each new movement+reps+weight+time object into
       },
       open: false,
       movement: "", //movement we are currently adding
-      movementName: "",
       sets: "",
       reps:"",
       moveDuration: "",
@@ -48,16 +47,8 @@ class CreateWorkout extends Component{
   }
 // for selector component
   movementChange = name => value => {
-    let {allMovements} = this.state
-    let newName
-    for (var i=0; i < allMovements.length; i++) {
-      if (allMovements[i].id === value) {
-        newName = allMovements[i].movement_name;
-      }
-    }
     this.setState({
-      [name]: value,
-      movementName: newName
+      [name]: value
     });
   };
 //for form state
@@ -72,11 +63,11 @@ class CreateWorkout extends Component{
   }
 
   pushToArray(event){
-    let { movements } = this.state.workout
-    let oneMovement = {movement: this.state.movement, movement_name: this.state.movementName, rec_set: this.state.sets, rec_rep: this.state.reps, rec_duration: this.state.moveDuration}
-    movements = movements.push(oneMovement)
+    let { workoutdetails_attributes } = this.state.workout
+    let oneMovement = { movement_name: this.state.movement, rec_set: this.state.sets, rec_rep: this.state.reps, rec_duration: this.state.moveDuration}
+    workoutdetails_attributes = workoutdetails_attributes.push(oneMovement)
     this.setState({
-      movements,
+      workoutdetails_attributes,
       movement: "", //movement we are currently adding
       sets: "",
       reps:"",
@@ -95,7 +86,7 @@ class CreateWorkout extends Component{
           location: "",
           instructor: "",
           time: "",
-          movements:[]}
+          workoutdetails_attributes:[]}
       })
     })
   }
@@ -111,7 +102,7 @@ class CreateWorkout extends Component{
             location: "",
             instructor: "",
             time: "",
-            movements:[]}
+            workoutdetails_attributes:[]}
           })
       })
     }
@@ -240,7 +231,7 @@ class CreateWorkout extends Component{
               </Button>
             </span>
             <span className="move-table">
-              <MovementTable selectedMovements={this.state.workout.movements}/>
+              <MovementTable selectedMovements={this.state.workout.workoutdetails_attributes}/>
             </span>
           </div>
 

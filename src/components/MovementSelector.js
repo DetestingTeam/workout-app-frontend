@@ -197,7 +197,7 @@ class MovementSelector extends React.Component {
   render() {
     const { classes } = this.props;
     const suggestions = this.props.allMovements.map( movement => ({
-      value: movement.id,
+      value: movement.movement_name,
       label: movement.movement_name
     }));
 
